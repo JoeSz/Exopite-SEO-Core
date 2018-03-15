@@ -60,7 +60,7 @@ CHANGELOG
 
 LICENSE DETAILS
 ---------------
-The GPL license of Exopite Multifilter grants you the right to use, study, share (copy), modify and (re)distribute the software, as long as these license terms are retained.
+The GPL license of Exopite SEO Core grants you the right to use, study, share (copy), modify and (re)distribute the software, as long as these license terms are retained.
 
 DISCLAMER
 ---------
