@@ -596,11 +596,11 @@ class Exopite_Seo_Core_Public {
 
                 }
 
-                if ( ExopiteSettings::getValue( 'woocommerce-activated' ) && is_product() ) {
+                if ( class_exists( 'WooCommerce' ) && is_product() ) {
                     $breadcrumb .= '<a href="' . get_permalink( wc_get_page_id( 'shop' ) ) . '">' . $woocommerce_shop_title . '</a>';
                 }
 
-                if ( empty( $categories ) && ( ExopiteSettings::getValue( 'woocommerce-activated' ) && ! is_product() ) ) {
+                if ( empty( $categories ) && ( class_exists( 'WooCommerce' ) && ! is_product() ) ) {
 
                     $post_type = get_post_type_object( get_post_type() );
 
@@ -672,7 +672,7 @@ class Exopite_Seo_Core_Public {
             } elseif ( is_tax() ) {
 
 
-                if ( ExopiteSettings::getValue( 'woocommerce-activated' ) ) {
+                if ( class_exists( 'WooCommerce' ) ) {
 
                     $breadcrumb .= '<a href="' . get_permalink( wc_get_page_id( 'shop' ) ) . '">' . $woocommerce_shop_title . '</a>' . $divider;
                 }
