@@ -1,7 +1,7 @@
 # Exopite-SEO-Core
 ## WordPress Plugin
 Increase your website's SEO ranking, speed, the number of visitors and ultimately your sales.<br>
-Provide some extra but important SEO functions along Yoast SEO. Yoast SEO not required however but recommended.
+Provide some extra but important SEO functions along Yoast SEO. Yoast SEO not required but recommended.
 You may or may not use an other SEO plugin too.
 
 - Author: Joe Szalai
