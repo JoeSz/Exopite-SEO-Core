@@ -107,12 +107,12 @@ class Exopite_Seo_Core_Admin {
 
         $config = array(
 
-            'type'              => 'menu',                          // Required, menu or metabox
-            'id'                => $this->plugin_name,              // Required, meta box id, unique per page, to save: get_option( id )
-            'menu'              => 'plugins.php',                   // Required, sub page to your options page
-            'submenu'           => true,                            // Required for submenu
-            'title'             => 'SEO Core',            //The name of this page
-            'capability'        => 'manage_options',                // The capability needed to view the page
+            'type'              => 'menu',                                          // Required, menu or metabox
+            'id'                => $this->plugin_name,                              // Required, meta box id, unique per page, to save: get_option( id )
+            'menu'              => 'plugins.php',                                   // Required, sub page to your options page
+            'submenu'           => true,                                            // Required for submenu
+            'title'             => esc_html__( 'SEO Core', 'exopite-seo-core' ),    //The name of this page
+            'capability'        => 'manage_options',                                // The capability needed to view the page
             'plugin_basename'   =>  plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_name . '.php' ),
             'tabbed'            => true,
 
@@ -120,14 +120,14 @@ class Exopite_Seo_Core_Admin {
 
         $fields[0] = array(
             'name'   => 'general',
-            'title'  => 'General',
+            'title'  => esc_html__( 'General', 'exopite-seo-core' ),
             'icon'   => 'dashicons-admin-generic',
             'fields' => array(
 
                 array(
                     'id'      => 'activate_gzip',
                     'type'    => 'switcher',
-                    'title'   => esc_html__( 'Activate gzip', 'exopite-seo-core' ),
+                    'title'   => esc_html__( 'Activate GZip', 'exopite-seo-core' ),
                     'default' => 'no',
                 ),
 
@@ -222,7 +222,7 @@ class Exopite_Seo_Core_Admin {
 
                 'type'    => 'notice',
                 'class'   => 'warning',
-                'content' => 'We are recommend to use <a href="http://www.emotions-in-print.localhost/wp-admin/plugin-install.php?tab=plugin-information&plugin=ewww-image-optimizer" target="_blank">EWWW Image Optimizer</a> to optimize your images.',
+                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your images.', 'exopite-seo-core' ), '<a href="http://www.emotions-in-print.localhost/wp-admin/plugin-install.php?tab=plugin-information&plugin=ewww-image-optimizer" target="_blank">EWWW Image Optimizer</a>' ),
 
             );
 
@@ -234,7 +234,7 @@ class Exopite_Seo_Core_Admin {
 
                 'type'    => 'notice',
                 'class'   => 'warning',
-                'content' => 'We are recommend to use <a href="http://www.emotions-in-print.localhost/wp-admin/plugin-install.php?tab=plugin-information&plugin=wordpress-seo" target="_blank">Yoast SEO</a> to optimize your site SEO. This plugin is created to extend your site SEO after Yoast SEO is installed and activated.',
+                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your site SEO. This plugin is created to extend your site SEO after Yoast SEO is installed and activated.', 'exopite-seo-core' ), '<a href="http://www.emotions-in-print.localhost/wp-admin/plugin-install.php?tab=plugin-information&plugin=wordpress-seo" target="_blank">Yoast SEO</a>' ),
 
             );
 
@@ -242,7 +242,7 @@ class Exopite_Seo_Core_Admin {
 
         $fields[1] = array(
             'name'   => 'head_section',
-            'title'  => 'Head',
+            'title'  => esc_html__( 'Head', 'exopite-seo-core' ),
             'icon'   => 'fa fa-h-square',
             'fields' => array(
 
@@ -270,7 +270,7 @@ class Exopite_Seo_Core_Admin {
 
         $fields[2] = array(
             'name'   => 'backup_section',
-            'title'  => 'Backup',
+            'title'  => esc_html__( 'Backup', 'exopite-seo-core' ),
             'icon'   => 'fa fa-floppy-o',
             'fields' => array(
 
