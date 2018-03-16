@@ -13,18 +13,24 @@ Provide some extra but important SEO functions along Yoast SEO
 DESCRIPTION
 -----------
 
-Provide some extra but important SEO functions along Yoast SEO
+Increase your website's SEO ranking, speed, the number of visitors and ultimately your sales.<br>
+Provide some extra but important SEO functions along Yoast SEO.
 
-* Activate gzip
-* Remove JSON links from header
-* Deactivate attachment pages and redirect to attachment file
-* Limit revisions
-* Add noidex on archives, search and 404
-* Automatically Set the WordPress Image Title, Alt-Text & Other Meta
-* Deactivate comments and pingbacks
-* Deactivate feed
-* Activate Google Analytics (via Tag-Manager)
-* Add anything to header (e.g. Schema.org JSON or GEO Tags)
+In our analysis in XOVI, we find some possibilities to improve site SEO. Unfortunalty we did not
+find this options in out favorite plugin Yoast SEO. So we decided to create this plugin.
+
+All functions are optional.
+
+* Activate GZip,
+* Remove JSON links from header,
+* Deactivate attachment pages and redirect to attachment file,
+* Limit revisions,
+* Add noidex on archives, search and 404,
+* Automatically set the WordPress image title, alt-text & description based on file name,
+* Deactivate comments and pingbacks in the whole site,
+* Deactivate feed,
+* Activate Google Analytics (via Tag-Manager), you need a Tag-Manager ID for this first,
+* Add anything to header (e.g. Schema.org JSON or GEO Tags).
 
 INSTALLATION
 ------------
