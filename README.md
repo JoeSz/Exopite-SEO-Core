@@ -1,6 +1,8 @@
 # Exopite-SEO-Core
 ## WordPress Plugin
-Provide some extra but important SEO functions along Yoast SEO
+Increase your website's SEO ranking, speed, the number of visitors and ultimately your sales.<br>
+Provide some extra but important SEO functions along Yoast SEO. Yoast SEO not required however but recommended.
+You may or may not use an other SEO plugin too.
 
 - Author: Joe Szalai
 - Version: 20180315
@@ -12,9 +14,6 @@ Provide some extra but important SEO functions along Yoast SEO
 
 DESCRIPTION
 -----------
-
-Increase your website's SEO ranking, speed, the number of visitors and ultimately your sales.<br>
-Provide some extra but important SEO functions along Yoast SEO.
 
 In our analysis in XOVI, we find some possibilities to improve site SEO. Unfortunalty we did not
 find this options in out favorite plugin Yoast SEO. So we decided to create this plugin.
