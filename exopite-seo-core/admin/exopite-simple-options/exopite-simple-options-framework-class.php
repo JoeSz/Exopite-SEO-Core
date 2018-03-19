@@ -1,28 +1,34 @@
 <?php if ( ! defined( 'ABSPATH' ) ) { die; } // Cannot access pages directly.
 /*
  * Available fields:
+ * - ACE field
+ * - attached
+ * - backup
+ * - button
+ * - botton_bar
  * - card
+ * - checkbox
+ * - color
  * - content
+ * - date
+ * - editor
+ * - group
+ * - hidden
+ * - image
+ * - image_select
+ * - meta
  * - notice
+ * - number
+ * - password
+ * - radio
+ * - range
+ * - select
+ * - switcher
+ * - tap_list
  * - text
  * - textarea
- * - select
- * - checkbox
- * - radio
- * - date
- * - switcher
- * - range
- * - image_select
- * - tap_list
- * - number
- * - color_picker
- * - botton_bar
- * - media upload drag and drop
- * - ACE field
+ * - upload
  * - video mp4/oembed
- * ToDo:
- * - font awesome include
- * - for icon in section -> dashicons or fontAwesome
  */
 
 /*
@@ -943,6 +949,8 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework' ) ) :
                     $active = '';
                     if ( $section === reset( $this->fields ) ) $active = ' active';
 
+                    $depend = '';
+                    $hidden = '';
                     // Dependency for tabs too
                     if ( ! empty( $section['dependency'] ) ) {
                         $hidden  = ' hidden';

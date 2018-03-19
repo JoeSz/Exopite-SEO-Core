@@ -81,7 +81,7 @@ if( ! class_exists( 'Exopite_Simple_Options_Framework_Fields' ) ) {
                 }
             }
 
-            return $atts . $x;
+            return $atts;
 
         }
         public function element_value( $value = '' ) {
