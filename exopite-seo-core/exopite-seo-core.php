@@ -36,6 +36,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Rename this for your plugin and update it as you release new versions.
  */
 define( 'EXOPITE_SEO_CORE_VERSION', '20180315' );
+define( 'EXOPITE_SEO_PLUGIN_NAME', 'exopite-seo-core' );
 define( 'EXOPITE_SEO_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
@@ -62,7 +63,6 @@ register_deactivation_hook( __FILE__, 'deactivate_exopite_seo_core' );
 /*
  * Update
  */
-
 if ( is_admin() ) {
 
     /**
@@ -83,13 +83,12 @@ if ( is_admin() ) {
     }
 
     $MyUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-        'http://update.szalai.org/?action=get_metadata&slug=exopite-seo-core', //Metadata URL.
+        'https://update.szalai.org/?action=get_metadata&slug=' . EXOPITE_SEO_PLUGIN_NAME, //Metadata URL.
         __FILE__, //Full path to the main plugin file.
-        'exopite-seo-core' //Plugin slug. Usually it's the same as the name of the directory.
+        EXOPITE_SEO_PLUGIN_NAME //Plugin slug. Usually it's the same as the name of the directory.
     );
 
 }
-
 // End Update
 
 /**
