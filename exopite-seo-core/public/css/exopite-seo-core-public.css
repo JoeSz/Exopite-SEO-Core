@@ -1,0 +1,21 @@
+.cookie-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999999;
+}
+.cookie-column {
+    float: left;
+    position: relative;
+}
+.cookie-column-innter {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.accept-cookies.cookie-btn {
+    padding: 5px 15px;
+    margin-left: 10px;
+    background: #000;
+    cursor: pointer;
+}
