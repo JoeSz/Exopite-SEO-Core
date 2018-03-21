@@ -209,6 +209,13 @@ class Exopite_Seo_Core_Admin {
                     'dependency' => array( 'activate_google_analytics', '==', 'true' ),
                 ),
 
+                array(
+                    'id'      => 'cookie_note',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Add cookie permission', 'exopite-seo-core' ),
+                    'default' => 'no',
+                ),
+
             ),
 
         );
@@ -269,6 +276,85 @@ class Exopite_Seo_Core_Admin {
         );
 
         $fields[2] = array(
+            'name'   => 'cookie',
+            'title'  => esc_html__( 'Cookie', 'exopite-seo-core' ),
+            'icon'   => 'dashicons-admin-generic',
+            'fields' => array(
+
+                array(
+                    'id'     => 'cookie_hint_content_left',
+                    'type'   => 'text',
+                    'title'  => 'Cookie Hint Content Left',
+                ),
+
+                array(
+                    'id'     => 'cookie_hint_content_right',
+                    'type'   => 'text',
+                    'title'  => 'Cookie Hint Content Right',
+                ),
+
+                array(
+                    'id'     => 'cookie_hint_button',
+                    'type'   => 'text',
+                    'title'  => 'Cookie Hint Button Text',
+                ),
+
+                array(
+                    'id'     => 'cookie_hint_wrapper_class',
+                    'type'   => 'text',
+                    'title'  => 'Theme Body Wapper Class',
+                    'default' => 'gdlr-core-container',
+                ),
+
+                array(
+                    'id'     => 'cookie_hint_bg_color',
+                    'type'   => 'color',
+                    'title'  => 'Cookie Hint Background Color',
+                    'rgba'   => true,
+                    'default' => 'rgba(5,5,5,0.49)',
+                ),
+
+                array(
+                    'id'     => 'cookie_hint_top_border_color',
+                    'type'   => 'color',
+                    'title'  => 'Cookie Hint Top Border Color',
+                    'rgba'   => true,
+                    'default' => 'rgba(5,5,5,0.49)',
+                ),
+
+                array(
+                    'id'     => 'cookie_hint_text_color',
+                    'type'   => 'color',
+                    'title'  => 'Cookie Hint Text Color',
+                    'rgba'   => true,
+                    'default' => '#ffffff',
+                ),
+
+                array(
+                     'id'      => 'cookie_hint_left_column_width',
+                     'type'    => 'range',
+                     'title'   => 'Cookie Hint Left Column Width in %',
+                     'default' => '50',
+                     'after'   => ' <i class="text-muted">%</i>',
+                     'min'     => '1',
+                     'max'     => '99',
+                 ),
+
+                array(
+                     'id'      => 'cookie_hint_padding',
+                     'type'    => 'range',
+                     'title'   => 'Cookie Hint Top and Bottom Padding',
+                     'default' => '7',
+                     'after'   => ' <i class="text-muted">px</i>',
+                     'min'     => '0',
+                     'max'     => '100',
+                 ),
+
+            ),
+
+        );
+
+        $fields[3] = array(
             'name'   => 'backup_section',
             'title'  => esc_html__( 'Backup', 'exopite-seo-core' ),
             'icon'   => 'fa fa-floppy-o',
