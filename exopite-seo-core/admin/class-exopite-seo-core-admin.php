@@ -278,7 +278,7 @@ class Exopite_Seo_Core_Admin {
         $fields[2] = array(
             'name'   => 'cookie',
             'title'  => esc_html__( 'Cookie', 'exopite-seo-core' ),
-            'icon'   => 'dashicons-admin-generic',
+            'icon'   => 'fa fa-birthday-cake',
             'fields' => array(
 
                 array(
