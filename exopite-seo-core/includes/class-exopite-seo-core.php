@@ -188,6 +188,7 @@ class Exopite_Seo_Core {
         $limit_revisions = ( isset( $options['limit_revisions'] ) ) ? $options['limit_revisions'] : 'no';
         $deactivate_comments = ( isset( $options['deactivate_comments'] ) ) ? $options['deactivate_comments'] : 'no';
         $deactivate_feed = ( isset( $options['deactivate_feed'] ) ) ? $options['deactivate_feed'] : 'no';
+        $cookie_note = ( isset( $options['cookie_note'] ) ) ? $options['cookie_note'] : 'no';
         $ace_editor_head = ( isset( $options['ace_editor_head'] ) ) ? $options['ace_editor_head'] : '';
         $activate_google_analytics = ( isset( $options['activate_google_analytics'] ) ) ? $options['activate_google_analytics'] : 'no';
 
@@ -268,6 +269,17 @@ class Exopite_Seo_Core {
              * @link https://brutalbusiness.com/automatically-set-the-wordpress-image-title-alt-text-other-meta/
              */
             $this->loader->add_action( 'add_attachment', $plugin_public, 'auto_image_alt' );
+
+        }
+
+        if ( $cookie_note == 'yes' ) {
+
+            /*
+             * Automatically Set the WordPress Image Title, Alt-Text & Other Meta
+             *
+             * @link https://brutalbusiness.com/automatically-set-the-wordpress-image-title-alt-text-other-meta/
+             */
+            $this->loader->add_action( 'wp_footer', $plugin_public, 'cookie_note', 1 );
 
         }
 
