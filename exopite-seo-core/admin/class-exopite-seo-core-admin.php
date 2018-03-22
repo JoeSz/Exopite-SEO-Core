@@ -100,12 +100,9 @@ class Exopite_Seo_Core_Admin {
 
 	}
 
-    public function checkGZIPCompression( $url ) {
+    public function checkGZIPCompression() {
 
-        $url = 'http://bachmann.markatus.net';
-        // $url = get_site_url();
-
-        $api_url = 'https://checkgzipcompression.com/js/checkgzip.json?url=' . urlencode( $url );
+        $api_url = 'https://checkgzipcompression.com/js/checkgzip.json?url=' . urlencode( get_site_url() );
         $result = wp_remote_get($api_url);
         $body = json_decode( $result['body'] );
         if( isset( $body->error ) && $body->error ) {
