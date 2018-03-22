@@ -100,6 +100,30 @@ class Exopite_Seo_Core_Admin {
 
 	}
 
+    public function checkGZIPCompression( $url ) {
+
+        $url = 'http://bachmann.markatus.net';
+        // $url = get_site_url();
+
+        $api_url = 'https://checkgzipcompression.com/js/checkgzip.json?url=' . urlencode( $url );
+        $result = wp_remote_get($api_url);
+        $body = json_decode( $result['body'] );
+        if( isset( $body->error ) && $body->error ) {
+            $this->error = $body->error;
+            return '<span class="exopite-seo-core-gzip exopite-seo-core-gzip-error"><b>' . esc_html( 'Error', 'exopite-seo-core' ) . '</b>: ' . $body->error . '</span>';
+        }
+        elseif ( isset( $body->result->gzipenabled ) && $body->result->gzipenabled == true ) {
+
+            return '<span class="exopite-seo-core-gzip exopite-seo-core-gzip-success">' . esc_html( 'GZip is enabled.', 'exopite-seo-core' ) . '</span>' . esc_html( 'Uncompressed bytes', 'exopite-seo-core' ) . ': ' . $body->result->uncompressedbytes . ', ' . esc_html( 'Compressed bytes', 'exopite-seo-core' ) . ': ' . $body->result->compressedbytes . ', ' . esc_html( 'Total Saved', 'exopite-seo-core' ) . ': <b>' . $body->result->percentagesaved . '%</b>';
+        }
+        elseif ( isset( $body->result->gzipenabled ) && $body->result->gzipenabled == false ) {
+            return '<span class="exopite-seo-core-gzip exopite-seo-core-gzip-warning">' . esc_html( 'GZip is not enabled.', 'exopite-seo-core' ) . '</span>' .  esc_html( 'You could save', 'exopite-seo-core' ) . ': <b>' . $body->result->percentagesaved . '%</b>';
+        }
+        else {
+            return '<span class="exopite-seo-core-gzip exopite-seo-core-gzip-error">' . esc_html( 'Unknown error.', 'exopite-seo-core' ) . '<br>' . var_export( $result , true ) . '</span>';
+        }
+
+    }
 
     public function create_menu() {
 
@@ -129,6 +153,17 @@ class Exopite_Seo_Core_Admin {
                     'type'    => 'switcher',
                     'title'   => esc_html__( 'Activate GZip', 'exopite-seo-core' ),
                     'default' => 'no',
+                ),
+
+                array(
+                    'type'    => 'notice',
+                    'title'  => esc_html__( 'GZip', 'exopite-seo-core' ),
+                    'content' => 'NDEF',
+                    'wrap_class' => 'exopite-seo-core-bottom-border',
+                    'callback' => array(
+                        'function' => array( $this, 'checkGZIPCompression' ),
+                    ),
+
                 ),
 
                 array(
@@ -216,6 +251,13 @@ class Exopite_Seo_Core_Admin {
                     'default' => 'no',
                 ),
 
+                array(
+                    'type'    => 'notice',
+                    'title'  => esc_html__( 'Integrated shortcodes', 'exopite-seo-core' ),
+                    'content' => '<code>[exopite-breadcrumbs]</code> <code>[exopite-ga-optout link="' . esc_html__( 'Link Text', 'exopite-seo-core' ) . '"]</code>',
+
+                )
+
             ),
 
         );
@@ -279,18 +321,20 @@ class Exopite_Seo_Core_Admin {
             'name'   => 'cookie',
             'title'  => esc_html__( 'Cookie', 'exopite-seo-core' ),
             'icon'   => 'fa fa-birthday-cake',
+            'dependency' => array( 'cookie_note', '==', 'true' ),
             'fields' => array(
 
                 array(
                     'id'     => 'cookie_hint_content_left',
-                    'type'   => 'text',
+                    'type'   => 'textarea',
                     'title'  => 'Cookie Hint Content Left',
                 ),
 
                 array(
                     'id'     => 'cookie_hint_content_right',
-                    'type'   => 'text',
+                    'type'   => 'textarea',
                     'title'  => 'Cookie Hint Content Right',
+                    'dependency' => array( 'cookie_hint_left_column_width', '<', '100' ),
                 ),
 
                 array(
@@ -331,13 +375,29 @@ class Exopite_Seo_Core_Admin {
                 ),
 
                 array(
+                    'id'     => 'cookie_hint_accept_bg_color',
+                    'type'   => 'color',
+                    'title'  => 'Cookie Hint Accept Button Background Color',
+                    'rgba'   => true,
+                    'default' => '#000',
+                ),
+
+                array(
+                    'id'     => 'cookie_hint_accept_text_color',
+                    'type'   => 'color',
+                    'title'  => 'Cookie Hint Accept Button Text Color',
+                    'rgba'   => true,
+                    'default' => '#fff',
+                ),
+
+                array(
                      'id'      => 'cookie_hint_left_column_width',
                      'type'    => 'range',
-                     'title'   => 'Cookie Hint Left Column Width in %',
+                     'title'   => 'Cookie Hint Left Column Width',
                      'default' => '50',
                      'after'   => ' <i class="text-muted">%</i>',
                      'min'     => '1',
-                     'max'     => '99',
+                     'max'     => '100',
                  ),
 
                 array(
