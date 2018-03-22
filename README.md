@@ -60,6 +60,12 @@ Browsers
 CHANGELOG
 ---------
 
+= 20180322 =
+* ADDED: check GZip compression
+* ADDED: pot file for translations
+* ADDED: cookie warning/note
+* FIXED: various bugfix
+
 = 20180315 =
 * Initial release.
 
