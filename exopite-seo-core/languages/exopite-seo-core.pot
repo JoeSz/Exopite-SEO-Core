@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-22 10:30+0100\n"
+"POT-Creation-Date: 2018-03-22 11:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,144 +17,150 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: admin/class-exopite-seo-core-admin.php:135
+#: admin/class-exopite-seo-core-admin.php:141
 msgid "SEO Core"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:144
+#: admin/class-exopite-seo-core-admin.php:150
 msgid "General"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:151
-msgid "Activate GZip"
-msgstr ""
-
 #: admin/class-exopite-seo-core-admin.php:157
-msgid "GZip"
-msgstr ""
-
-#: admin/class-exopite-seo-core-admin.php:168
-msgid "Remove JSON links from header"
-msgstr ""
-
-#: admin/class-exopite-seo-core-admin.php:175
 msgid "Deactivate attachment pages"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:184
-msgid "Limit revisions"
-msgstr ""
-
-#: admin/class-exopite-seo-core-admin.php:191
-msgid "Revision to keep"
-msgstr ""
-
-#: admin/class-exopite-seo-core-admin.php:202
-msgid "Add noidex on archives, search and 404"
-msgstr ""
-
-#: admin/class-exopite-seo-core-admin.php:209
+#: admin/class-exopite-seo-core-admin.php:165
 msgid "Automatically add image infos"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:211
+#: admin/class-exopite-seo-core-admin.php:167
 msgid "Automatically Set the WordPress Image Title, Alt-Text & Other Meta"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:217
-msgid "Deactivate comments and pingbacks"
-msgstr ""
-
-#: admin/class-exopite-seo-core-admin.php:224
+#: admin/class-exopite-seo-core-admin.php:173
 msgid "Deactivate feed"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:231
+#: admin/class-exopite-seo-core-admin.php:180
 msgid "Activate Google Analytics"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:239
+#: admin/class-exopite-seo-core-admin.php:188
 msgid "Google Analytics ID"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:246
+#: admin/class-exopite-seo-core-admin.php:195
 msgid "Add cookie permission"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:252
+#: admin/class-exopite-seo-core-admin.php:201
+msgid "PHP version"
+msgstr ""
+
+#: admin/class-exopite-seo-core-admin.php:210
+msgid "GZip"
+msgstr ""
+
+#: admin/class-exopite-seo-core-admin.php:226
+msgid "Activate GZip"
+msgstr ""
+
+#: admin/class-exopite-seo-core-admin.php:233
+msgid "Remove JSON links from header"
+msgstr ""
+
+#: admin/class-exopite-seo-core-admin.php:240
+msgid "Limit revisions"
+msgstr ""
+
+#: admin/class-exopite-seo-core-admin.php:247
+msgid "Revision to keep"
+msgstr ""
+
+#: admin/class-exopite-seo-core-admin.php:258
+msgid "Add noidex on archives, search and 404"
+msgstr ""
+
+#: admin/class-exopite-seo-core-admin.php:265
+msgid "Deactivate comments and pingbacks"
+msgstr ""
+
+#: admin/class-exopite-seo-core-admin.php:271
+#: admin/class-exopite-seo-core-admin.php:279
 msgid "Integrated shortcodes"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:253
+#: admin/class-exopite-seo-core-admin.php:272
+#: admin/class-exopite-seo-core-admin.php:280
 msgid "Link Text"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:270
+#: admin/class-exopite-seo-core-admin.php:294
 #, php-format
 msgid "We are recommend to use %s to optimize your images."
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:282
+#: admin/class-exopite-seo-core-admin.php:306
 #, php-format
 msgid ""
 "We are recommend to use %s to optimize your site SEO. This plugin is created "
 "to extend your site SEO after Yoast SEO is installed and activated."
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:290
+#: admin/class-exopite-seo-core-admin.php:314
 msgid "Head"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:318
+#: admin/class-exopite-seo-core-admin.php:342
 msgid "Cookie"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:326
+#: admin/class-exopite-seo-core-admin.php:350
 msgid "Cookie Hint Content Left"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:332
+#: admin/class-exopite-seo-core-admin.php:356
 msgid "Cookie Hint Content Right"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:339
+#: admin/class-exopite-seo-core-admin.php:363
 msgid "Cookie Hint Button Text"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:345
+#: admin/class-exopite-seo-core-admin.php:369
 msgid "Theme Body Wapper Class"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:352
+#: admin/class-exopite-seo-core-admin.php:376
 msgid "Cookie Hint Background Color"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:360
+#: admin/class-exopite-seo-core-admin.php:384
 msgid "Cookie Hint Top Border Color"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:368
+#: admin/class-exopite-seo-core-admin.php:392
 msgid "Cookie Hint Text Color"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:376
+#: admin/class-exopite-seo-core-admin.php:400
 msgid "Cookie Hint Accept Button Background Color"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:384
+#: admin/class-exopite-seo-core-admin.php:408
 msgid "Cookie Hint Accept Button Text Color"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:392
+#: admin/class-exopite-seo-core-admin.php:416
 msgid "Cookie Hint Left Column Width"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:402
+#: admin/class-exopite-seo-core-admin.php:426
 msgid "Cookie Hint Top and Bottom Padding"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:415
-#: admin/class-exopite-seo-core-admin.php:421
+#: admin/class-exopite-seo-core-admin.php:439
+#: admin/class-exopite-seo-core-admin.php:445
 msgid "Backup"
 msgstr ""
 
