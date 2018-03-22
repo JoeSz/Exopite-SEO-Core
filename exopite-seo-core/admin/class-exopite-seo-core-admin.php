@@ -122,6 +122,10 @@ class Exopite_Seo_Core_Admin {
 
     }
 
+    public function get_php_version() {
+        return phpversion();
+    }
+
     public function create_menu() {
 
         if ( ! function_exists( 'is_plugin_active' ) ) require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
@@ -190,6 +194,15 @@ class Exopite_Seo_Core_Admin {
                     'type'    => 'switcher',
                     'title'   => esc_html__( 'Add cookie permission', 'exopite-seo-core' ),
                     'default' => 'no',
+                ),
+
+                array(
+                    'type'    => 'notice',
+                    'title'  => esc_html__( 'PHP version', 'exopite-seo-core' ),
+                    'wrap_class' => 'exopite-seo-core-bottom-border',
+                    'callback' => array(
+                        'function' => array( $this, 'get_php_version' ),
+                    ),
                 ),
 
                 array(
