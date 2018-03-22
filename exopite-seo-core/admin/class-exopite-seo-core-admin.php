@@ -126,11 +126,13 @@ class Exopite_Seo_Core_Admin {
 
         if ( ! function_exists( 'is_plugin_active' ) ) require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 
+        $parent = ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) ? 'wpseo_dashboard' : 'plugins.php';
+
         $config = array(
 
             'type'              => 'menu',                                          // Required, menu or metabox
             'id'                => $this->plugin_name,                              // Required, meta box id, unique per page, to save: get_option( id )
-            'menu'              => 'plugins.php',                                   // Required, sub page to your options page
+            'menu'              => $parent,                                         // Required, sub page to your options page
             'submenu'           => true,                                            // Required for submenu
             'title'             => esc_html__( 'SEO Core', 'exopite-seo-core' ),    //The name of this page
             'capability'        => 'manage_options',                                // The capability needed to view the page
