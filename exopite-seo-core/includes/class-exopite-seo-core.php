@@ -206,12 +206,11 @@ class Exopite_Seo_Core {
          * Remove JSON API description
          * @link https://wordpress.stackexchange.com/questions/211467/remove-json-api-links-in-header-html/212472#212472
          */
-        if ( $remove_json_from_header == 'yes' ) {
+        if ( ! defined( 'EXOPITE_VERSION' ) && $remove_json_from_header == 'yes' ) {
 
             $this->loader->add_action( 'after_setup_theme', $plugin_public, 'remove_json_api_links_from_header' );
 
         }
-
 
         /**
          * Plugin Name: Disable Attachment Pages
@@ -236,7 +235,7 @@ class Exopite_Seo_Core {
         /**
          * Add noindex on archives, search and 404
          */
-        if ( $noidex_archives_search == 'yes' ) {
+        if ( ! defined( 'EXOPITE_VERSION' ) && $noidex_archives_search == 'yes' ) {
 
             $this->loader->add_action( 'wp_head', $plugin_public, 'noidex_archives_search' );
 
@@ -283,7 +282,7 @@ class Exopite_Seo_Core {
 
         }
 
-        if ( $deactivate_comments == 'yes' ) {
+        if ( ! defined( 'EXOPITE_VERSION' ) && $deactivate_comments == 'yes' ) {
 
             // Disable support for comments and trackbacks in post types
             $this->loader->add_action('admin_init', $plugin_public, 'disable_comments_post_types_support');
@@ -303,7 +302,7 @@ class Exopite_Seo_Core {
 
         }
 
-        if ( $limit_revisions == 'yes' ) {
+        if ( ! defined( 'EXOPITE_VERSION' ) && $limit_revisions == 'yes' ) {
 
             /**
              * Limit revisions
@@ -331,7 +330,7 @@ class Exopite_Seo_Core {
 
         }
 
-        $this->loader->add_shortcode( 'exopite-breadcrumbs', $plugin_public, 'breadcrumbs' );
+        if ( ! defined( 'EXOPITE_VERSION' ) ) $this->loader->add_shortcode( 'exopite-breadcrumbs', $plugin_public, 'breadcrumbs' );
 
         $this->loader->add_shortcode( "exopite-ga-optout", $plugin_public, "ga_optout", $priority = 10, $accepted_args = 2 );
 

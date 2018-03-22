@@ -146,61 +146,11 @@ class Exopite_Seo_Core_Admin {
             'fields' => array(
 
                 array(
-                    'id'      => 'activate_gzip',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Activate GZip', 'exopite-seo-core' ),
-                    'default' => 'no',
-                ),
-
-                array(
-                    'type'    => 'notice',
-                    'title'  => esc_html__( 'GZip', 'exopite-seo-core' ),
-                    'wrap_class' => 'exopite-seo-core-bottom-border',
-                    'callback' => array(
-                        'function' => array( $this, 'checkGZIPCompression' ),
-                    ),
-
-                ),
-
-                array(
-                    'id'      => 'remove_json_from_header',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Remove JSON links from header', 'exopite-seo-core' ),
-                    'default' => 'no',
-                ),
-
-                array(
                     'id'      => 'deactivate_attachment_pages',
                     'type'    => 'switcher',
                     'title'   => esc_html__( 'Deactivate attachment pages', 'exopite-seo-core' ),
                     'default' => 'no',
                     'info'   => 'If you change this, please <a href="/wp-admin/options-permalink.php" target="_blank">save permalinks</a>',
-                ),
-
-
-                array(
-                    'id'      => 'limit_revisions',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Limit revisions', 'exopite-seo-core' ),
-                    'default' => 'no',
-                ),
-
-                array(
-                    'id'      => 'revision_to_keep',
-                    'type'    => 'range',
-                    'title'   => esc_html__( 'Revision to keep', 'exopite-seo-core' ),
-                    'default' => '20',
-                    'min'     => '0',
-                    'max'     => '100',
-                    'dependency' => array( 'limit_revisions', '==', 'true' ),
-                    'info'    =>  ' ' . 'For unlimited, set to 100.',
-                ),
-
-                array(
-                    'id'      => 'noidex_archives_search',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Add noidex on archives, search and 404', 'exopite-seo-core' ),
-                    'default' => 'no',
                 ),
 
                 array(
@@ -209,13 +159,6 @@ class Exopite_Seo_Core_Admin {
                     'title'   => esc_html__( 'Automatically add image infos', 'exopite-seo-core' ),
                     'default' => 'no',
                     'info'    => esc_html__( 'Automatically Set the WordPress Image Title, Alt-Text & Other Meta' ),
-                ),
-
-                array(
-                    'id'      => 'deactivate_comments',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Deactivate comments and pingbacks', 'exopite-seo-core' ),
-                    'default' => 'no',
                 ),
 
                 array(
@@ -249,14 +192,80 @@ class Exopite_Seo_Core_Admin {
 
                 array(
                     'type'    => 'notice',
-                    'title'  => esc_html__( 'Integrated shortcodes', 'exopite-seo-core' ),
-                    'content' => '<code>[exopite-breadcrumbs]</code> <code>[exopite-ga-optout link="' . esc_html__( 'Link Text', 'exopite-seo-core' ) . '"]</code>',
-
-                )
+                    'title'  => esc_html__( 'GZip', 'exopite-seo-core' ),
+                    'wrap_class' => 'exopite-seo-core-bottom-border',
+                    'callback' => array(
+                        'function' => array( $this, 'checkGZIPCompression' ),
+                    ),
+                ),
 
             ),
 
         );
+
+        if ( ! defined( 'EXOPITE_VERSION' ) ) {
+
+            $fields[0]['fields'][] = array(
+                'id'      => 'activate_gzip',
+                'type'    => 'switcher',
+                'title'   => esc_html__( 'Activate GZip', 'exopite-seo-core' ),
+                'default' => 'no',
+            );
+
+            $fields[0]['fields'][] = array(
+                'id'      => 'remove_json_from_header',
+                'type'    => 'switcher',
+                'title'   => esc_html__( 'Remove JSON links from header', 'exopite-seo-core' ),
+                'default' => 'no',
+            );
+
+            $fields[0]['fields'][] = array(
+                'id'      => 'limit_revisions',
+                'type'    => 'switcher',
+                'title'   => esc_html__( 'Limit revisions', 'exopite-seo-core' ),
+                'default' => 'no',
+            );
+
+            $fields[0]['fields'][] = array(
+                'id'      => 'revision_to_keep',
+                'type'    => 'range',
+                'title'   => esc_html__( 'Revision to keep', 'exopite-seo-core' ),
+                'default' => '20',
+                'min'     => '0',
+                'max'     => '100',
+                'dependency' => array( 'limit_revisions', '==', 'true' ),
+                'info'    =>  ' ' . 'For unlimited, set to 100.',
+            );
+
+            $fields[0]['fields'][] = array(
+                'id'      => 'noidex_archives_search',
+                'type'    => 'switcher',
+                'title'   => esc_html__( 'Add noidex on archives, search and 404', 'exopite-seo-core' ),
+                'default' => 'no',
+            );
+
+            $fields[0]['fields'][] = array(
+                'id'      => 'deactivate_comments',
+                'type'    => 'switcher',
+                'title'   => esc_html__( 'Deactivate comments and pingbacks', 'exopite-seo-core' ),
+                'default' => 'no',
+            );
+
+            $fields[0]['fields'][] = array(
+                'type'    => 'notice',
+                'title'  => esc_html__( 'Integrated shortcodes', 'exopite-seo-core' ),
+                'content' => '<code>[exopite-breadcrumbs]</code> <code>[exopite-ga-optout link="' . esc_html__( 'Link Text', 'exopite-seo-core' ) . '"]</code>',
+            );
+
+        } else {
+
+            $fields[0]['fields'][] = array(
+                'type'    => 'notice',
+                'title'  => esc_html__( 'Integrated shortcodes', 'exopite-seo-core' ),
+                'content' => '<code>[exopite-ga-optout link="' . esc_html__( 'Link Text', 'exopite-seo-core' ) . '"]</code>',
+            );
+
+        }
 
         /**
          * Detect plugin. For use in Admin area only.
@@ -273,7 +282,7 @@ class Exopite_Seo_Core_Admin {
 
         }
 
-        if ( ! is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
+        if ( defined( 'EXOPITE_VERSION' ) || ! is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
 
             $fields[0]['fields'][] = array(
 
