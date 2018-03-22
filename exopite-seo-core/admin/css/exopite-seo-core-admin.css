@@ -8,3 +8,24 @@
     margin-top: -10px;
     margin-left: 10px;
 }
+.exopite-sof-field.exopite-sof-field-notice.exopite-seo-core-bottom-border {
+    border-bottom: 1px solid #eee;
+}
+.exopite-seo-core-gzip {
+    padding: 5px 10px;
+    display: inline-block;
+}
+.exopite-seo-core-gzip-success {
+    background: #c3e6cb;
+    color: green;
+    margin-right: 10px;
+}
+.exopite-seo-core-gzip-warning {
+    background: #f5c6cb;
+    color: #930000;
+    margin-right: 10px;
+}
+.exopite-seo-core-gzip-error {
+    background: #930000;
+    color: #fff;
+}
