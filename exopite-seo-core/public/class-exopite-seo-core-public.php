@@ -147,22 +147,35 @@ class Exopite_Seo_Core_Public {
         $options = get_option( $this->plugin_name );
 
         $left_column = $options['cookie_hint_left_column_width'];
-        $right_column = 100 - $left_column;
+        if ( $left_column != '100' ) {
+            $right_column = 100 - $left_column;
+        }
 
         ?>
         <div class="cookie-container" style="display:none;background:<?php echo $options['cookie_hint_bg_color']; ?>;border-top:2px solid <?php echo $options['cookie_hint_top_border_color']; ?>;padding:<?php echo $options['cookie_hint_padding']; ?>px 0;">
             <div class="cookie-wrapper-container <?php echo $options['cookie_hint_wrapper_class']; ?>">
                 <div class="cookie-column" style="width:<?php echo $left_column; ?>%;">
                     <div class="cookie-column-innter cookie-text" style="color:<?php echo $options['cookie_hint_text_color']; ?>;">
-                        <?php echo $options['cookie_hint_content_left']; ?>
+                        <?php
+
+                        echo $options['cookie_hint_content_left'];
+
+                        if ( $left_column == '100' ) :
+                        ?>
+                        <span class="accept-cookies accept-cookies-js cookie-btn" style="float:right;background:<?php echo $options['cookie_hint_accept_bg_color']; ?>;color:<?php echo $options['cookie_hint_accept_text_color']; ?>;"><?php echo $options['cookie_hint_button']; ?></span>
+                        <?php
+                        endif;
+                        ?>
                     </div>
                 </div>
+                <?php if ( $left_column != '100' ) : ?>
                 <div class="cookie-column" style="text-align: right;width:<?php echo $right_column; ?>%;">
                     <div class="cookie-column-innter" style="color:<?php echo $options['cookie_hint_text_color']; ?>;">
                         <?php echo $options['cookie_hint_content_right']; ?>
-                        <span class="accept-cookies accept-cookies-js cookie-btn"><?php echo $options['cookie_hint_button']; ?></span>
+                        <span class="accept-cookies accept-cookies-js cookie-btn" style="background:<?php echo $options['cookie_hint_accept_bg_color']; ?>;color:<?php echo $options['cookie_hint_accept_text_color']; ?>;"><?php echo $options['cookie_hint_button']; ?></span>
                     </div>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
         <?php
