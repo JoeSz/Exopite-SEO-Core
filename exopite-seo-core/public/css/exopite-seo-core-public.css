@@ -14,8 +14,13 @@
     padding-right: 15px;
 }
 .accept-cookies.cookie-btn {
-    padding: 5px 15px;
+    padding: 2px 15px;
     margin-left: 10px;
     background: #000;
     cursor: pointer;
+}
+@media only screen and (max-width:767px) {
+    .cookie-column-innter.cookie-text {
+        font-size: 0.8rem;
+    }
 }
