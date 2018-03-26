@@ -395,6 +395,29 @@ class Exopite_Seo_Core_Admin {
                 ),
 
                 array(
+                    'id'     => 'cookie_hint_link_color',
+                    'type'   => 'color',
+                    'title'  => esc_html__( 'Cookie Hint Link Color', 'exopite-seo-core' ),
+                    'rgba'   => true,
+                    'default' => '#ffffff',
+                ),
+
+                array(
+                    'id'     => 'cookie_hint_link_hover_color',
+                    'type'   => 'color',
+                    'title'  => esc_html__( 'Cookie Hint Link Hover Color', 'exopite-seo-core' ),
+                    'rgba'   => true,
+                    'default' => '#ffffff',
+                ),
+
+                array(
+                    'id'     => 'cookie_hint_link_underline',
+                    'type'   => 'checkbox',
+                    'title'  => esc_html__( 'Cookie Hint Link Underline', 'exopite-seo-core' ),
+                    'default' => 'no',
+                ),
+
+                array(
                     'id'     => 'cookie_hint_accept_bg_color',
                     'type'   => 'color',
                     'title'  => esc_html__( 'Cookie Hint Accept Button Background Color', 'exopite-seo-core' ),
