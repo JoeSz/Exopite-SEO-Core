@@ -4,6 +4,7 @@
     left: 0;
     right: 0;
     z-index: 999999;
+    line-height:1.2;
 }
 .cookie-column {
     float: left;
@@ -14,7 +15,7 @@
     padding-right: 15px;
 }
 .accept-cookies.cookie-btn {
-    padding: 2px 15px;
+    padding: 4px 15px;
     margin-left: 10px;
     background: #000;
     cursor: pointer;
