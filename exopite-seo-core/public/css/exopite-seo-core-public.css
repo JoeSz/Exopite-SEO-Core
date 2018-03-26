@@ -17,8 +17,8 @@
 .accept-cookies.cookie-btn {
     padding: 4px 15px;
     margin-left: 10px;
-    background: #000;
     cursor: pointer;
+    margin-top: 2px;
 }
 @media only screen and (max-width:767px) {
     .cookie-column-innter.cookie-text {
