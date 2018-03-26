@@ -152,7 +152,7 @@ class Exopite_Seo_Core_Public {
         }
 
         ?>
-        <div class="cookie-container" style="display:none;background:<?php echo $options['cookie_hint_bg_color']; ?>;border-top:2px solid <?php echo $options['cookie_hint_top_border_color']; ?>;padding:<?php echo $options['cookie_hint_padding']; ?>px 0;">
+        <div class="cookie-container" style="display:none;background:<?php echo $options['cookie_hint_bg_color']; ?>;border-top:2px solid <?php echo $options['cookie_hint_top_border_color']; ?>;padding:<?php echo $options['cookie_hint_padding']; ?>px 0;font-size:<?php echo $options['cookie_hint_font_size']; ?>px;line-hiehgt:1.2;">
             <div class="cookie-wrapper-container <?php echo $options['cookie_hint_wrapper_class']; ?>">
                 <div class="cookie-column" style="width:<?php echo $left_column; ?>%;">
                     <div class="cookie-column-innter cookie-text" style="color:<?php echo $options['cookie_hint_text_color']; ?>;">

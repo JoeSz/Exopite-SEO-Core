@@ -375,7 +375,7 @@ class Exopite_Seo_Core_Admin {
                     'type'   => 'color',
                     'title'  => esc_html__( 'Cookie Hint Background Color', 'exopite-seo-core' ),
                     'rgba'   => true,
-                    'default' => 'rgba(5,5,5,0.49)',
+                    'default' => 'rgba(5,5,5,0.75)',
                 ),
 
                 array(
@@ -383,7 +383,7 @@ class Exopite_Seo_Core_Admin {
                     'type'   => 'color',
                     'title'  => esc_html__( 'Cookie Hint Top Border Color', 'exopite-seo-core' ),
                     'rgba'   => true,
-                    'default' => 'rgba(5,5,5,0.49)',
+                    'default' => 'rgba(5,5,5,0.75)',
                 ),
 
                 array(
@@ -428,6 +428,16 @@ class Exopite_Seo_Core_Admin {
                     'after'   => ' <i class="text-muted">px</i>',
                     'min'     => '0',
                     'max'     => '100',
+                ),
+
+                array(
+                    'id'      => 'cookie_hint_font_size',
+                    'type'    => 'range',
+                    'title'   => esc_html__( 'Cookie Hint Font Size', 'exopite-seo-core' ),
+                    'default' => '14',
+                    'after'   => ' <i class="text-muted">px</i>',
+                    'min'     => '6',
+                    'max'     => '36',
                 ),
 
             ),
