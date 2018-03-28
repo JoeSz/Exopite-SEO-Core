@@ -109,6 +109,7 @@ class Exopite_Seo_Core_Public {
         }
         .cookie-container-footer {
             background:" . $options['cookie_hint_accept_footer_bg_color'] . ";
+            color:" . $options['cookie_hint_accept_footer_link_color'] . ";
         }
         .cookie-container-footer .cookie-column-footer a {
             color:" . $options['cookie_hint_accept_footer_link_color'] . ";
