@@ -52,6 +52,10 @@ Browsers
 
 == Changelog ==
 
+= 20180328 =
+* ADDED: Cookie Notice with color, padding, etc. customisation
+* UPDATED: Exopite Simple Options Framework
+
 = 20180322 =
 * ADDED: check GZip compression
 * ADDED: pot file for translations
