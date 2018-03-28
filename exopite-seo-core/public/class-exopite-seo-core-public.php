@@ -88,8 +88,10 @@ class Exopite_Seo_Core_Public {
             display:none;
             background:" . $options['cookie_hint_bg_color'] . ";
             border-top:2px solid" . $options['cookie_hint_top_border_color'] . ";
-            padding:" . $options['cookie_hint_padding'] . "px 0;
             font-size:" . $options['cookie_hint_font_size'] . "px;
+        }
+        .cookie-wrapper-container .cookie-column {
+            padding:" . $options['cookie_hint_top_padding'] . "px 0 " . $options['cookie_hint_bottom_padding'] . "px 0;
         }
         .cookie-column-inner {
             color:" . $options['cookie_hint_text_color'] . ";
@@ -98,6 +100,24 @@ class Exopite_Seo_Core_Public {
             float:right;
             background:" . $options['cookie_hint_accept_bg_color'] . ";
             color:" . $options['cookie_hint_accept_text_color'] . ";
+            transition: all 200ms ease;
+        }
+        .cookie-btn:hover {
+            float:right;
+            background:" . $options['cookie_hint_accept_bg_color_hover'] . ";
+            color:" . $options['cookie_hint_accept_text_color_hover'] . ";
+        }
+        .cookie-container-footer {
+            background:" . $options['cookie_hint_accept_footer_bg_color'] . ";
+        }
+        .cookie-container-footer .cookie-column-footer a {
+            color:" . $options['cookie_hint_accept_footer_link_color'] . ";
+        }
+        .cookie-container-footer .cookie-column-footer a:hover {
+            color:" . $options['cookie_hint_accept_footer_link_color_hover'] . ";
+        }
+        .cookie-container-footer .cookie-column-footer {
+            padding:" . $options['cookie_hint_footer_top_bottom_padding'] . "px 0;
         }
         ";
         if ( $options['cookie_hint_link_underline'] === 'yes' ) {
@@ -188,7 +208,7 @@ class Exopite_Seo_Core_Public {
 
         ?>
         <div class="cookie-container">
-            <div class="cookie-wrapper-container <?php echo $options['cookie_hint_wrapper_class']; ?>">
+            <div class="cookie-wrapper-container clearfix <?php echo $options['cookie_hint_wrapper_class']; ?>">
                 <div class="cookie-column" style="width:<?php echo $left_column; ?>%;">
                     <div class="cookie-column-inner cookie-text">
                         <?php
@@ -212,6 +232,27 @@ class Exopite_Seo_Core_Public {
                 </div>
                 <?php endif; ?>
             </div>
+            <?php if ( isset( $options['cookie_hint_accept_footer_links'] ) && $options['cookie_hint_accept_footer_links'] != null && is_array( $options['cookie_hint_accept_footer_links'] ) ) : ?>
+            <div class="cookie-container-footer">
+                <div class="cookie-wrapper-container-footer clearfix <?php echo $options['cookie_hint_wrapper_class']; ?>">
+                    <div class="cookie-column cookie-column-footer" style="width:<?php echo $left_column; ?>%;">
+                    <?php
+
+                    $links = array();
+
+                    foreach ( $options['cookie_hint_accept_footer_links'] as $page_id ) :
+
+                        $links[] = '<a href="' . get_the_permalink( $page_id ) . '">' . get_the_title( $page_id ) . '</a>';
+
+                    endforeach;
+
+                    echo implode( ' | ', $links );
+
+                    ?>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
         </div>
         <?php
 
