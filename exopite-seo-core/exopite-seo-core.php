@@ -16,7 +16,7 @@
  * Plugin Name:       Exopite SEO Core
  * Plugin URI:        https://joe.szalai.org
  * Description:       Core SEO optimizations
- * Version:           20180322
+ * Version:           20180328
  * Author:            Joe Szalai
  * Author URI:        https://joe.szalai.org
  * License:           GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'EXOPITE_SEO_CORE_VERSION', '20180315' );
+define( 'EXOPITE_SEO_CORE_VERSION', '20180328' );
 define( 'EXOPITE_SEO_PLUGIN_NAME', 'exopite-seo-core' );
 define( 'EXOPITE_SEO_PATH', plugin_dir_path( __FILE__ ) );
 
