@@ -293,7 +293,7 @@ class Exopite_Seo_Core_Admin {
 
                 'type'    => 'notice',
                 'class'   => 'warning',
-                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your images.', 'exopite-seo-core' ), '<a href="http://www.emotions-in-print.localhost/wp-admin/plugin-install.php?tab=plugin-information&plugin=ewww-image-optimizer" target="_blank">EWWW Image Optimizer</a>' ),
+                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your images.', 'exopite-seo-core' ), '<a href="' . get_site_url() . 'wp-admin/plugin-install.php?tab=plugin-information&plugin=ewww-image-optimizer" target="_blank">EWWW Image Optimizer</a>' ),
 
             );
 
@@ -305,7 +305,7 @@ class Exopite_Seo_Core_Admin {
 
                 'type'    => 'notice',
                 'class'   => 'warning',
-                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your site SEO. This plugin is created to extend your site SEO after Yoast SEO is installed and activated.', 'exopite-seo-core' ), '<a href="http://www.emotions-in-print.localhost/wp-admin/plugin-install.php?tab=plugin-information&plugin=wordpress-seo" target="_blank">Yoast SEO</a>' ),
+                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your site SEO. This plugin is created to extend your site SEO after Yoast SEO is installed and activated.', 'exopite-seo-core' ), '<a href="' . get_site_url() . 'wp-admin/plugin-install.php?tab=plugin-information&plugin=wordpress-seo" target="_blank">Yoast SEO</a>' ),
 
             );
 
