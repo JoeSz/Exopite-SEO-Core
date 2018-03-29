@@ -82,17 +82,17 @@ if ( is_admin() ) {
 
     }
 
-    // $MyUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-    //     'https://update.szalai.org/?action=get_metadata&slug=' . EXOPITE_SEO_PLUGIN_NAME, //Metadata URL.
-    //     __FILE__, //Full path to the main plugin file.
-    //     EXOPITE_SEO_PLUGIN_NAME //Plugin slug. Usually it's the same as the name of the directory.
-    // );
-
     $MyUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-        'https://github.com/JoeSz/Exopite-SEO-Core-WordPress-Plugin' . EXOPITE_SEO_PLUGIN_NAME, //Metadata URL.
+        'https://update.szalai.org/?action=get_metadata&slug=' . EXOPITE_SEO_PLUGIN_NAME, //Metadata URL.
         __FILE__, //Full path to the main plugin file.
         EXOPITE_SEO_PLUGIN_NAME //Plugin slug. Usually it's the same as the name of the directory.
     );
+
+    // $MyUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+    //     'https://github.com/JoeSz/Exopite-SEO-Core', //Metadata URL.
+    //     __FILE__, //Full path to the main plugin file.
+    //     EXOPITE_SEO_PLUGIN_NAME //Plugin slug. Usually it's the same as the name of the directory.
+    // );
 
 }
 // End Update
