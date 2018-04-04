@@ -34,7 +34,7 @@ All functions are optional.
 INSTALLATION
 ------------
 
-1. [x] Upload `exopite-multifilter` to the `/wp-content/plugins/exopite-multifilter/` directory
+1. [x] Upload `exopite-seo-core` to the `/wp-content/plugins/exopite-seo-core/` directory
 
 OR
 

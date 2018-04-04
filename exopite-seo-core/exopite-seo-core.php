@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Exopite SEO Core
  * Plugin URI:        https://joe.szalai.org
- * Description:       Core SEO optimizations
+ * Description:       Core SEO optimizations.
  * Version:           20180329
  * Author:            Joe Szalai
  * Author URI:        https://joe.szalai.org
