@@ -91,7 +91,8 @@ class Exopite_Seo_Core_Public {
             font-size:" . $options['cookie_hint_font_size'] . "px;
         }
         .cookie-wrapper-container .cookie-column {
-            padding:" . $options['cookie_hint_top_padding'] . "px 0 " . $options['cookie_hint_bottom_padding'] . "px 0;
+            padding-top:" . $options['cookie_hint_top_padding'] . "px;
+            padding-bottom:" . $options['cookie_hint_bottom_padding'] . "px;
         }
         .cookie-column-inner {
             color:" . $options['cookie_hint_text_color'] . ";
