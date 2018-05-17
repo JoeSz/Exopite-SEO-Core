@@ -207,18 +207,36 @@ class Exopite_Seo_Core_Public {
             $right_column = 100 - $left_column;
         }
 
+        $cookie_hint_wrapper_class = ( isset( $options['cookie_hint_wrapper_class'] ) ) ? $options['cookie_hint_wrapper_class'] : '';
+        $cookie_hint_inner_wrapper_class = ( isset( $options['cookie_hint_inner_wrapper_class'] ) ) ? $options['cookie_hint_inner_wrapper_class'] : '';
+
+        $cookie_hint_button = '';
+        $cookie_hint_content_left = '';
+        $cookie_hint_content_right = '';
+
+        if ( isset( $options['cookie_hint_content_from_translation'] ) && $options['cookie_hint_content_from_translation'] != 'no' ) {
+            $left_column = '100';
+            $cookie_hint_content_left = esc_html__( 'In order to optimize our website for you and to be able to continuously improve it, we use cookies. By continuing to use the website, you agree to the use of cookies.', 'exopite-seo-core' );
+            $cookie_hint_button = esc_html__( 'OK', 'exopite-seo-core' );
+            $cookie_hint_content_left .= ' ' . '<a href="/' . esc_html_x( 'privacy-policy', 'Relative permalink slug', 'exopite-seo-core' ) . '/">' . esc_html__( 'More information', 'exopite-seo-core' ) . '</a>';
+
+        } else {
+            $cookie_hint_content_left = ( isset( $options['cookie_hint_content_left'] ) && ! empty( $options['cookie_hint_content_left'] ) ) ? $options['cookie_hint_content_left'] : '';
+            $cookie_hint_button = ( isset( $options['cookie_hint_button'] ) && ! empty( $options['cookie_hint_button'] ) ) ? $options['cookie_hint_button'] : '';
+        }
+
         ?>
         <div class="cookie-container">
-            <div class="cookie-wrapper-container clearfix <?php echo $options['cookie_hint_wrapper_class']; ?>">
-                <div class="cookie-column" style="width:<?php echo $left_column; ?>%;">
+            <div class="cookie-wrapper-container clearfix <?php echo $cookie_hint_wrapper_class; ?>">
+                <div class="cookie-column <?php echo $cookie_hint_inner_wrapper_class; ?>" style="width:<?php echo $left_column; ?>%;">
                     <div class="cookie-column-inner cookie-text">
                         <?php
 
-                        echo $options['cookie_hint_content_left'];
+                        echo $cookie_hint_content_left;
 
                         if ( $left_column == '100' ) :
                         ?>
-                        <span class="accept-cookies accept-cookies-js cookie-btn"><?php echo $options['cookie_hint_button']; ?></span>
+                        <span class="accept-cookies accept-cookies-js cookie-btn"><?php echo $cookie_hint_button; ?></span>
                         <?php
                         endif;
                         ?>
@@ -227,16 +245,16 @@ class Exopite_Seo_Core_Public {
                 <?php if ( $left_column != '100' ) : ?>
                 <div class="cookie-column" style="text-align: right;width:<?php echo $right_column; ?>%;">
                     <div class="cookie-column-inner">
-                        <?php echo $options['cookie_hint_content_right']; ?>
-                        <span class="accept-cookies accept-cookies-js cookie-btn"><?php echo $options['cookie_hint_button']; ?></span>
+                        <?php echo $cookie_hint_content_right; ?>
+                        <span class="accept-cookies accept-cookies-js cookie-btn"><?php echo $cookie_hint_button; ?></span>
                     </div>
                 </div>
                 <?php endif; ?>
             </div>
             <?php if ( isset( $options['cookie_hint_accept_footer_links'] ) && $options['cookie_hint_accept_footer_links'] != null && is_array( $options['cookie_hint_accept_footer_links'] ) ) : ?>
             <div class="cookie-container-footer">
-                <div class="cookie-wrapper-container-footer clearfix <?php echo $options['cookie_hint_wrapper_class']; ?>">
-                    <div class="cookie-column cookie-column-footer" style="width:<?php echo $left_column; ?>%;">
+                <div class="cookie-wrapper-container-footer clearfix <?php echo $cookie_hint_wrapper_class; ?>">
+                    <div class="cookie-column cookie-column-footer <?php echo $cookie_hint_inner_wrapper_class; ?>" style="width:<?php echo $left_column; ?>%;">
                     <?php
 
                     $links = array();
