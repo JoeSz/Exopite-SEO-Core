@@ -320,7 +320,7 @@ class Exopite_Seo_Core_Admin {
                 array(
                     'id'      => 'ace_editor_head',
                     'type'    => 'ace_editor',
-                    'title'   => 'Head',
+                    'title'   => esc_html__( 'Head', 'exopite-seo-core' ),
                     'options' => array(
                         'theme'                     => 'ace/theme/chrome',
                         'mode'                      => 'ace/mode/html',
@@ -340,52 +340,70 @@ class Exopite_Seo_Core_Admin {
         );
 
         $fields[2] = array(
-            'name'   => 'cookie',
-            'title'  => esc_html__( 'Cookie', 'exopite-seo-core' ),
-            'icon'   => 'fa fa-birthday-cake',
+            'name'       => 'cookie',
+            'title'      => esc_html__( 'Cookie', 'exopite-seo-core' ),
+            'icon'       => 'fa fa-birthday-cake',
             'dependency' => array( 'cookie_note', '==', 'true' ),
-            'fields' => array(
+            'fields'     => array(
 
                 array(
-                    'id'     => 'cookie_hint_content_left',
-                    'type'   => 'textarea',
-                    'title'  => esc_html__( 'Content Left', 'exopite-seo-core' ),
+                    'id'      => 'cookie_hint_content_from_translation',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Content from translation file', 'exopite-seo-core' ),
+                    'default' => 'no',
                 ),
 
                 array(
-                    'id'     => 'cookie_hint_content_right',
-                    'type'   => 'textarea',
-                    'title'  => esc_html__( 'Content Right', 'exopite-seo-core' ),
-                    'dependency' => array( 'cookie_hint_left_column_width', '<', '100' ),
+                    'id'         => 'cookie_hint_content_left',
+                    'type'       => 'textarea',
+                    'title'      => esc_html__( 'Content Left', 'exopite-seo-core' ),
+                    'dependency' => array( 'cookie_hint_content_from_translation', '!=', 'true' ),
+                    'default'    => esc_html__( "In order to optimize our website for you and to be able to continuously improve it, we use cookies. By continuing to use the website, you agree to the use of cookies.", 'exopite-seo-core' ) . " <a href='/" . esc_html_x( 'privacy-policy', 'Relative permalink slug', 'exopite-seo-core' ) . "/'>" . esc_html__( "More information", 'exopite-seo-core' ) . '</a>',
                 ),
 
                 array(
-                    'id'     => 'cookie_hint_button',
-                    'type'   => 'text',
-                    'title'  => esc_html__( 'Button Text', 'exopite-seo-core' ),
+                    'id'         => 'cookie_hint_content_right',
+                    'type'       => 'textarea',
+                    'title'      => esc_html__( 'Content Right', 'exopite-seo-core' ),
+                    'dependency' => array( 'cookie_hint_left_column_width|cookie_hint_content_from_translation', '<|!=', '100|true' ),
                 ),
 
                 array(
-                    'id'     => 'cookie_hint_wrapper_class',
-                    'type'   => 'text',
-                    'title'  => esc_html__( 'Theme Body Wapper Class', 'exopite-seo-core' ),
+                    'id'         => 'cookie_hint_button',
+                    'type'       => 'text',
+                    'title'      => esc_html__( 'Button Text', 'exopite-seo-core' ),
+                    'default'    => 'OK',
+                    'dependency' => array( 'cookie_hint_content_from_translation', '!=', 'true' ),
+                ),
+
+                array(
+                    'id'      => 'cookie_hint_wrapper_class',
+                    'type'    => 'text',
+                    'title'   => esc_html__( 'Theme Body Wapper Class', 'exopite-seo-core' ),
                     'default' => 'gdlr-core-container',
                 ),
 
                 array(
-                    'id'     => 'cookie_hint_bg_color',
-                    'type'   => 'color',
-                    'title'  => esc_html__( 'Background Color', 'exopite-seo-core' ),
-                    'rgba'   => true,
-                    'default' => 'rgba(5,5,5,0.75)',
+                    'id'     => 'cookie_hint_inner_wrapper_class',
+                    'type'   => 'text',
+                    'title'  => esc_html__( 'Theme Body Inner Wapper Class', 'exopite-seo-core' ),
+                    'default' => 'gdlr-core-item-pdlr',
                 ),
 
                 array(
-                    'id'     => 'cookie_hint_top_border_color',
-                    'type'   => 'color',
-                    'title'  => esc_html__( 'Top Border Color', 'exopite-seo-core' ),
-                    'rgba'   => true,
-                    'default' => 'rgba(5,5,5,0.75)',
+                    'id'      => 'cookie_hint_bg_color',
+                    'type'    => 'color',
+                    'title'   => esc_html__( 'Background Color', 'exopite-seo-core' ),
+                    'rgba'    => true,
+                    'default' => 'rgba(5,5,5,0.6)',
+                ),
+
+                array(
+                    'id'      => 'cookie_hint_top_border_color',
+                    'type'    => 'color',
+                    'title'   => esc_html__( 'Top Border Color', 'exopite-seo-core' ),
+                    'rgba'    => true,
+                    'default' => 'rgba(5,5,5,0.6)',
                 ),
 
                 array(
@@ -492,8 +510,8 @@ class Exopite_Seo_Core_Admin {
                     'id'      => 'cookie_hint_left_column_width',
                     'type'    => 'range',
                     'title'   => esc_html__( 'Left Column Width', 'exopite-seo-core' ),
-                    'default' => '50',
-                    'after'   => ' <i class="text-muted">%</i>',
+                    'default' => '100',
+                    'info'   => ' <i class="text-muted">%</i>',
                     'min'     => '1',
                     'max'     => '100',
                 ),
@@ -503,7 +521,7 @@ class Exopite_Seo_Core_Admin {
                     'type'    => 'range',
                     'title'   => esc_html__( 'Font Size', 'exopite-seo-core' ),
                     'default' => '14',
-                    'after'   => ' <i class="text-muted">px</i>',
+                    'info'   => ' <i class="text-muted">px</i>',
                     'min'     => '6',
                     'max'     => '36',
                 ),
@@ -513,7 +531,7 @@ class Exopite_Seo_Core_Admin {
                     'type'    => 'range',
                     'title'   => esc_html__( 'Top Padding', 'exopite-seo-core' ),
                     'default' => '7',
-                    'after'   => ' <i class="text-muted">px</i>',
+                    'info'   => ' <i class="text-muted">px</i>',
                     'min'     => '0',
                     'max'     => '60',
                 ),
@@ -523,7 +541,7 @@ class Exopite_Seo_Core_Admin {
                     'type'    => 'range',
                     'title'   => esc_html__( 'Bottom Padding', 'exopite-seo-core' ),
                     'default' => '7',
-                    'after'   => ' <i class="text-muted">px</i>',
+                    'info'   => ' <i class="text-muted">px</i>',
                     'min'     => '0',
                     'max'     => '60',
                 ),
@@ -533,7 +551,7 @@ class Exopite_Seo_Core_Admin {
                     'type'    => 'range',
                     'title'   => esc_html__( 'Footer Top Bottom Padding', 'exopite-seo-core' ),
                     'default' => '2',
-                    'after'   => ' <i class="text-muted">px</i>',
+                    'info'   => ' <i class="text-muted">px</i>',
                     'min'     => '0',
                     'max'     => '60',
                 ),
