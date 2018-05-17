@@ -42,7 +42,7 @@ All functions are optional.
 Server
 
 * WordPress 4.0+ (May work with earlier versions too)
-* PHP 5.3+ (Required)
+* PHP 5.6+ (Required)
 * jQuery 1.9.1+
 
 Browsers
@@ -52,6 +52,10 @@ Browsers
 * Tested on Firefox, Chrome, Edge, IE 11
 
 == Changelog ==
+
+= 20180517 =
+* ADDED: Cookie Notice from translation file for WPML compatibility
+* ADDED: German translation
 
 = 20180328 =
 * ADDED: Cookie Notice with color, padding, etc. customisation
