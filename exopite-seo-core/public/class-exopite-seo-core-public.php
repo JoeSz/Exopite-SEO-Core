@@ -130,6 +130,10 @@ class Exopite_Seo_Core_Public {
             ";
         }
 
+        if ( ! empty( $options['ace_editor_head_css'] ) ) {
+            $custom_css .= esc_html( $options['ace_editor_head_css'] );
+        }
+
         wp_add_inline_style( $this->plugin_name, $custom_css );
 
 	}
@@ -671,6 +675,14 @@ class Exopite_Seo_Core_Public {
         );
 
         return '<a href="javascript:gaOptout()">' . $args['link'] . '</a>';
+
+    }
+
+    public function add_to_footer() {
+
+        $options = get_option( $this->plugin_name );
+
+        echo $options['ace_editor_footer'];
 
     }
 
