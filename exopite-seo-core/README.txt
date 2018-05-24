@@ -3,21 +3,22 @@ Contributors: ujbeszel
 Author: Joe Szalai
 Donate link: https://joe.szalai.org
 Tags: seo, search, engine, optimization, search-engine-optimization, wordpress, plugin, wordpress-plugin
-Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 4.9
-Version: 20180329
+Requires at least: 4.7
+Tested up to: 4.9.6
+Stable tag: 4.9.6
+Version: 20180524
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Increase your website's SEO ranking, speed, the number of visitors and ultimately your sales by optimizing your WordPress site for SEO.<br>
+Core SEO optimizations with cookie notice, inline CSS and more. Increase your website's SEO ranking, speed, the number of visitors and ultimately your sales by optimizing your WordPress site for SEO.<br>
 Provide some extra but important SEO functions along Yoast SEO. Yoast SEO not required but recommended.
 You may or may not use an other SEO plugin too.
 
 == Description ==
 
-In our analysis in XOVI, we find some possibilities to improve site SEO. Unfortunalty we did not
-find this options in out favorite plugin Yoast SEO. So we decided to create this plugin.
+In our analysis in XOVI, we find some possibilities to improve our sites SEO. Mainly we use Yoast SEO Plugin, but unfortunalty we did not
+find this options in it. So we decided to create this plugin. Mainly to expand Yoast SEO functionality, but it not required,
+the plugin can be used alone too.
 
 All functions are optional.
 
@@ -30,7 +31,10 @@ All functions are optional.
 * Deactivate comments and pingbacks in the whole site,
 * Deactivate feed,
 * Activate Google Analytics (via Tag-Manager), you need a Tag-Manager ID for this first,
-* Add anything to header (e.g. Schema.org JSON or GEO Tags).
+* Add anything to header (e.g. Schema.org JSON or GEO Tags),
+* Add anything to footer (e.g. JavaScript, etc...),
+* Add inline style to header (it is hard to add css for some themes),
+* Add personalizable cookie notice.
 
 == Installation ==
 
@@ -41,7 +45,7 @@ All functions are optional.
 
 Server
 
-* WordPress 4.0+ (May work with earlier versions too)
+* WordPress 4.7+ (May work with earlier versions too)
 * PHP 5.6+ (Required)
 * jQuery 1.9.1+
 
@@ -52,6 +56,10 @@ Browsers
 * Tested on Firefox, Chrome, Edge, IE 11
 
 == Changelog ==
+
+= 20180524 =
+* ADDED: (ACE) Editor field for footer
+* ADDED: (ACE) Editor field for inline css in header
 
 = 20180517 =
 * ADDED: Cookie Notice from translation file for WPML compatibility

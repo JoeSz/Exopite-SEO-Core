@@ -1,11 +1,11 @@
 # Exopite-SEO-Core
 ## WordPress Plugin
-Increase your website's SEO ranking, speed, the number of visitors and ultimately your sales by optimizing your WordPress site for SEO.<br>
+Core SEO optimizations with cookie notice, inline CSS and more. Increase your website's SEO ranking, speed, the number of visitors and ultimately your sales by optimizing your WordPress site for SEO.<br>
 Provide some extra but important SEO functions along Yoast SEO. Yoast SEO not required but recommended.
 You may or may not use an other SEO plugin too.
 
 - Author: Joe Szalai
-- Version: 20180315
+- Version: 20180527
 - Plugin URL: https://github.com/JoeSz/Exopite-SEO-Core
 - Demo URL: https://joe.szalai.org/exopite/exopite-seo-core/
 - Author URL: https://joe.szalai.org
@@ -15,8 +15,9 @@ You may or may not use an other SEO plugin too.
 DESCRIPTION
 -----------
 
-In our analysis in XOVI, we find some possibilities to improve site SEO. Unfortunalty we did not
-find this options in out favorite plugin Yoast SEO. So we decided to create this plugin.
+In our analysis in XOVI, we find some possibilities to improve our sites SEO. Mainly we use Yoast SEO Plugin, but unfortunalty we did not
+find this options in it. So we decided to create this plugin. Mainly to expand Yoast SEO functionality, but it not required,
+the plugin can be used alone too.
 
 All functions are optional.
 
@@ -29,7 +30,10 @@ All functions are optional.
 * Deactivate comments and pingbacks in the whole site,
 * Deactivate feed,
 * Activate Google Analytics (via Tag-Manager), you need a Tag-Manager ID for this first,
-* Add anything to header (e.g. Schema.org JSON or GEO Tags).
+* Add anything to header (e.g. Schema.org JSON or GEO Tags),
+* Add anything to footer (e.g. JavaScript, etc...),
+* Add inline style to header (it is hard to add css for some themes),
+* Add personalizable cookie notice.
 
 INSTALLATION
 ------------
@@ -47,7 +51,7 @@ REQUIREMENTS
 
 Server
 
-* WordPress 4.0+ (May work with earlier versions too)
+* WordPress 4.7+ (May work with earlier versions too)
 * PHP 5.6+ (Required)
 * jQuery 1.9.1+
 
@@ -59,6 +63,9 @@ Browsers
 
 CHANGELOG
 ---------
+= 20180524 =
+* ADDED: (ACE) Editor field for footer
+* ADDED: (ACE) Editor field for inline css in header
 
 = 20180517 =
 * ADDED: Cookie Notice from translation file for WPML compatibility
