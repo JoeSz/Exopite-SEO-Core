@@ -15,12 +15,12 @@
  * @wordpress-plugin
  * Plugin Name:       Exopite SEO Core
  * Plugin URI:        https://joe.szalai.org
- * Description:       Core SEO optimizations.
- * Version:           20180517
+ * Description:       Core SEO optimizations with cookie notice, inline CSS and more.
+ * Version:           20180524
  * Author:            Joe Szalai
  * Author URI:        https://joe.szalai.org
  * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain:       exopite-seo-core
  * Domain Path:       /languages
  */
@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'EXOPITE_SEO_CORE_VERSION', '20180517' );
+define( 'EXOPITE_SEO_CORE_VERSION', '20180524' );
 define( 'EXOPITE_SEO_PLUGIN_NAME', 'exopite-seo-core' );
 define( 'EXOPITE_SEO_PATH', plugin_dir_path( __FILE__ ) );
 
