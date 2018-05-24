@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-17 12:10+0200\n"
-"PO-Revision-Date: 2018-05-17 12:31+0200\n"
+"POT-Creation-Date: 2018-05-24 10:08+0100\n"
+"PO-Revision-Date: 2018-05-24 10:12+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: de_DE\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -115,20 +115,41 @@ msgstr ""
 msgid "Head"
 msgstr "Kopfbereich"
 
-#: admin/class-exopite-seo-core-admin.php:344
+#: admin/class-exopite-seo-core-admin.php:323
+msgid "Head (for HTML)"
+msgstr "Kopfbereich (für HTML)"
+
+#: admin/class-exopite-seo-core-admin.php:342
+msgid "Head inline CSS"
+msgstr "Kopfbereich Inline-CSS"
+
+#: admin/class-exopite-seo-core-admin.php:363
+#: admin/class-exopite-seo-core-admin.php:370
+msgid "Footer"
+msgstr "Fußzeile"
+
+#: admin/class-exopite-seo-core-admin.php:389
+msgid "Use wp_print_footer_scripts hook"
+msgstr "Verwenden sie den wp_print_footer_scripts-Hook"
+
+#: admin/class-exopite-seo-core-admin.php:391
+msgid "For themes where wp_footer is not called."
+msgstr "Themes, in denen der wp_footer nicht aufgerufen wird."
+
+#: admin/class-exopite-seo-core-admin.php:399
 msgid "Cookie"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:352
+#: admin/class-exopite-seo-core-admin.php:407
 msgid "Content from translation file"
 msgstr "Inhalte aus Übersetzungsdatei"
 
-#: admin/class-exopite-seo-core-admin.php:359
+#: admin/class-exopite-seo-core-admin.php:414
 msgid "Content Left"
 msgstr "Inhalt links"
 
-#: admin/class-exopite-seo-core-admin.php:361
-#: public/class-exopite-seo-core-public.php:219
+#: admin/class-exopite-seo-core-admin.php:416
+#: public/class-exopite-seo-core-public.php:223
 msgid ""
 "In order to optimize our website for you and to be able to continuously "
 "improve it, we use cookies. By continuing to use the website, you agree to "
@@ -138,107 +159,107 @@ msgstr ""
 "zu können, verwenden wir Cookies. Durch die weitere Nutzung der Webseite "
 "stimmen Sie der Verwendung von Cookies zu. "
 
-#: admin/class-exopite-seo-core-admin.php:361
-#: public/class-exopite-seo-core-public.php:221
+#: admin/class-exopite-seo-core-admin.php:416
+#: public/class-exopite-seo-core-public.php:225
 msgctxt "Relative permalink slug"
 msgid "privacy-policy"
 msgstr "datenschutz"
 
-#: admin/class-exopite-seo-core-admin.php:361
-#: public/class-exopite-seo-core-public.php:221
+#: admin/class-exopite-seo-core-admin.php:416
+#: public/class-exopite-seo-core-public.php:225
 msgid "More information"
 msgstr "Weitere Informationen"
 
-#: admin/class-exopite-seo-core-admin.php:367
+#: admin/class-exopite-seo-core-admin.php:422
 msgid "Content Right"
 msgstr "Inhalt rechts"
 
-#: admin/class-exopite-seo-core-admin.php:374
+#: admin/class-exopite-seo-core-admin.php:429
 msgid "Button Text"
 msgstr "Button-Text"
 
-#: admin/class-exopite-seo-core-admin.php:382
+#: admin/class-exopite-seo-core-admin.php:437
 msgid "Theme Body Wapper Class"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:389
+#: admin/class-exopite-seo-core-admin.php:444
 msgid "Theme Body Inner Wapper Class"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:396
+#: admin/class-exopite-seo-core-admin.php:451
 msgid "Background Color"
 msgstr "Hintergrundfarbe"
 
-#: admin/class-exopite-seo-core-admin.php:404
+#: admin/class-exopite-seo-core-admin.php:459
 msgid "Top Border Color"
 msgstr "Farbe des oberen Rahmens"
 
-#: admin/class-exopite-seo-core-admin.php:412
+#: admin/class-exopite-seo-core-admin.php:467
 msgid "Text Color"
 msgstr "Textfarbe"
 
-#: admin/class-exopite-seo-core-admin.php:420
+#: admin/class-exopite-seo-core-admin.php:475
 msgid "Link Color"
 msgstr "Linkfarbe"
 
-#: admin/class-exopite-seo-core-admin.php:428
+#: admin/class-exopite-seo-core-admin.php:483
 msgid "Link Hover Color"
 msgstr "Linkfarbe bei Mouseover"
 
-#: admin/class-exopite-seo-core-admin.php:436
+#: admin/class-exopite-seo-core-admin.php:491
 msgid "Link Underline"
 msgstr "Link-Unterstreichung"
 
-#: admin/class-exopite-seo-core-admin.php:443
+#: admin/class-exopite-seo-core-admin.php:498
 msgid "Accept Button Background Color"
 msgstr "Akzeptieren Button Hintergrundfarbe"
 
-#: admin/class-exopite-seo-core-admin.php:451
+#: admin/class-exopite-seo-core-admin.php:506
 msgid "Accept Button Background Hover Color"
 msgstr "Akzeptieren Button Hintergrundfarbe bei Mouseover"
 
-#: admin/class-exopite-seo-core-admin.php:459
+#: admin/class-exopite-seo-core-admin.php:514
 msgid "Accept Button Text Color"
 msgstr "Akzeptieren Button Textfarbe"
 
-#: admin/class-exopite-seo-core-admin.php:467
+#: admin/class-exopite-seo-core-admin.php:522
 msgid "Accept Button Text Hover Color"
 msgstr "Akzeptieren Button Textfarbe bei Mouseover"
 
-#: admin/class-exopite-seo-core-admin.php:475
+#: admin/class-exopite-seo-core-admin.php:530
 msgid "Footer Menu Link Color"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:483
+#: admin/class-exopite-seo-core-admin.php:538
 msgid "Footer Menu Link Hover Color"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:491
+#: admin/class-exopite-seo-core-admin.php:546
 msgid "Footer Menu Background Color"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:512
+#: admin/class-exopite-seo-core-admin.php:567
 msgid "Left Column Width"
 msgstr ""
 
-#: admin/class-exopite-seo-core-admin.php:522
+#: admin/class-exopite-seo-core-admin.php:577
 msgid "Font Size"
 msgstr "Schriftgröße"
 
-#: admin/class-exopite-seo-core-admin.php:532
+#: admin/class-exopite-seo-core-admin.php:587
 msgid "Top Padding"
 msgstr "Oberer Innenabstand"
 
-#: admin/class-exopite-seo-core-admin.php:542
+#: admin/class-exopite-seo-core-admin.php:597
 msgid "Bottom Padding"
 msgstr "﻿Unterer Innenabstand"
 
-#: admin/class-exopite-seo-core-admin.php:552
+#: admin/class-exopite-seo-core-admin.php:607
 msgid "Footer Top Bottom Padding"
 msgstr "Innenabstand Fußbereich oben und unten"
 
-#: admin/class-exopite-seo-core-admin.php:565
-#: admin/class-exopite-seo-core-admin.php:571
+#: admin/class-exopite-seo-core-admin.php:620
+#: admin/class-exopite-seo-core-admin.php:626
 msgid "Backup"
 msgstr "Backup"
 
@@ -366,27 +387,27 @@ msgstr "Max Dateigröße: "
 msgid "Add Video"
 msgstr "Video hinzufügen"
 
-#: public/class-exopite-seo-core-public.php:220
+#: public/class-exopite-seo-core-public.php:224
 msgid "OK"
 msgstr ""
 
-#: public/class-exopite-seo-core-public.php:680
+#: public/class-exopite-seo-core-public.php:692
 msgid "Home"
 msgstr ""
 
-#: public/class-exopite-seo-core-public.php:774
+#: public/class-exopite-seo-core-public.php:786
 msgid "Archive for "
 msgstr "Archiv für "
 
-#: public/class-exopite-seo-core-public.php:793
+#: public/class-exopite-seo-core-public.php:805
 msgid "Author "
 msgstr "Autor "
 
-#: public/class-exopite-seo-core-public.php:797
+#: public/class-exopite-seo-core-public.php:809
 msgid "Blog Archives"
 msgstr "Blog Archive"
 
-#: public/class-exopite-seo-core-public.php:801
+#: public/class-exopite-seo-core-public.php:813
 msgid "Search results for "
 msgstr "Suchergebnisse für "
 
