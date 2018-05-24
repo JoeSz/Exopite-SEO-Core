@@ -177,8 +177,8 @@ class Exopite_Seo_Core {
 
 		$plugin_public = new Exopite_Seo_Core_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-        $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles', 999 );
+        $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts', 999 );
 
         $activate_gzip = ( isset( $options['activate_gzip'] ) ) ? $options['activate_gzip'] : 'no';
         $remove_json_from_header = ( isset( $options['remove_json_from_header'] ) ) ? $options['remove_json_from_header'] : 'no';
@@ -190,8 +190,23 @@ class Exopite_Seo_Core {
         $deactivate_feed = ( isset( $options['deactivate_feed'] ) ) ? $options['deactivate_feed'] : 'no';
         $cookie_note = ( isset( $options['cookie_note'] ) ) ? $options['cookie_note'] : 'no';
         $ace_editor_head = ( isset( $options['ace_editor_head'] ) ) ? $options['ace_editor_head'] : '';
+        $ace_editor_footer = ( isset( $options['ace_editor_footer'] ) && ! empty( $options['ace_editor_footer'] ) ) ? true : false;
+        $ace_editor_footer_print_hook = ( isset( $options['ace_editor_footer_print_hook'] ) ) ? $options['ace_editor_footer_print_hook'] : 'no';
         $activate_google_analytics = ( isset( $options['activate_google_analytics'] ) ) ? $options['activate_google_analytics'] : 'no';
 
+        if ( $ace_editor_footer ) {
+
+            $hook = 'wp_footer';
+
+            if ( $ace_editor_footer_print_hook == 'yes' ) {
+
+                $hook = 'wp_print_footer_scripts';
+
+            }
+
+            $this->loader->add_action( $hook, $plugin_public, 'add_to_footer', 999 );
+
+        }
 
         if ( $activate_gzip == 'yes' ) {
 
