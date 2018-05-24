@@ -320,7 +320,7 @@ class Exopite_Seo_Core_Admin {
                 array(
                     'id'      => 'ace_editor_head',
                     'type'    => 'ace_editor',
-                    'title'   => esc_html__( 'Head', 'exopite-seo-core' ),
+                    'title'   => esc_html__( 'Head (for HTML)', 'exopite-seo-core' ),
                     'options' => array(
                         'theme'                     => 'ace/theme/chrome',
                         'mode'                      => 'ace/mode/html',
@@ -331,15 +331,70 @@ class Exopite_Seo_Core_Admin {
                         'enableLiveAutocompletion'  => true,
                     ),
                     'attributes'    => array(
-                        'style'        => 'height: 700px; max-width: 700px;',
+                        'style'        => 'height: 300px; max-width: 700px;',
                     ),
                     'description' => '<span class="info-links"><a href="https://technicalseo.com/seo-tools/schema-markup-generator/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Schema Markup Generator</a><br><a href="http://www.geo-tag.de/generator/de.html" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Geo-Tag Generator</a></span>',
+                ),
+
+                array(
+                    'id'      => 'ace_editor_head_css',
+                    'type'    => 'ace_editor',
+                    'title'   => esc_html__( 'Head inline CSS', 'exopite-seo-core' ),
+                    'options' => array(
+                        'theme'                     => 'ace/theme/chrome',
+                        'mode'                      => 'ace/mode/css',
+                        'showGutter'                => true,
+                        'showPrintMargin'           => true,
+                        'enableBasicAutocompletion' => true,
+                        'enableSnippets'            => true,
+                        'enableLiveAutocompletion'  => true,
+                    ),
+                    'attributes'    => array(
+                        'style'        => 'height: 600px; max-width: 700px;',
+                    ),
+                    // 'description' => '<span class="info-links"><a href="https://technicalseo.com/seo-tools/schema-markup-generator/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Schema Markup Generator</a><br><a href="http://www.geo-tag.de/generator/de.html" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Geo-Tag Generator</a></span>',
                 ),
 
             ),
         );
 
         $fields[2] = array(
+            'name'   => 'footer_section',
+            'title'  => esc_html__( 'Footer', 'exopite-seo-core' ),
+            'icon'   => 'fa fa-h-square',
+            'fields' => array(
+
+                array(
+                    'id'      => 'ace_editor_footer',
+                    'type'    => 'ace_editor',
+                    'title'   => esc_html__( 'Footer', 'exopite-seo-core' ),
+                    'options' => array(
+                        'theme'                     => 'ace/theme/chrome',
+                        'mode'                      => 'ace/mode/html',
+                        'showGutter'                => true,
+                        'showPrintMargin'           => true,
+                        'enableBasicAutocompletion' => true,
+                        'enableSnippets'            => true,
+                        'enableLiveAutocompletion'  => true,
+                    ),
+                    'attributes'    => array(
+                        'style'        => 'height: 600px; max-width: 700px;',
+                    ),
+
+                ),
+
+                array(
+                    'id'      => 'ace_editor_footer_print_hook',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Use wp_print_footer_scripts hook', 'exopite-seo-core' ),
+                    'default' => 'no',
+                    'info'    => ' ' . esc_html__( 'For themes where wp_footer is not called.', 'exopite-seo-core' ),
+                ),
+
+            ),
+        );
+
+        $fields[3] = array(
             'name'       => 'cookie',
             'title'      => esc_html__( 'Cookie', 'exopite-seo-core' ),
             'icon'       => 'fa fa-birthday-cake',
@@ -560,7 +615,7 @@ class Exopite_Seo_Core_Admin {
 
         );
 
-        $fields[3] = array(
+        $fields[4] = array(
             'name'   => 'backup_section',
             'title'  => esc_html__( 'Backup', 'exopite-seo-core' ),
             'icon'   => 'fa fa-floppy-o',
