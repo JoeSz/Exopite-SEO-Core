@@ -361,7 +361,7 @@ class Exopite_Seo_Core_Admin {
         $fields[2] = array(
             'name'   => 'footer_section',
             'title'  => esc_html__( 'Footer', 'exopite-seo-core' ),
-            'icon'   => 'fa fa-h-square',
+            'icon'   => 'fa fa-code',
             'fields' => array(
 
                 array(
