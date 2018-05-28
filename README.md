@@ -5,7 +5,7 @@ Provide some extra but important SEO functions along Yoast SEO. Yoast SEO not re
 You may or may not use an other SEO plugin too.
 
 - Author: Joe Szalai
-- Version: 20180527
+- Version: 20180528
 - Plugin URL: https://github.com/JoeSz/Exopite-SEO-Core
 - Demo URL: https://joe.szalai.org/exopite/exopite-seo-core/
 - Author URL: https://joe.szalai.org
@@ -63,6 +63,11 @@ Browsers
 
 CHANGELOG
 ---------
+
+= 20180528 =
+* UPDATED: Exopite Simple Options Framework
+* FIXED: Cookie footer always full width
+
 = 20180524 =
 * ADDED: (ACE) Editor field for footer
 * ADDED: (ACE) Editor field for inline css in header

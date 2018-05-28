@@ -6,7 +6,7 @@ Tags: seo, search, engine, optimization, search-engine-optimization, wordpress, 
 Requires at least: 4.7
 Tested up to: 4.9.6
 Stable tag: 4.9.6
-Version: 20180524
+Version: 20180528
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -56,6 +56,10 @@ Browsers
 * Tested on Firefox, Chrome, Edge, IE 11
 
 == Changelog ==
+
+= 20180528 =
+* UPDATED: Exopite Simple Options Framework
+* FIXED: Cookie footer always full width
 
 = 20180524 =
 * ADDED: (ACE) Editor field for footer
