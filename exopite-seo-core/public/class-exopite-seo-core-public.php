@@ -233,18 +233,20 @@ class Exopite_Seo_Core_Public {
         ?>
         <div class="cookie-container">
             <div class="cookie-wrapper-container clearfix <?php echo $cookie_hint_wrapper_class; ?>">
-                <div class="cookie-column <?php echo $cookie_hint_inner_wrapper_class; ?>" style="width:<?php echo $left_column; ?>%;">
-                    <div class="cookie-column-inner cookie-text">
-                        <?php
+                <div class="cookie-column " style="width:<?php echo $left_column; ?>%;">
+                    <div class="<?php echo $cookie_hint_inner_wrapper_class; ?>">
+                        <div class="cookie-column-inner cookie-text">
+                            <?php
 
-                        echo $cookie_hint_content_left;
+                            echo $cookie_hint_content_left;
 
-                        if ( $left_column == '100' ) :
-                        ?>
-                        <span class="accept-cookies accept-cookies-js cookie-btn"><?php echo $cookie_hint_button; ?></span>
-                        <?php
-                        endif;
-                        ?>
+                            if ( $left_column == '100' ) :
+                            ?>
+                            <span class="accept-cookies accept-cookies-js cookie-btn"><?php echo $cookie_hint_button; ?></span>
+                            <?php
+                            endif;
+                            ?>
+                        </div>
                     </div>
                 </div>
                 <?php if ( $left_column != '100' ) : ?>
@@ -259,7 +261,7 @@ class Exopite_Seo_Core_Public {
             <?php if ( isset( $options['cookie_hint_accept_footer_links'] ) && $options['cookie_hint_accept_footer_links'] != null && is_array( $options['cookie_hint_accept_footer_links'] ) ) : ?>
             <div class="cookie-container-footer">
                 <div class="cookie-wrapper-container-footer clearfix <?php echo $cookie_hint_wrapper_class; ?>">
-                    <div class="cookie-column cookie-column-footer <?php echo $cookie_hint_inner_wrapper_class; ?>" style="width:<?php echo $left_column; ?>%;">
+                    <div class="cookie-column-footer <?php echo $cookie_hint_inner_wrapper_class; ?>">
                     <?php
 
                     $links = array();
