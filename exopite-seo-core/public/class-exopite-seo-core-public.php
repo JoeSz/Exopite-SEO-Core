@@ -233,8 +233,8 @@ class Exopite_Seo_Core_Public {
         ?>
         <div class="cookie-container">
             <div class="cookie-wrapper-container clearfix <?php echo $cookie_hint_wrapper_class; ?>">
-                <div class="cookie-column " style="width:<?php echo $left_column; ?>%;">
-                    <div class="<?php echo $cookie_hint_inner_wrapper_class; ?>">
+                <div class="<?php echo $cookie_hint_inner_wrapper_class; ?>">
+                    <div class="cookie-column " style="width:<?php echo $left_column; ?>%;">
                         <div class="cookie-column-inner cookie-text">
                             <?php
 
@@ -248,15 +248,15 @@ class Exopite_Seo_Core_Public {
                             ?>
                         </div>
                     </div>
+                    <?php if ( $left_column != '100' ) : ?>
+                        <div class="cookie-column" style="text-align: right;width:<?php echo $right_column; ?>%;">
+                            <div class="cookie-column-inner">
+                                <?php echo $cookie_hint_content_right; ?>
+                                <span class="accept-cookies accept-cookies-js cookie-btn"><?php echo $cookie_hint_button; ?></span>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
-                <?php if ( $left_column != '100' ) : ?>
-                <div class="cookie-column" style="text-align: right;width:<?php echo $right_column; ?>%;">
-                    <div class="cookie-column-inner">
-                        <?php echo $cookie_hint_content_right; ?>
-                        <span class="accept-cookies accept-cookies-js cookie-btn"><?php echo $cookie_hint_button; ?></span>
-                    </div>
-                </div>
-                <?php endif; ?>
             </div>
             <?php if ( isset( $options['cookie_hint_accept_footer_links'] ) && $options['cookie_hint_accept_footer_links'] != null && is_array( $options['cookie_hint_accept_footer_links'] ) ) : ?>
             <div class="cookie-container-footer">
@@ -316,7 +316,6 @@ class Exopite_Seo_Core_Public {
     }
 
     // this function is a trimmed down version of `wp_unique_post_slug` from WordPress 4.8.3
-
     public function wp_unique_post_slug( $slug, $post_ID, $post_status, $post_type, $post_parent, $original_slug ) {
 
         global $wpdb, $wp_rewrite;
@@ -338,7 +337,6 @@ class Exopite_Seo_Core_Public {
             }
 
             // remove this filter and rerun with the prefix
-
             remove_filter( 'wp_unique_post_slug', array( $this, 'wp_unique_post_slug' ), 10 );
 
             $slug = wp_unique_post_slug( $prefix . $original_slug, $post_ID, $post_status, $post_type, $post_parent );
@@ -363,10 +361,9 @@ class Exopite_Seo_Core_Public {
 
         }
 
-        /*
+        /**
          * NOTE: This is the big change. We are NOT checking attachments along with our post type
          */
-
         $slug = $original_slug;
 
         $check_sql = "SELECT post_name FROM $wpdb->posts WHERE post_name = %s AND post_type IN ( %s ) AND ID != %d AND post_parent = %d LIMIT 1";
@@ -383,7 +380,6 @@ class Exopite_Seo_Core_Public {
          * @param string $post_type   Post type.
          * @param int    $post_parent Post parent ID.
          */
-
         if ( $post_name_check || in_array( $slug, $feeds ) || 'embed' === $slug || preg_match( "@^($wp_rewrite->pagination_base)?\d+$@", $slug )  || apply_filters( 'wp_unique_post_slug_is_bad_hierarchical_slug', false, $slug, $post_type, $post_parent ) ) {
 
             $suffix = 2;
@@ -406,7 +402,6 @@ class Exopite_Seo_Core_Public {
 
     }
 
-
     public function remove_attachment_query_var( $vars ) {
 
         if ( ! empty( $vars['attachment'] ) ) {
@@ -423,8 +418,6 @@ class Exopite_Seo_Core_Public {
 
     }
 
-
-
     public function make_attachments_private( $args, $slug ) {
 
         if ( $slug == 'attachment' ) {
@@ -439,8 +432,6 @@ class Exopite_Seo_Core_Public {
 
     }
 
-
-
     public function change_attachment_link_to_file( $url, $id ) {
 
         $attachment_url = wp_get_attachment_url( $id );
@@ -454,8 +445,6 @@ class Exopite_Seo_Core_Public {
         return $url;
 
     }
-
-
 
     public function redirect_attachment_pages_to_file() {
 
@@ -497,7 +486,7 @@ class Exopite_Seo_Core_Public {
 
     public function google_analytics_footer() {
 
-        /*
+        /**
          * There is no hook top of body. It is a noscropt version, so I place it in the footer.
          * The other possibility is, hack the "body_class" filter, but I find that too "hackish"
          * and I think it can easily break.
