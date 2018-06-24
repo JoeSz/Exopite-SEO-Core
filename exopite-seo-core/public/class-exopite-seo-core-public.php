@@ -134,7 +134,7 @@ class Exopite_Seo_Core_Public {
             $custom_css .= esc_html( $options['ace_editor_head_css'] );
         }
 
-        wp_add_inline_style( $this->plugin_name, $custom_css );
+        wp_add_inline_style( $this->plugin_name . '-head', $custom_css );
 
 	}
 
