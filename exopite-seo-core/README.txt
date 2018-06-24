@@ -6,8 +6,8 @@ Tags: seo, search, engine, optimization, search-engine-optimization, wordpress, 
 Requires at least: 4.7
 Tested up to: 4.9.6
 Stable tag: 4.9.6
-Version: 20180528
-License: GPLv2 or later
+Version: 20180624
+License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Core SEO optimizations with cookie notice, inline CSS and more. Increase your website's SEO ranking, speed, the number of visitors and ultimately your sales by optimizing your WordPress site for SEO.<br>
@@ -56,6 +56,12 @@ Browsers
 * Tested on Firefox, Chrome, Edge, IE 11
 
 == Changelog ==
+
+= 20180624 =
+* CHANGED: Remove empty admin JavaScript from enqueue
+
+= 20180622 =
+* FIXED: Some typos
 
 = 20180528 =
 * UPDATED: Exopite Simple Options Framework
