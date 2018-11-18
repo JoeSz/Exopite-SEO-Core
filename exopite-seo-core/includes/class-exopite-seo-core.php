@@ -173,7 +173,7 @@ class Exopite_Seo_Core {
 	 */
 	private function define_public_hooks() {
 
-        $options = get_option( $this->plugin_name );
+        $options = get_exopite_sof_option( $this->plugin_name );
 
 		$plugin_public = new Exopite_Seo_Core_Public( $this->get_plugin_name(), $this->get_version() );
 

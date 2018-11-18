@@ -137,7 +137,7 @@ class Exopite_Seo_Core_Admin {
 
             'type'              => 'menu',                                          // Required, menu or metabox
             'id'                => $this->plugin_name,                              // Required, meta box id, unique per page, to save: get_option( id )
-            'menu'              => $parent,                                         // Required, sub page to your options page
+            'parent'            => $parent,                                         // Required, sub page to your options page
             'submenu'           => true,                                            // Required for submenu
             'settings-link'     => $settings_link,
             'title'             => esc_html__( 'SEO Core', 'exopite-seo-core' ),    //The name of this page
@@ -552,7 +552,13 @@ class Exopite_Seo_Core_Admin {
                      'id'             => 'cookie_hint_accept_footer_links',
                      'type'           => 'select',
                      'title'          => 'Select Footer Menu Pages',
-                     'options'        => 'pages',
+                     'query'          => array(
+                         'type'           => 'pages',
+                         'args'           => array(
+                             'orderby'      => 'post_date',
+                             'order'        => 'DESC',
+                         ),
+                     ),
                      'default_option' => '',
                      'class'       => 'chosen',
                      'attributes' => array(

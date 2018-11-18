@@ -75,7 +75,7 @@ class Exopite_Seo_Core_Public {
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/exopite-seo-core-public.css', array(), $this->version, 'all' );
 
-        $options = get_option( $this->plugin_name );
+        $options = get_exopite_sof_option( $this->plugin_name );
 
         $custom_css = "
         .cookie-container .cookie-text a:hover {
@@ -157,7 +157,7 @@ class Exopite_Seo_Core_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/exopite-seo-core-public.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/exopite-seo-core-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -205,7 +205,7 @@ class Exopite_Seo_Core_Public {
 
     public function cookie_note() {
 
-        $options = get_option( $this->plugin_name );
+        $options = get_exopite_sof_option( $this->plugin_name );
 
         $left_column = $options['cookie_hint_left_column_width'];
         if ( $left_column != '100' ) {
@@ -470,7 +470,7 @@ class Exopite_Seo_Core_Public {
 
         // @info: https://developers.google.com/tag-manager/quickstart
 
-        $options = get_option( $this->plugin_name );
+        $options = get_exopite_sof_option( $this->plugin_name );
 
         ?>
         <!-- Google Tag Manager -->
@@ -494,7 +494,7 @@ class Exopite_Seo_Core_Public {
          * https://www.lunametrics.com/blog/2016/11/22/google-tag-manager-snippet-placement/
          */
 
-        $options = get_option( $this->plugin_name );
+        $options = get_exopite_sof_option( $this->plugin_name );
 
         ?>
         <!-- There is no hook top of body. It is a noscropt version, so I place it in the footer. The other possibility is to hack the "body_class" filter, but I find that too "hackish" and I think it can easily break. -->
@@ -508,7 +508,7 @@ class Exopite_Seo_Core_Public {
 
     function body_class( $classes ) {
 
-        $options = get_option( $this->plugin_name );
+        $options = get_exopite_sof_option( $this->plugin_name );
 
         // solution is based on the code of Yaniv Friedensohn
         // http://www.affectivia.com/blog/placing-the-google-tag-manager-in-wordpress-after-the-body-tag/
@@ -533,7 +533,7 @@ class Exopite_Seo_Core_Public {
 
     public function ace_editor_head() {
 
-        $options = get_option( $this->plugin_name );
+        $options = get_exopite_sof_option( $this->plugin_name );
 
         echo $options['ace_editor_head'];
 
@@ -550,7 +550,7 @@ class Exopite_Seo_Core_Public {
 
     public function limit_revisions( $num, $post ) {
 
-        $options = get_option( $this->plugin_name );
+        $options = get_exopite_sof_option( $this->plugin_name );
 
         $revision_to_keep = intval( $options['revision_to_keep'] );
 
@@ -671,7 +671,7 @@ class Exopite_Seo_Core_Public {
 
     public function add_to_footer() {
 
-        $options = get_option( $this->plugin_name );
+        $options = get_exopite_sof_option( $this->plugin_name );
 
         echo $options['ace_editor_footer'];
 
