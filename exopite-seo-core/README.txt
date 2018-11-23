@@ -59,6 +59,7 @@ Browsers
 
 = 20181123 =
 * UPDATE: Exopite Simple Options Framework
+* ADDED: plugin upgrade notification
 
 = 20180624 =
 * CHANGED: Remove empty admin JavaScript from enqueue
