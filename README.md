@@ -64,6 +64,9 @@ Browsers
 CHANGELOG
 ---------
 
+= 20181123 =
+* UPDATE: Exopite Simple Options Framework
+
 = 20180624 =
 * CHANGED: Remove empty admin JavaScript from enqueue
 
