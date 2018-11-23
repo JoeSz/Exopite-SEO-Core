@@ -16,7 +16,7 @@
  * Plugin Name:       Exopite SEO Core
  * Plugin URI:        https://joe.szalai.org
  * Description:       Core SEO optimizations with cookie notice, inline CSS and more.
- * Version:           20180624
+ * Version:           20181123
  * Author:            Joe Szalai
  * Author URI:        https://joe.szalai.org
  * License:           GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'EXOPITE_SEO_CORE_VERSION', '20180624' );
+define( 'EXOPITE_SEO_CORE_VERSION', '20181123' );
 define( 'EXOPITE_SEO_PLUGIN_NAME', 'exopite-seo-core' );
 define( 'EXOPITE_SEO_PATH', plugin_dir_path( __FILE__ ) );
 
@@ -87,6 +87,30 @@ if ( is_admin() ) {
         __FILE__, //Full path to the main plugin file.
         EXOPITE_SEO_PLUGIN_NAME //Plugin slug. Usually it's the same as the name of the directory.
     );
+
+	/**
+	 * add plugin upgrade notification
+	 * https://andidittrich.de/2015/05/howto-upgrade-notice-for-wordpress-plugins.html
+	 */
+	add_action( 'in_plugin_update_message-' . EXOPITE_SEO_PLUGIN_NAME . '/' . EXOPITE_SEO_PLUGIN_NAME .'.php', 'exopite_seo_core_show_upgrade_notification', 10, 2 );
+	function exopite_seo_core_show_upgrade_notification( $current_plugin_metadata, $new_plugin_metadata ) {
+
+		/**
+		 * Check "upgrade_notice" in readme.txt.
+		 *
+		 * Eg.:
+		 * == Upgrade Notice ==
+		 * = 20180624 = <- new version
+		 * Notice		<- message
+		 *
+		 */
+		if ( isset( $new_plugin_metadata->upgrade_notice ) && strlen( trim( $new_plugin_metadata->upgrade_notice ) ) > 0 ) {
+
+			// Display "upgrade_notice".
+			echo sprintf( '<span style="background-color:#d54e21;padding:10px;color:#f9f9f9;margin-top:10px;display:block;"><strong>%1$s: </strong>%2$s</span>', esc_attr( 'Important Upgrade Notice', 'exopite-multifilter' ), esc_html( rtrim( $new_plugin_metadata->upgrade_notice ) ) );
+
+		}
+    }
 
     // $MyUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
     //     'https://github.com/JoeSz/Exopite-SEO-Core', //Metadata URL.
