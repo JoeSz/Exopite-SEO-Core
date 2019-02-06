@@ -127,7 +127,16 @@ class Exopite_Seo_Core_Admin {
     }
 
     public function get_php_version() {
-        return phpversion();
+
+        $php_version = phpversion();
+
+        if ( $php_version < 7.0 ) {
+
+            return '<span style="color:#9e0000;font-weight: 600;">' . phpversion() . ' - ' . esc_attr__( 'This version of php is outdated. Please update to 7.x.x.', 'exopite-seo-core' ) . '</span>';
+
+        }
+
+        return '<span style="color:#009307;font-weight: 600;">' . phpversion() . '</span>';
     }
 
     public function create_menu() {
