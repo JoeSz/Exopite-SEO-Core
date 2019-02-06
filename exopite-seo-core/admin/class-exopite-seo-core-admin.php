@@ -175,14 +175,6 @@ class Exopite_Seo_Core_Admin {
                 ),
 
                 array(
-                    'id'      => 'auto_image_alt',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Automatically add image infos', 'exopite-seo-core' ),
-                    'default' => 'no',
-                    'info'    => esc_html__( 'Automatically Set the WordPress Image Title, Alt-Text & Other Meta' ),
-                ),
-
-                array(
                     'id'      => 'deactivate_feed',
                     'type'    => 'switcher',
                     'title'   => esc_html__( 'Deactivate feed', 'exopite-seo-core' ),
@@ -229,11 +221,28 @@ class Exopite_Seo_Core_Admin {
                 //     ),
                 // ),
 
+
+                array(
+                    'id'      => 'sanitize_file_name',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Sanitize file name', 'exopite-seo-core' ),
+                    'default' => 'no',
+                    'info'   => 'Empty spaces and special characters can cause problems and they are not SEO freundly.',
+                ),
+
             ),
 
         );
 
         if ( ! defined( 'EXOPITE_VERSION' ) ) {
+
+            $fields[0]['fields'][] = array(
+                'id'      => 'auto_image_alt',
+                'type'    => 'switcher',
+                'title'   => esc_html__( 'Automatically add image infos', 'exopite-seo-core' ),
+                'default' => 'no',
+                'info'    => esc_html__( 'Automatically Set the WordPress Image Title, Alt-Text & Other Meta' ),
+            );
 
             $fields[0]['fields'][] = array(
                 'id'      => 'activate_gzip',
