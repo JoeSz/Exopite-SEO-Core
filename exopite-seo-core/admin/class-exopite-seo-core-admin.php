@@ -207,14 +207,14 @@ class Exopite_Seo_Core_Admin {
                     ),
                 ),
 
-                array(
-                    'type'    => 'notice',
-                    'title'  => esc_html__( 'GZip', 'exopite-seo-core' ),
-                    'wrap_class' => 'exopite-seo-core-bottom-border',
-                    'callback' => array(
-                        'function' => array( $this, 'checkGZIPCompression' ),
-                    ),
-                ),
+                // array(
+                //     'type'    => 'notice',
+                //     'title'  => esc_html__( 'GZip', 'exopite-seo-core' ),
+                //     'wrap_class' => 'exopite-seo-core-bottom-border',
+                //     'callback' => array(
+                //         'function' => array( $this, 'checkGZIPCompression' ),
+                //     ),
+                // ),
 
             ),
 
