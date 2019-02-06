@@ -104,7 +104,11 @@ class Exopite_Seo_Core_Admin {
 
         $api_url = 'https://checkgzipcompression.com/js/checkgzip.json?url=' . urlencode( get_site_url() );
         $result = wp_remote_get($api_url);
-        $body = json_decode( $result['body'] );
+
+        if ( ! is_wp_error( $result ) ) {
+            $body = json_decode( $result['body'] );
+        }
+
         if( isset( $body->error ) && $body->error ) {
             $this->error = $body->error;
             return '<span class="exopite-seo-core-gzip exopite-seo-core-gzip-error"><b>' . esc_html( 'Error', 'exopite-seo-core' ) . '</b>: ' . $body->error . '</span>';
