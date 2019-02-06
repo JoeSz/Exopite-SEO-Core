@@ -193,6 +193,7 @@ class Exopite_Seo_Core {
         $ace_editor_footer = ( isset( $options['ace_editor_footer'] ) && ! empty( $options['ace_editor_footer'] ) ) ? true : false;
         $ace_editor_footer_print_hook = ( isset( $options['ace_editor_footer_print_hook'] ) ) ? $options['ace_editor_footer_print_hook'] : 'no';
         $activate_google_analytics = ( isset( $options['activate_google_analytics'] ) ) ? $options['activate_google_analytics'] : 'no';
+        $sanitize_file_name = ( isset( $options['sanitize_file_name'] ) ) ? $options['sanitize_file_name'] : 'no';
 
         if ( $ace_editor_footer ) {
 
@@ -274,6 +275,18 @@ class Exopite_Seo_Core {
             }
 
         }
+
+        if ( $sanitize_file_name == 'yes' ) {
+
+			/**
+			 * Sanitize filename.
+			 *
+			 * WordPress build in sanitize_file_name will not take care umlauts.
+			 * This generate sometime some issues with urls and filenames.
+			 */
+			$this->loader->add_filter( 'sanitize_file_name', $plugin_public, 'sanitize_file_name', 10, 2 );
+
+		}
 
         if ( $auto_image_alt == 'yes' ) {
 
