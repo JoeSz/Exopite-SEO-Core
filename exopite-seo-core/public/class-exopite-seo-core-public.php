@@ -87,7 +87,7 @@ class Exopite_Seo_Core_Public {
         .cookie-container {
             display:none;
             background:" . $options['cookie_hint_bg_color'] . ";
-            border-top:2px solid" . $options['cookie_hint_top_border_color'] . ";
+            border-top:2px solid " . $options['cookie_hint_top_border_color'] . ";
             font-size:" . $options['cookie_hint_font_size'] . "px;
         }
         .cookie-wrapper-container .cookie-column {
