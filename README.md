@@ -5,7 +5,7 @@ Provide some extra but important SEO functions along Yoast SEO. Yoast SEO not re
 You may or may not use an other SEO plugin too.
 
 - Author: Joe Szalai
-- Version: 20180624
+- Version: 20190401
 - Plugin URL: https://github.com/JoeSz/Exopite-SEO-Core
 - Demo URL: https://joe.szalai.org/exopite/exopite-seo-core/
 - Author URL: https://joe.szalai.org
@@ -63,6 +63,14 @@ Browsers
 
 CHANGELOG
 ---------
+
+= 20190401 =
+UPDATE: Exopite Simple Options Framework
+
+= 20190206 =
+* ADDED: Sanitize file name function
+* UPDATED: Check PHP verzion
+* REMOVED: Disable gzip checking (site is down?)
 
 = 20181123 =
 * UPDATE: Exopite Simple Options Framework

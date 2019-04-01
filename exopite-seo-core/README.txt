@@ -6,7 +6,7 @@ Tags: seo, search, engine, optimization, search-engine-optimization, wordpress, 
 Requires at least: 4.7
 Tested up to: 4.9.8
 Stable tag: 4.9.8
-Version: 20181123
+Version: 20190401
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
