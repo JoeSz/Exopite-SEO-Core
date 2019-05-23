@@ -214,7 +214,8 @@ class Exopite_Seo_Core {
             $this->loader->add_action('init', $plugin_public, 'gzip_compression' );
 
             // Gzip - keep it from conflicting with older versions, if someone activates it on a pre-WP 2.5 site
-            add_filter('option_gzipcompression', create_function('$a','return false;'));
+            // add_filter('option_gzipcompression', create_function('$a','return false;'));
+            add_filter( 'option_gzipcompression', '__return_false' );
 
         }
 
