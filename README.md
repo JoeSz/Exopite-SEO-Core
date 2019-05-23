@@ -5,7 +5,7 @@ Provide some extra but important SEO functions along Yoast SEO. Yoast SEO not re
 You may or may not use an other SEO plugin too.
 
 - Author: Joe Szalai
-- Version: 20190401
+- Version: 20190521
 - Plugin URL: https://github.com/JoeSz/Exopite-SEO-Core
 - Demo URL: https://joe.szalai.org/exopite/exopite-seo-core/
 - Author URL: https://joe.szalai.org
@@ -63,6 +63,10 @@ Browsers
 
 CHANGELOG
 ---------
+
+= 20190521 =
+* UPDATE: Update Exopite Simple Options Framework
+* FIX: Function create_function() is deprecated since PHP 7.2; Use an anonymous function instead
 
 = 20190401 =
 UPDATE: Exopite Simple Options Framework

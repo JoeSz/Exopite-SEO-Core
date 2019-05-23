@@ -4,9 +4,9 @@ Author: Joe Szalai
 Donate link: https://joe.szalai.org
 Tags: seo, search, engine, optimization, search-engine-optimization, wordpress, plugin, wordpress-plugin
 Requires at least: 4.7
-Tested up to: 4.9.8
-Stable tag: 4.9.8
-Version: 20190401
+Tested up to: 5.2.1
+Stable tag: 5.2.1
+Version: 20190521
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -56,6 +56,10 @@ Browsers
 * Tested on Firefox, Chrome, Edge, IE 11
 
 == Changelog ==
+
+= 20190521 =
+* UPDATE: Update Exopite Simple Options Framework
+* FIX: Function create_function() is deprecated since PHP 7.2; Use an anonymous function instead
 
 = 20181123 =
 * UPDATE: Exopite Simple Options Framework
