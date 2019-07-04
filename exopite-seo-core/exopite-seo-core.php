@@ -60,7 +60,7 @@ function deactivate_exopite_seo_core() {
 register_activation_hook( __FILE__, 'activate_exopite_seo_core' );
 register_deactivation_hook( __FILE__, 'deactivate_exopite_seo_core' );
 
-/*
+/**
  * Update
  */
 if ( is_admin() ) {
