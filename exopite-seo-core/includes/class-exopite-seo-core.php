@@ -67,8 +67,8 @@ class Exopite_Seo_Core {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
-			$this->version = PLUGIN_NAME_VERSION;
+		if ( defined( 'EXOPITE_SEO_CORE_VERSION' ) ) {
+			$this->version = EXOPITE_SEO_CORE_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
@@ -194,6 +194,7 @@ class Exopite_Seo_Core {
         $ace_editor_footer_print_hook = ( isset( $options['ace_editor_footer_print_hook'] ) ) ? $options['ace_editor_footer_print_hook'] : 'no';
         $activate_google_analytics = ( isset( $options['activate_google_analytics'] ) ) ? $options['activate_google_analytics'] : 'no';
         $sanitize_file_name = ( isset( $options['sanitize_file_name'] ) ) ? $options['sanitize_file_name'] : 'no';
+        $canonical_url = ( isset( $options['canonical_url'] ) ) ? $options['canonical_url'] : 'no';
 
         if ( $ace_editor_footer ) {
 
@@ -250,6 +251,19 @@ class Exopite_Seo_Core {
         }
 
         /**
+         * Add Canonical URL for singles
+         */
+        if ( $canonical_url == 'yes' ) {
+
+			if( function_exists( 'rel_canonical' ) ) {
+				remove_action( 'wp_head', 'rel_canonical' );
+			}
+
+            $this->loader->add_action( 'wp_head', $plugin_public, 'canonical_url' );
+
+        }
+
+        /**
          * Add noindex on archives, search and 404
          */
         if ( ! defined( 'EXOPITE_VERSION' ) && $noidex_archives_search == 'yes' ) {
@@ -269,9 +283,15 @@ class Exopite_Seo_Core {
             if ( isset( $options['google_analytics_id'] ) && ! empty( $options['google_analytics_id'] ) ) {
 
                 $this->loader->add_action( 'wp_head', $plugin_public, 'google_analytics_head', 0 );
-                $this->loader->add_action( 'wp_footer', $plugin_public, 'google_analytics_footer', 0 );
+                // $this->loader->add_action( 'wp_footer', $plugin_public, 'google_analytics_footer', 0 );
                 // -- OR --
                 // $this->loader->add_filter( 'body_class', $plugin_public, 'body_class', 10000 );
+
+            }
+
+            if ( isset( $options['google_analytics_id_gtag'] ) && ! empty( $options['google_analytics_id_gtag'] ) ) {
+
+                $this->loader->add_action( 'wp_head', $plugin_public, 'google_analytics_head_gtag', 0 );
 
             }
 
