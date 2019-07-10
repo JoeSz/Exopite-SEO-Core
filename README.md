@@ -5,7 +5,7 @@ Provide some extra but important SEO functions along Yoast SEO. Yoast SEO not re
 You may or may not use an other SEO plugin too.
 
 - Author: Joe Szalai
-- Version: 20190521
+- Version: 20190710
 - Plugin URL: https://github.com/JoeSz/Exopite-SEO-Core
 - Demo URL: https://joe.szalai.org/exopite/exopite-seo-core/
 - Author URL: https://joe.szalai.org
@@ -63,6 +63,11 @@ Browsers
 
 CHANGELOG
 ---------
+
+= 20190710 =
+* FIX: Google Analytics add 'anonymizeIp' true
+* UPDATE: Google Analytics with GTag and regular
+* ADDED: Canonical URL
 
 = 20190521 =
 * UPDATE: Update Exopite Simple Options Framework
