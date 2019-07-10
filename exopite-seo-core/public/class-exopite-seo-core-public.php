@@ -468,41 +468,93 @@ class Exopite_Seo_Core_Public {
 
     public function google_analytics_head() {
 
-        // @info: https://developers.google.com/tag-manager/quickstart
-
-        $options = get_exopite_sof_option( $this->plugin_name );
-
-        ?>
-        <!-- Google Tag Manager -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','<?php echo $options['google_analytics_id']; ?>');</script>
-        <!-- End Google Tag Manager -->
-        <?php
-
-    }
-
-    public function google_analytics_footer() {
-
         /**
-         * There is no hook top of body. It is a noscropt version, so I place it in the footer.
-         * The other possibility is, hack the "body_class" filter, but I find that too "hackish"
-         * and I think it can easily break.
-         *
-         * https://www.lunametrics.com/blog/2016/11/22/google-tag-manager-snippet-placement/
+         * CHECK AND SET ANONYMIZE IP
+         * @link https://checkgoogleanalytics.psi.uni-bamberg.de/howto/#enable
          */
 
         $options = get_exopite_sof_option( $this->plugin_name );
 
         ?>
-        <!-- There is no hook top of body. It is a noscropt version, so I place it in the footer. The other possibility is to hack the "body_class" filter, but I find that too "hackish" and I think it can easily break. -->
-        <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo $options['google_analytics_id']; ?>"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
+        <!-- Google Analytics -->
+        <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', '<?php echo $options['google_analytics_id']; ?>', 'auto');
+        <?php // Enable anonymization. Must be placed before ga ('send', 'pageview'). ?>
+        ga('set', 'anonymizeIp', true);
+        <?php do_action( 'exopite_seo_core_additional_ga_code', $options['google_analytics_id'] ); ?>
+        ga('send', 'pageview');
+        </script>
+        <!-- End Google Analytics -->
         <?php
+
+    }
+
+    public function google_analytics_head_gtag() {
+
+        /**
+         * MIGRATION
+         * @link https://developers.google.com/analytics/devguides/collection/gtagjs/migration
+         */
+
+        $options = get_exopite_sof_option( $this->plugin_name );
+
+        ?>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $options['google_analytics_id']; ?>"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        <?php do_action( 'exopite_seo_core_additional_gtag_code', $options['google_analytics_id_gtag'] ); ?>
+        gtag('config', '<?php echo $options['google_analytics_id_gtag']; ?>', { 'anonymize_ip': true });
+        </script>
+        <?php
+
+    }
+
+    public function is_https() {
+        return ( ! empty($_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ) || $_SERVER['SERVER_PORT'] == 443;
+    }
+
+    public function canonical_url() {
+        global $post;
+
+        // start page, is_archive, is_search, is_paged
+        $canonical = site_url();
+        $https = ( $this->is_https() ) ? 's' : '';
+
+        if( is_singular() && ! is_attachment() ) {
+
+            $canonical = wp_get_canonical_url();
+
+        } elseif ( is_home() && "page" == get_option('show_on_front') ) {
+
+            $canonical = get_permalink( get_option( 'page_for_posts' ) );
+
+        } elseif ( is_attachment() ) {
+
+            $canonical = get_permalink( $post->post_parent );
+
+        } elseif ( is_home() ) {
+
+            $canonical = 'http' . $https . '://'.$_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
+
+        } elseif ( is_category() ) {
+
+            $category_id = get_query_var( 'cat' );
+            $canonical = get_category_link( $category_id );
+
+        } else {
+
+            $canonical = 'http' . $https . '://'.$_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
+
+        }
+
+	    echo '<link rel="canonical" href="' . esc_url( $canonical ) . '" />' . PHP_EOL;
 
     }
 
@@ -523,7 +575,7 @@ class Exopite_Seo_Core_Public {
 
     public function noidex_archives_search() {
 
-        if ( is_author() || is_date() || is_search() || is_category() || is_tag() || is_404() ) {
+        if ( is_author() || is_date() || is_search() || is_category() || is_tag() || is_404() || is_home() ) {
 
             echo '<meta name="robots" content="noindex,follow" />';
 
