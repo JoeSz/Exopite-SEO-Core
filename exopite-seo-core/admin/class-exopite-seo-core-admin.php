@@ -186,7 +186,7 @@ class Exopite_Seo_Core_Admin {
                     'type'    => 'switcher',
                     'title'   => esc_html__( 'Activate Google Analytics', 'exopite-seo-core' ),
                     'default' => 'no',
-                    'info'    => '<span class="info-links ga-links"><a href="https://analytics.google.com/analytics/web/?hl=de" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Open Google Analytics</a><br><a href="https://www.google.com/webmasters/tools/home?hl=de&pli=1" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Open Google Search Console</a></span>',
+                    'info'    => '<span class="info-links ga-links"><a href="https://analytics.google.com/analytics/web/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Open Google Analytics</a><br><a href="https://www.google.com/webmasters/tools/home?pli=1" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Open Google Search Console</a><br><a href="https://tagmanager.google.com/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Open Google Tag Manager</a></span>',
                 ),
 
                 array(
@@ -194,6 +194,20 @@ class Exopite_Seo_Core_Admin {
                     'type'   => 'text',
                     'title'  => esc_html__( 'Google Analytics ID', 'exopite-seo-core' ),
                     'dependency' => array( 'activate_google_analytics', '==', 'true' ),
+                    'description' => esc_html__( 'Enqueue in head with', 'exopite-seo-core' ) . ' <code>anonymize_ip: true</code>.<br><a href="https://checkgoogleanalytics.psi.uni-bamberg.de/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Check Anonymize IP</a><br><a href="https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Google ip-anonymization</a>',
+                    'info'    => ' <em>' . esc_html__( 'Leave empty to disable', 'exopite-seo-core' ) . '</em>',
+
+                ),
+
+                array(
+                    'id'      => 'google_analytics_id_gtag',
+                    'type'    => 'text',
+                    'title'   => esc_html__( 'Google Analytics ID for GTAG', 'exopite-seo-core' ),
+                    'dependency' => array( 'activate_google_analytics', '==', 'true' ),
+                    'description' => esc_html__( 'Using GTAG in head with', 'exopite-seo-core' ) . ' <code>anonymize_ip: true</code> ' . esc_html__( 'and async, more info: ', 'exopite-seo-core' ) . '<br><a href="https://developers.google.com/analytics/devguides/collection/gtagjs/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Add gtag.js to your site</a>
+                    ',
+                    'info'    => ' <em>' . esc_html__( 'Leave empty to disable', 'exopite-seo-core' ) . '</em>',
+
                 ),
 
                 array(
@@ -221,13 +235,20 @@ class Exopite_Seo_Core_Admin {
                 //     ),
                 // ),
 
-
                 array(
                     'id'      => 'sanitize_file_name',
                     'type'    => 'switcher',
                     'title'   => esc_html__( 'Sanitize file name', 'exopite-seo-core' ),
                     'default' => 'no',
                     'info'   => 'Empty spaces and special characters can cause problems and they are not SEO freundly.',
+                ),
+
+                array(
+                    'id'      => 'canonical_url',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Add Canonical URL to head', 'exopite-seo-core' ),
+                    'default' => 'no',
+                    // 'info'   => 'Empty spaces and special characters can cause problems and they are not SEO freundly.',
                 ),
 
             ),
@@ -241,7 +262,7 @@ class Exopite_Seo_Core_Admin {
                 'type'    => 'switcher',
                 'title'   => esc_html__( 'Automatically add image infos', 'exopite-seo-core' ),
                 'default' => 'no',
-                'info'    => esc_html__( 'Automatically Set the WordPress Image Title, Alt-Text & Other Meta' ),
+                'info'    => esc_html__( 'Automatically Set the WordPress Image Title, Alt-Text & Other Meta for new images' ),
             );
 
             $fields[0]['fields'][] = array(
@@ -279,7 +300,7 @@ class Exopite_Seo_Core_Admin {
             $fields[0]['fields'][] = array(
                 'id'      => 'noidex_archives_search',
                 'type'    => 'switcher',
-                'title'   => esc_html__( 'Add noidex on archives, search and 404', 'exopite-seo-core' ),
+                'title'   => esc_html__( 'Add noidex on blog, archives, search and 404', 'exopite-seo-core' ),
                 'default' => 'no',
             );
 
