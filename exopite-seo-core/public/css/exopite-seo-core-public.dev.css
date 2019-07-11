@@ -37,3 +37,6 @@
     float: none;
     width: 100%;
 }
+.cookie-column-footer {
+    justify-content: center;
+}
