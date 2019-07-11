@@ -6,7 +6,7 @@ Tags: seo, search, engine, optimization, search-engine-optimization, wordpress, 
 Requires at least: 4.7
 Tested up to: 5.2.2
 Stable tag: 5.2.2
-Version: 20190710
+Version: 20190711
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -56,6 +56,9 @@ Browsers
 * Tested on Firefox, Chrome, Edge, IE 11
 
 == Changelog ==
+
+= 20190711 =
+* ADDED: possibility to append text to robots.txt
 
 = 20190710 =
 * FIX: Google Analytics add 'anonymizeIp' true
