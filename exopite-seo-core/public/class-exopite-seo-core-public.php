@@ -40,6 +40,8 @@ class Exopite_Seo_Core_Public {
 	 */
 	private $version;
 
+    private $options;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -51,6 +53,7 @@ class Exopite_Seo_Core_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+        $this->options = get_exopite_sof_option( $this->plugin_name );
 
 	}
 
@@ -75,54 +78,52 @@ class Exopite_Seo_Core_Public {
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/exopite-seo-core-public.css', array(), $this->version, 'all' );
 
-        $options = get_exopite_sof_option( $this->plugin_name );
-
         $custom_css = "
         .cookie-container .cookie-text a:hover {
-            color:" . $options['cookie_hint_link_hover_color'] . ";
+            color:" . $this->options['cookie_hint_link_hover_color'] . ";
         }
         .cookie-container .cookie-text a {
-            color:" . $options['cookie_hint_link_color'] . ";
+            color:" . $this->options['cookie_hint_link_color'] . ";
         }
         .cookie-container {
             display:none;
-            background:" . $options['cookie_hint_bg_color'] . ";
-            border-top:2px solid " . $options['cookie_hint_top_border_color'] . ";
-            font-size:" . $options['cookie_hint_font_size'] . "px;
+            background:" . $this->options['cookie_hint_bg_color'] . ";
+            border-top:2px solid " . $this->options['cookie_hint_top_border_color'] . ";
+            font-size:" . $this->options['cookie_hint_font_size'] . "px;
         }
         .cookie-wrapper-container .cookie-column {
-            padding-top:" . $options['cookie_hint_top_padding'] . "px;
-            padding-bottom:" . $options['cookie_hint_bottom_padding'] . "px;
+            padding-top:" . $this->options['cookie_hint_top_padding'] . "px;
+            padding-bottom:" . $this->options['cookie_hint_bottom_padding'] . "px;
         }
         .cookie-column-inner {
-            color:" . $options['cookie_hint_text_color'] . ";
+            color:" . $this->options['cookie_hint_text_color'] . ";
         }
         .cookie-btn {
             float:right;
-            background:" . $options['cookie_hint_accept_bg_color'] . ";
-            color:" . $options['cookie_hint_accept_text_color'] . ";
+            background:" . $this->options['cookie_hint_accept_bg_color'] . ";
+            color:" . $this->options['cookie_hint_accept_text_color'] . ";
             transition: all 200ms ease;
         }
         .cookie-btn:hover {
             float:right;
-            background:" . $options['cookie_hint_accept_bg_color_hover'] . ";
-            color:" . $options['cookie_hint_accept_text_color_hover'] . ";
+            background:" . $this->options['cookie_hint_accept_bg_color_hover'] . ";
+            color:" . $this->options['cookie_hint_accept_text_color_hover'] . ";
         }
         .cookie-container-footer {
-            background:" . $options['cookie_hint_accept_footer_bg_color'] . ";
-            color:" . $options['cookie_hint_accept_footer_link_color'] . ";
+            background:" . $this->options['cookie_hint_accept_footer_bg_color'] . ";
+            color:" . $this->options['cookie_hint_accept_footer_link_color'] . ";
         }
         .cookie-container-footer .cookie-column-footer a {
-            color:" . $options['cookie_hint_accept_footer_link_color'] . ";
+            color:" . $this->options['cookie_hint_accept_footer_link_color'] . ";
         }
         .cookie-container-footer .cookie-column-footer a:hover {
-            color:" . $options['cookie_hint_accept_footer_link_color_hover'] . ";
+            color:" . $this->options['cookie_hint_accept_footer_link_color_hover'] . ";
         }
         .cookie-container-footer .cookie-column-footer {
-            padding:" . $options['cookie_hint_footer_top_bottom_padding'] . "px 0;
+            padding:" . $this->options['cookie_hint_footer_top_bottom_padding'] . "px 0;
         }
         ";
-        if ( $options['cookie_hint_link_underline'] === 'yes' ) {
+        if ( $this->options['cookie_hint_link_underline'] === 'yes' ) {
             $custom_css .= "
             .cookie-container .cookie-text a {
                 text-decoration: underline;
@@ -130,8 +131,8 @@ class Exopite_Seo_Core_Public {
             ";
         }
 
-        if ( ! empty( $options['ace_editor_head_css'] ) ) {
-            $custom_css .= esc_html( $options['ace_editor_head_css'] );
+        if ( ! empty( $this->options['ace_editor_head_css'] ) ) {
+            $custom_css .= esc_html( $this->options['ace_editor_head_css'] );
         }
 
         wp_add_inline_style( $this->plugin_name, $custom_css );
@@ -205,29 +206,27 @@ class Exopite_Seo_Core_Public {
 
     public function cookie_note() {
 
-        $options = get_exopite_sof_option( $this->plugin_name );
-
-        $left_column = $options['cookie_hint_left_column_width'];
+        $left_column = $this->options['cookie_hint_left_column_width'];
         if ( $left_column != '100' ) {
             $right_column = 100 - $left_column;
         }
 
-        $cookie_hint_wrapper_class = ( isset( $options['cookie_hint_wrapper_class'] ) ) ? $options['cookie_hint_wrapper_class'] : '';
-        $cookie_hint_inner_wrapper_class = ( isset( $options['cookie_hint_inner_wrapper_class'] ) ) ? $options['cookie_hint_inner_wrapper_class'] : '';
+        $cookie_hint_wrapper_class = ( isset( $this->options['cookie_hint_wrapper_class'] ) ) ? $this->options['cookie_hint_wrapper_class'] : '';
+        $cookie_hint_inner_wrapper_class = ( isset( $this->options['cookie_hint_inner_wrapper_class'] ) ) ? $this->options['cookie_hint_inner_wrapper_class'] : '';
 
         $cookie_hint_button = '';
         $cookie_hint_content_left = '';
         $cookie_hint_content_right = '';
 
-        if ( isset( $options['cookie_hint_content_from_translation'] ) && $options['cookie_hint_content_from_translation'] != 'no' ) {
+        if ( isset( $this->options['cookie_hint_content_from_translation'] ) && $this->options['cookie_hint_content_from_translation'] != 'no' ) {
             $left_column = '100';
             $cookie_hint_content_left = esc_html__( 'In order to optimize our website for you and to be able to continuously improve it, we use cookies. By continuing to use the website, you agree to the use of cookies.', 'exopite-seo-core' );
             $cookie_hint_button = esc_html__( 'OK', 'exopite-seo-core' );
             $cookie_hint_content_left .= ' ' . '<a href="/' . esc_html_x( 'privacy-policy', 'Relative permalink slug', 'exopite-seo-core' ) . '/">' . esc_html__( 'More information', 'exopite-seo-core' ) . '</a>';
 
         } else {
-            $cookie_hint_content_left = ( isset( $options['cookie_hint_content_left'] ) && ! empty( $options['cookie_hint_content_left'] ) ) ? $options['cookie_hint_content_left'] : '';
-            $cookie_hint_button = ( isset( $options['cookie_hint_button'] ) && ! empty( $options['cookie_hint_button'] ) ) ? $options['cookie_hint_button'] : '';
+            $cookie_hint_content_left = ( isset( $this->options['cookie_hint_content_left'] ) && ! empty( $this->options['cookie_hint_content_left'] ) ) ? $this->options['cookie_hint_content_left'] : '';
+            $cookie_hint_button = ( isset( $this->options['cookie_hint_button'] ) && ! empty( $this->options['cookie_hint_button'] ) ) ? $this->options['cookie_hint_button'] : '';
         }
 
         ?>
@@ -258,7 +257,7 @@ class Exopite_Seo_Core_Public {
                     <?php endif; ?>
                 </div>
             </div>
-            <?php if ( isset( $options['cookie_hint_accept_footer_links'] ) && $options['cookie_hint_accept_footer_links'] != null && is_array( $options['cookie_hint_accept_footer_links'] ) ) : ?>
+            <?php if ( isset( $this->options['cookie_hint_accept_footer_links'] ) && $this->options['cookie_hint_accept_footer_links'] != null && is_array( $this->options['cookie_hint_accept_footer_links'] ) ) : ?>
             <div class="cookie-container-footer">
                 <div class="cookie-wrapper-container-footer clearfix <?php echo $cookie_hint_wrapper_class; ?>">
                     <div class="cookie-column-footer <?php echo $cookie_hint_inner_wrapper_class; ?>">
@@ -266,7 +265,7 @@ class Exopite_Seo_Core_Public {
 
                     $links = array();
 
-                    foreach ( $options['cookie_hint_accept_footer_links'] as $page_id ) :
+                    foreach ( $this->options['cookie_hint_accept_footer_links'] as $page_id ) :
 
                         $links[] = '<a href="' . get_the_permalink( $page_id ) . '">' . get_the_title( $page_id ) . '</a>';
 
@@ -473,8 +472,6 @@ class Exopite_Seo_Core_Public {
          * @link https://checkgoogleanalytics.psi.uni-bamberg.de/howto/#enable
          */
 
-        $options = get_exopite_sof_option( $this->plugin_name );
-
         ?>
         <!-- Google Analytics -->
         <script>
@@ -482,10 +479,10 @@ class Exopite_Seo_Core_Public {
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-        ga('create', '<?php echo $options['google_analytics_id']; ?>', 'auto');
+        ga('create', '<?php echo $this->options['google_analytics_id']; ?>', 'auto');
         <?php // Enable anonymization. Must be placed before ga ('send', 'pageview'). ?>
         ga('set', 'anonymizeIp', true);
-        <?php do_action( 'exopite_seo_core_additional_ga_code', $options['google_analytics_id'] ); ?>
+        <?php do_action( 'exopite_seo_core_additional_ga_code', $this->options['google_analytics_id'] ); ?>
         ga('send', 'pageview');
         </script>
         <!-- End Google Analytics -->
@@ -500,20 +497,23 @@ class Exopite_Seo_Core_Public {
          * @link https://developers.google.com/analytics/devguides/collection/gtagjs/migration
          */
 
-        $options = get_exopite_sof_option( $this->plugin_name );
-
         ?>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $options['google_analytics_id']; ?>"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $this->options['google_analytics_id']; ?>"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        <?php do_action( 'exopite_seo_core_additional_gtag_code', $options['google_analytics_id_gtag'] ); ?>
-        gtag('config', '<?php echo $options['google_analytics_id_gtag']; ?>', { 'anonymize_ip': true });
+        <?php do_action( 'exopite_seo_core_additional_gtag_code', $this->options['google_analytics_id_gtag'] ); ?>
+        gtag('config', '<?php echo $this->options['google_analytics_id_gtag']; ?>', { 'anonymize_ip': true });
         </script>
         <?php
 
+    }
+
+    public function robots_txt( $text ) {
+
+        return $text . esc_html( $this->options['append_to_robots_txt'] );
     }
 
     public function is_https() {
@@ -560,14 +560,12 @@ class Exopite_Seo_Core_Public {
 
     function body_class( $classes ) {
 
-        $options = get_exopite_sof_option( $this->plugin_name );
-
         // solution is based on the code of Yaniv Friedensohn
         // http://www.affectivia.com/blog/placing-the-google-tag-manager-in-wordpress-after-the-body-tag/
         // and Plugin Name: Google Tag Manager for Wordpress
         // https://duracelltomi.com/google-tag-manager-for-wordpress/
         // https://duracelltomi.com/
-        $classes[] = '"><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=' . $options['google_analytics_id'] . '" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) --><br style="display:none;';
+        $classes[] = '"><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=' . $this->options['google_analytics_id'] . '" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) --><br style="display:none;';
 
         return $classes;
 
@@ -585,9 +583,7 @@ class Exopite_Seo_Core_Public {
 
     public function ace_editor_head() {
 
-        $options = get_exopite_sof_option( $this->plugin_name );
-
-        echo $options['ace_editor_head'];
+        echo $this->options['ace_editor_head'];
 
 
     }
@@ -602,9 +598,7 @@ class Exopite_Seo_Core_Public {
 
     public function limit_revisions( $num, $post ) {
 
-        $options = get_exopite_sof_option( $this->plugin_name );
-
-        $revision_to_keep = intval( $options['revision_to_keep'] );
+        $revision_to_keep = intval( $this->options['revision_to_keep'] );
 
         if ( $revision_to_keep >= 0 && $revision_to_keep < 100 ) {
 
@@ -950,9 +944,7 @@ class Exopite_Seo_Core_Public {
 
     public function add_to_footer() {
 
-        $options = get_exopite_sof_option( $this->plugin_name );
-
-        echo $options['ace_editor_footer'];
+        echo $this->options['ace_editor_footer'];
 
     }
 
