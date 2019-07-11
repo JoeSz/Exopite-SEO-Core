@@ -195,6 +195,7 @@ class Exopite_Seo_Core {
         $activate_google_analytics = ( isset( $options['activate_google_analytics'] ) ) ? $options['activate_google_analytics'] : 'no';
         $sanitize_file_name = ( isset( $options['sanitize_file_name'] ) ) ? $options['sanitize_file_name'] : 'no';
         $canonical_url = ( isset( $options['canonical_url'] ) ) ? $options['canonical_url'] : 'no';
+		$activate_robots_txt = ( isset( $options['activate_robots_txt'] ) ) ? $options['activate_robots_txt'] : 'no';
 
         if ( $ace_editor_footer ) {
 
@@ -260,6 +261,15 @@ class Exopite_Seo_Core {
 			}
 
             $this->loader->add_action( 'wp_head', $plugin_public, 'canonical_url' );
+
+        }
+
+        /**
+         * Append text for robots.txt
+         */
+        if ( $activate_robots_txt == 'yes' ) {
+
+            $this->loader->add_filter( 'robots_txt', $plugin_public, 'robots_txt' );
 
         }
 
