@@ -213,15 +213,15 @@ class Exopite_Seo_Core_Admin {
                 array(
                     'id'      => 'activate_robots_txt',
                     'type'    => 'switcher',
-                    'title'   => esc_html__( 'Append to robots.txt', 'exopite-seo-core' ),
+                    'title'   => esc_html__( 'Append text to robots.txt', 'exopite-seo-core' ),
                     'default' => 'no',
-                    'info'    => '<span class="info-links ga-links"><a href="https://support.google.com/webmasters/answer/6062596?hl=en" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Googe: about robots.txt</a><br><a href="/robots.txt" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> See robots.txt</a></span>',
+                    'info'    => '<span class="info-links ga-links"><a href="https://support.google.com/webmasters/answer/6062596?hl=en" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Google: about robots.txt</a><br><a href="/robots.txt" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> See robots.txt</a></span>',
                 ),
 
                 array(
                     'id'      => 'append_to_robots_txt',
                     'type'    => 'textarea',
-                    'title'   => esc_html__( 'Adding text to the robots.txt file', 'exopite-seo-core' ),
+                    'title'   => esc_html__( 'Text to append to the robots.txt file', 'exopite-seo-core' ),
                     'dependency' => array( 'activate_robots_txt', '==', 'true' ),
                     'default' => "Disallow: /?s=\nDisallow: /search/",
                     // 'description' => '',
