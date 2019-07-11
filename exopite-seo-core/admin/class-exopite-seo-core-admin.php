@@ -194,8 +194,8 @@ class Exopite_Seo_Core_Admin {
                     'type'   => 'text',
                     'title'  => esc_html__( 'Google Analytics ID', 'exopite-seo-core' ),
                     'dependency' => array( 'activate_google_analytics', '==', 'true' ),
-                    'description' => esc_html__( 'Enqueue in head with', 'exopite-seo-core' ) . ' <code>anonymize_ip: true</code>.<br><a href="https://checkgoogleanalytics.psi.uni-bamberg.de/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Check Anonymize IP</a><br><a href="https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Google ip-anonymization</a>',
-                    'info'    => ' <em>' . esc_html__( 'Leave empty to disable', 'exopite-seo-core' ) . '</em>',
+                    'description' => esc_html__( 'Enqueue in head with', 'exopite-seo-core' ) . '<br><code>anonymize_ip: true</code><br><a href="https://checkgoogleanalytics.psi.uni-bamberg.de/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Check Anonymize IP</a><br><a href="https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Google ip-anonymization</a>',
+                    'info'    => ' <em>' . esc_html__( 'Leave empty to ignore', 'exopite-seo-core' ) . '</em>',
 
                 ),
 
@@ -204,9 +204,28 @@ class Exopite_Seo_Core_Admin {
                     'type'    => 'text',
                     'title'   => esc_html__( 'Google Analytics ID for GTAG', 'exopite-seo-core' ),
                     'dependency' => array( 'activate_google_analytics', '==', 'true' ),
-                    'description' => esc_html__( 'Using GTAG in head with', 'exopite-seo-core' ) . ' <code>anonymize_ip: true</code> ' . esc_html__( 'and async, more info: ', 'exopite-seo-core' ) . '<br><a href="https://developers.google.com/analytics/devguides/collection/gtagjs/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Add gtag.js to your site</a>
+                    'description' => esc_html__( 'Using GTAG in head with', 'exopite-seo-core' ) . '<br><code>anonymize_ip: true</code><br>' . esc_html__( 'and async, more info: ', 'exopite-seo-core' ) . '<br><a href="https://developers.google.com/analytics/devguides/collection/gtagjs/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Add gtag.js to your site</a>
                     ',
-                    'info'    => ' <em>' . esc_html__( 'Leave empty to disable', 'exopite-seo-core' ) . '</em>',
+                    'info'    => ' <em>' . esc_html__( 'Leave empty to ignore', 'exopite-seo-core' ) . '</em>',
+
+                ),
+
+                array(
+                    'id'      => 'activate_robots_txt',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Append to robots.txt', 'exopite-seo-core' ),
+                    'default' => 'no',
+                    'info'    => '<span class="info-links ga-links"><a href="https://support.google.com/webmasters/answer/6062596?hl=en" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Googe: about robots.txt</a><br><a href="/robots.txt" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> See robots.txt</a></span>',
+                ),
+
+                array(
+                    'id'      => 'append_to_robots_txt',
+                    'type'    => 'textarea',
+                    'title'   => esc_html__( 'Adding text to the robots.txt file', 'exopite-seo-core' ),
+                    'dependency' => array( 'activate_robots_txt', '==', 'true' ),
+                    'default' => "Disallow: /?s=\nDisallow: /search/",
+                    // 'description' => '',
+                    // 'info'    => ' <em>' . esc_html__( 'Leave empty to ignore', 'exopite-seo-core' ) . '</em>',
 
                 ),
 
