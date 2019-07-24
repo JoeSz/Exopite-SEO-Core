@@ -868,6 +868,8 @@ class Exopite_Seo_Core_Public {
          */
         $filename = preg_replace("/[^(\x20-\x7F)]*/", "", $filename );
 
+        $filename = str_replace( '_', '-', $filename );
+
 		/**
 		 * Sanitize filename.
 		 *
