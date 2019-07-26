@@ -859,16 +859,10 @@ class Exopite_Seo_Core_Public {
          * Replace "speacial" chars without remove accents.
          */
         $filename = $this->special_replace_chars( $filename );
-        $filename = remove_accents( $filename );
-
-        /**
-         * Removes all non-ascii characters.
-         *
-         * @link https://ca.wordpress.org/plugins/wp-sanitize-accented-uploads
-         */
-        $filename = preg_replace("/[^(\x20-\x7F)]*/", "", $filename );
 
         $filename = str_replace( '_', '-', $filename );
+
+        $filename = remove_accents( $filename );
 
 		/**
 		 * Sanitize filename.
@@ -879,6 +873,13 @@ class Exopite_Seo_Core_Public {
 		 * suitable for use in a URL, not as a human-readable title."
 		 */
 		$filename = sanitize_title( $filename );
+
+        /**
+         * Removes all non-ascii characters.
+         *
+         * @link https://ca.wordpress.org/plugins/wp-sanitize-accented-uploads
+         */
+        $filename = preg_replace("/[^(\x20-\x7F)]*/", "", $filename );
 
 		return $filename . '.' . $ext;
 
