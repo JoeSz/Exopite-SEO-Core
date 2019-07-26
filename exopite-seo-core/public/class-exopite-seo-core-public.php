@@ -852,13 +852,13 @@ class Exopite_Seo_Core_Public {
          * Replace language-specific characters by ASCII-equivalents.
          * Converts all accent characters to ASCII characters.
          */
-        // $filename = $this->normalize_chars( $filename );
+        $filename = $this->normalize_chars( $filename );
 
         /**
          * Remove special chars, sanitize_title does not this (or at least not all).
          * Replace "speacial" chars without remove accents.
          */
-        $filename = $this->special_replace_chars( $filename );
+        // $filename = $this->special_replace_chars( $filename );
 
         $filename = str_replace( '_', '-', $filename );
 
