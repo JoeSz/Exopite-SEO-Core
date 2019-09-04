@@ -941,7 +941,7 @@ class Exopite_Seo_Core_Public {
             $atts
         );
 
-        return '<a href="javascript:gaOptout()">' . $args['link'] . '</a>';
+        return '<a href="javascript:gaOptout();">' . $args['link'] . '</a>';
 
     }
 
