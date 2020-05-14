@@ -64,7 +64,7 @@ class Exopite_Seo_Core_Public {
 	 */
 	public function enqueue_styles() {
 
-		$cookie_note = ( isset( $options['cookie_note'] ) ) ? $options['cookie_note'] : 'no';
+		$cookie_note = ( isset( $this->options['cookie_note'] ) ) ? $this->options['cookie_note'] : 'no';
         $custom_css = '';
         // wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/exopite-seo-core-public.css', array(), $this->version, 'all' );
 
@@ -140,7 +140,7 @@ class Exopite_Seo_Core_Public {
 	 */
 	public function enqueue_scripts() {
 
-        $cookie_note = ( isset( $options['cookie_note'] ) ) ? $options['cookie_note'] : 'no';
+        $cookie_note = ( isset( $this->options['cookie_note'] ) ) ? $this->options['cookie_note'] : 'no';
 
         // wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/exopite-seo-core-public.js', array( 'jquery' ), $this->version, false );
 
