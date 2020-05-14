@@ -5,7 +5,7 @@ Provide some extra but important SEO functions along Yoast SEO. Yoast SEO not re
 You may or may not use an other SEO plugin too.
 
 - Author: Joe Szalai
-- Version: 20190711
+- Version: 20200514
 - Plugin URL: https://github.com/JoeSz/Exopite-SEO-Core
 - Demo URL: https://joe.szalai.org/exopite/exopite-seo-core/
 - Author URL: https://joe.szalai.org
@@ -63,6 +63,9 @@ Browsers
 
 CHANGELOG
 ---------
+
+= 20200514 =
+* UPDATE: Separate Cookie CSS and JS and load them only if activated
 
 = 20190711 =
 * ADDED: possibility to append text to robots.txt
