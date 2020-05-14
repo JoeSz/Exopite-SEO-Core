@@ -64,71 +64,65 @@ class Exopite_Seo_Core_Public {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Exopite_Seo_Core_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Exopite_Seo_Core_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		$cookie_note = ( isset( $options['cookie_note'] ) ) ? $options['cookie_note'] : 'no';
+        $custom_css = '';
+        // wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/exopite-seo-core-public.css', array(), $this->version, 'all' );
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/exopite-seo-core-public.css', array(), $this->version, 'all' );
+        if ( $cookie_note == 'yes' ) {
+            wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/exopite-seo-core-public-cookie-note.css', array(), $this->version, 'all' );
 
-        $custom_css = "
-        .cookie-container .cookie-text a:hover {
-            color:" . $this->options['cookie_hint_link_hover_color'] . ";
-        }
-        .cookie-container .cookie-text a {
-            color:" . $this->options['cookie_hint_link_color'] . ";
-        }
-        .cookie-container {
-            display:none;
-            background:" . $this->options['cookie_hint_bg_color'] . ";
-            border-top:2px solid " . $this->options['cookie_hint_top_border_color'] . ";
-            font-size:" . $this->options['cookie_hint_font_size'] . "px;
-        }
-        .cookie-wrapper-container .cookie-column {
-            padding-top:" . $this->options['cookie_hint_top_padding'] . "px;
-            padding-bottom:" . $this->options['cookie_hint_bottom_padding'] . "px;
-        }
-        .cookie-column-inner {
-            color:" . $this->options['cookie_hint_text_color'] . ";
-        }
-        .cookie-btn {
-            float:right;
-            background:" . $this->options['cookie_hint_accept_bg_color'] . ";
-            color:" . $this->options['cookie_hint_accept_text_color'] . ";
-            transition: all 200ms ease;
-        }
-        .cookie-btn:hover {
-            float:right;
-            background:" . $this->options['cookie_hint_accept_bg_color_hover'] . ";
-            color:" . $this->options['cookie_hint_accept_text_color_hover'] . ";
-        }
-        .cookie-container-footer {
-            background:" . $this->options['cookie_hint_accept_footer_bg_color'] . ";
-            color:" . $this->options['cookie_hint_accept_footer_link_color'] . ";
-        }
-        .cookie-container-footer .cookie-column-footer a {
-            color:" . $this->options['cookie_hint_accept_footer_link_color'] . ";
-        }
-        .cookie-container-footer .cookie-column-footer a:hover {
-            color:" . $this->options['cookie_hint_accept_footer_link_color_hover'] . ";
-        }
-        .cookie-container-footer .cookie-column-footer {
-            padding:" . $this->options['cookie_hint_footer_top_bottom_padding'] . "px 0;
-        }
-        ";
-        if ( $this->options['cookie_hint_link_underline'] === 'yes' ) {
             $custom_css .= "
+            .cookie-container .cookie-text a:hover {
+                color:" . $this->options['cookie_hint_link_hover_color'] . ";
+            }
             .cookie-container .cookie-text a {
-                text-decoration: underline;
+                color:" . $this->options['cookie_hint_link_color'] . ";
+            }
+            .cookie-container {
+                display:none;
+                background:" . $this->options['cookie_hint_bg_color'] . ";
+                border-top:2px solid " . $this->options['cookie_hint_top_border_color'] . ";
+                font-size:" . $this->options['cookie_hint_font_size'] . "px;
+            }
+            .cookie-wrapper-container .cookie-column {
+                padding-top:" . $this->options['cookie_hint_top_padding'] . "px;
+                padding-bottom:" . $this->options['cookie_hint_bottom_padding'] . "px;
+            }
+            .cookie-column-inner {
+                color:" . $this->options['cookie_hint_text_color'] . ";
+            }
+            .cookie-btn {
+                float:right;
+                background:" . $this->options['cookie_hint_accept_bg_color'] . ";
+                color:" . $this->options['cookie_hint_accept_text_color'] . ";
+                transition: all 200ms ease;
+            }
+            .cookie-btn:hover {
+                float:right;
+                background:" . $this->options['cookie_hint_accept_bg_color_hover'] . ";
+                color:" . $this->options['cookie_hint_accept_text_color_hover'] . ";
+            }
+            .cookie-container-footer {
+                background:" . $this->options['cookie_hint_accept_footer_bg_color'] . ";
+                color:" . $this->options['cookie_hint_accept_footer_link_color'] . ";
+            }
+            .cookie-container-footer .cookie-column-footer a {
+                color:" . $this->options['cookie_hint_accept_footer_link_color'] . ";
+            }
+            .cookie-container-footer .cookie-column-footer a:hover {
+                color:" . $this->options['cookie_hint_accept_footer_link_color_hover'] . ";
+            }
+            .cookie-container-footer .cookie-column-footer {
+                padding:" . $this->options['cookie_hint_footer_top_bottom_padding'] . "px 0;
             }
             ";
+            if ( $this->options['cookie_hint_link_underline'] === 'yes' ) {
+                $custom_css .= "
+                .cookie-container .cookie-text a {
+                    text-decoration: underline;
+                }
+                ";
+            }
         }
 
         if ( ! empty( $this->options['ace_editor_head_css'] ) ) {
@@ -146,19 +140,13 @@ class Exopite_Seo_Core_Public {
 	 */
 	public function enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Exopite_Seo_Core_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Exopite_Seo_Core_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+        $cookie_note = ( isset( $options['cookie_note'] ) ) ? $options['cookie_note'] : 'no';
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/exopite-seo-core-public.js', array( 'jquery' ), $this->version, false );
+        // wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/exopite-seo-core-public.js', array( 'jquery' ), $this->version, false );
+
+        if ( $cookie_note == 'yes' ) {
+            wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/exopite-seo-core-public-cookie-note.js', array( 'jquery' ), $this->version, false );
+        }
 
 	}
 
