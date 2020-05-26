@@ -100,32 +100,6 @@ class Exopite_Seo_Core_Admin {
 
 	}
 
-    public function checkGZIPCompression() {
-
-        $api_url = 'https://checkgzipcompression.com/js/checkgzip.json?url=' . urlencode( get_site_url() );
-        $result = wp_remote_get($api_url);
-
-        if ( ! is_wp_error( $result ) ) {
-            $body = json_decode( $result['body'] );
-        }
-
-        if( isset( $body->error ) && $body->error ) {
-            $this->error = $body->error;
-            return '<span class="exopite-seo-core-gzip exopite-seo-core-gzip-error"><b>' . esc_html( 'Error', 'exopite-seo-core' ) . '</b>: ' . $body->error . '</span>';
-        }
-        elseif ( isset( $body->result->gzipenabled ) && $body->result->gzipenabled == true ) {
-
-            return '<span class="exopite-seo-core-gzip exopite-seo-core-gzip-success">' . esc_html( 'GZip is enabled.', 'exopite-seo-core' ) . '</span>' . esc_html( 'Uncompressed bytes', 'exopite-seo-core' ) . ': ' . $body->result->uncompressedbytes . ', ' . esc_html( 'Compressed bytes', 'exopite-seo-core' ) . ': ' . $body->result->compressedbytes . ', ' . esc_html( 'Total Saved', 'exopite-seo-core' ) . ': <b>' . $body->result->percentagesaved . '%</b>';
-        }
-        elseif ( isset( $body->result->gzipenabled ) && $body->result->gzipenabled == false ) {
-            return '<span class="exopite-seo-core-gzip exopite-seo-core-gzip-warning">' . esc_html( 'GZip is not enabled.', 'exopite-seo-core' ) . '</span>' .  esc_html( 'You could save', 'exopite-seo-core' ) . ': <b>' . $body->result->percentagesaved . '%</b>';
-        }
-        else {
-            return '<span class="exopite-seo-core-gzip exopite-seo-core-gzip-error">' . esc_html( 'Unknown error.', 'exopite-seo-core' ) . '<br>' . var_export( $result , true ) . '</span>';
-        }
-
-    }
-
     public function get_php_version() {
 
         $php_version = phpversion();
@@ -244,15 +218,6 @@ class Exopite_Seo_Core_Admin {
                         'function' => array( $this, 'get_php_version' ),
                     ),
                 ),
-
-                // array(
-                //     'type'    => 'notice',
-                //     'title'  => esc_html__( 'GZip', 'exopite-seo-core' ),
-                //     'wrap_class' => 'exopite-seo-core-bottom-border',
-                //     'callback' => array(
-                //         'function' => array( $this, 'checkGZIPCompression' ),
-                //     ),
-                // ),
 
                 array(
                     'id'      => 'sanitize_file_name',
