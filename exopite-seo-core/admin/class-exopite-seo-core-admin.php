@@ -3,6 +3,8 @@
  * ToDos:
  * - Add rel=nofollow to the outgoing links (check if already exists)
  * - Domains/subdomains to Exclude
+ * - add class
+ * - add option to open in new tab
  */
 
 /**
