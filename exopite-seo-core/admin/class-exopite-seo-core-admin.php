@@ -1,4 +1,9 @@
 <?php
+/**
+ * ToDos:
+ * - Add rel=nofollow to the outgoing links (check if already exists)
+ * - Domains/subdomains to Exclude
+ */
 
 /**
  * The admin-specific functionality of the plugin.
