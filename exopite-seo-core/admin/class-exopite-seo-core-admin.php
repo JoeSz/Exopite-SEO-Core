@@ -5,6 +5,7 @@
  * - Domains/subdomains to Exclude
  * - add class
  * - add option to open in new tab
+ * - add option for CSS to mark images without alt attribute
  */
 
 /**
