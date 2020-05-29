@@ -1,12 +1,4 @@
 <?php
-/**
- * ToDos:
- * - Add rel=nofollow to the outgoing links (check if already exists)
- * - Domains/subdomains to Exclude
- * - add class
- * - add option to open in new tab
- * - add option for CSS to mark images without alt attribute
- */
 
 /**
  * The admin-specific functionality of the plugin.
@@ -108,6 +100,32 @@ class Exopite_Seo_Core_Admin {
 
 	}
 
+    public function checkGZIPCompression() {
+
+        $api_url = 'https://checkgzipcompression.com/js/checkgzip.json?url=' . urlencode( get_site_url() );
+        $result = wp_remote_get($api_url);
+
+        if ( ! is_wp_error( $result ) ) {
+            $body = json_decode( $result['body'] );
+        }
+
+        if( isset( $body->error ) && $body->error ) {
+            $this->error = $body->error;
+            return '<span class="exopite-seo-core-gzip exopite-seo-core-gzip-error"><b>' . esc_html( 'Error', 'exopite-seo-core' ) . '</b>: ' . $body->error . '</span>';
+        }
+        elseif ( isset( $body->result->gzipenabled ) && $body->result->gzipenabled == true ) {
+
+            return '<span class="exopite-seo-core-gzip exopite-seo-core-gzip-success">' . esc_html( 'GZip is enabled.', 'exopite-seo-core' ) . '</span>' . esc_html( 'Uncompressed bytes', 'exopite-seo-core' ) . ': ' . $body->result->uncompressedbytes . ', ' . esc_html( 'Compressed bytes', 'exopite-seo-core' ) . ': ' . $body->result->compressedbytes . ', ' . esc_html( 'Total Saved', 'exopite-seo-core' ) . ': <b>' . $body->result->percentagesaved . '%</b>';
+        }
+        elseif ( isset( $body->result->gzipenabled ) && $body->result->gzipenabled == false ) {
+            return '<span class="exopite-seo-core-gzip exopite-seo-core-gzip-warning">' . esc_html( 'GZip is not enabled.', 'exopite-seo-core' ) . '</span>' .  esc_html( 'You could save', 'exopite-seo-core' ) . ': <b>' . $body->result->percentagesaved . '%</b>';
+        }
+        else {
+            return '<span class="exopite-seo-core-gzip exopite-seo-core-gzip-error">' . esc_html( 'Unknown error.', 'exopite-seo-core' ) . '<br>' . var_export( $result , true ) . '</span>';
+        }
+
+    }
+
     public function get_php_version() {
 
         $php_version = phpversion();
@@ -149,11 +167,20 @@ class Exopite_Seo_Core_Admin {
             'fields' => array(
 
                 array(
+                    'type'    => 'notice',
+                    'title'  => esc_html__( 'PHP version', 'exopite-seo-core' ),
+                    'wrap_class' => 'exopite-seo-core-bottom-border',
+                    'callback' => array(
+                        'function' => array( $this, 'get_php_version' ),
+                    ),
+                ),
+
+                array(
                     'id'      => 'deactivate_attachment_pages',
                     'type'    => 'switcher',
                     'title'   => esc_html__( 'Deactivate attachment pages', 'exopite-seo-core' ),
                     'default' => 'no',
-                    'info'   => 'If you change this, please <a href="/wp-admin/options-permalink.php" target="_blank">save permalinks</a>',
+                    'info'   => esc_html__( 'If you change this, please', 'exopite-seo-core' ),' <a href="/wp-admin/options-permalink.php" target="_blank" rel="noreferrer noopener">' . esc_html__( 'save permalinks', 'exopite-seo-core' ) . '</a>',
                 ),
 
                 array(
@@ -164,54 +191,6 @@ class Exopite_Seo_Core_Admin {
                 ),
 
                 array(
-                    'id'      => 'activate_google_analytics',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Activate Google Analytics', 'exopite-seo-core' ),
-                    'default' => 'no',
-                    'info'    => '<span class="info-links ga-links"><a href="https://analytics.google.com/analytics/web/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Open Google Analytics</a><br><a href="https://www.google.com/webmasters/tools/home?pli=1" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Open Google Search Console</a><br><a href="https://tagmanager.google.com/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Open Google Tag Manager</a></span>',
-                ),
-
-                array(
-                    'id'     => 'google_analytics_id',
-                    'type'   => 'text',
-                    'title'  => esc_html__( 'Google Analytics ID', 'exopite-seo-core' ),
-                    'dependency' => array( 'activate_google_analytics', '==', 'true' ),
-                    'description' => esc_html__( 'Enqueue in head with', 'exopite-seo-core' ) . '<br><code>anonymize_ip: true</code><br><a href="https://checkgoogleanalytics.psi.uni-bamberg.de/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Check Anonymize IP</a><br><a href="https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Google ip-anonymization</a>',
-                    'info'    => ' <em>' . esc_html__( 'Leave empty to ignore', 'exopite-seo-core' ) . '</em>',
-
-                ),
-
-                array(
-                    'id'      => 'google_analytics_id_gtag',
-                    'type'    => 'text',
-                    'title'   => esc_html__( 'Google Analytics ID for GTAG', 'exopite-seo-core' ),
-                    'dependency' => array( 'activate_google_analytics', '==', 'true' ),
-                    'description' => esc_html__( 'Using GTAG in head with', 'exopite-seo-core' ) . '<br><code>anonymize_ip: true</code><br>' . esc_html__( 'and async, more info: ', 'exopite-seo-core' ) . '<br><a href="https://developers.google.com/analytics/devguides/collection/gtagjs/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Add gtag.js to your site</a>
-                    ',
-                    'info'    => ' <em>' . esc_html__( 'Leave empty to ignore', 'exopite-seo-core' ) . '</em>',
-
-                ),
-
-                array(
-                    'id'      => 'activate_robots_txt',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Append text to robots.txt', 'exopite-seo-core' ),
-                    'default' => 'no',
-                    'info'    => '<span class="info-links ga-links"><a href="https://support.google.com/webmasters/answer/6062596?hl=en" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Google: about robots.txt</a><br><a href="/robots.txt" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> See robots.txt</a></span>',
-                ),
-
-                array(
-                    'id'      => 'append_to_robots_txt',
-                    'type'    => 'textarea',
-                    'title'   => esc_html__( 'Text to append to the robots.txt file', 'exopite-seo-core' ),
-                    'dependency' => array( 'activate_robots_txt', '==', 'true' ),
-                    'default' => "Disallow: /?s=\nDisallow: /search/",
-                    // 'description' => '',
-                    // 'info'    => ' <em>' . esc_html__( 'Leave empty to ignore', 'exopite-seo-core' ) . '</em>',
-
-                ),
-
-                array(
                     'id'      => 'cookie_note',
                     'type'    => 'switcher',
                     'title'   => esc_html__( 'Add cookie permission', 'exopite-seo-core' ),
@@ -219,20 +198,11 @@ class Exopite_Seo_Core_Admin {
                 ),
 
                 array(
-                    'type'    => 'notice',
-                    'title'  => esc_html__( 'PHP version', 'exopite-seo-core' ),
-                    'wrap_class' => 'exopite-seo-core-bottom-border',
-                    'callback' => array(
-                        'function' => array( $this, 'get_php_version' ),
-                    ),
-                ),
-
-                array(
                     'id'      => 'sanitize_file_name',
                     'type'    => 'switcher',
                     'title'   => esc_html__( 'Sanitize file name', 'exopite-seo-core' ),
                     'default' => 'no',
-                    'info'   => 'Empty spaces and special characters can cause problems and they are not SEO freundly.',
+                    'info'   => esc_html__( 'Empty spaces and special characters can cause problems and they are not SEO freundly.', 'exopite-seo-core' ),
                 ),
 
                 array(
@@ -240,7 +210,23 @@ class Exopite_Seo_Core_Admin {
                     'type'    => 'switcher',
                     'title'   => esc_html__( 'Add Canonical URL to head', 'exopite-seo-core' ),
                     'default' => 'no',
-                    // 'info'   => 'Empty spaces and special characters can cause problems and they are not SEO freundly.',
+                ),
+
+                array(
+                    'id'      => 'links_nofollow',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Add "nofollow" to external links', 'exopite-seo-core' ),
+                    'default' => 'no',
+                    'info'    => esc_html__( "Use this to signify to the search englines, that you don't vouch for a page you link to.", "exopite-seo-core" ),
+                ),
+
+                array(
+                    'id'      => 'links_noopener_noreferer',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Add "noopener", "noreferrer" to external links"', 'exopite-seo-core' ),
+                    'default' => 'no',
+                    'info'   => esc_html__( 'Apply only to links with target="_blank" attribute.', 'exopite-seo-core' ) . '<br>' . esc_html__( 'If you not doing this, can couse performance and security issues for the user.', 'exopite-seo-core' ),
+                    'description' => '<span class="info-links"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Mozilla attr-target</a><br><a href="https://mathiasbynens.github.io/rel-noopener/" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> About rel=noopener</a></span>',
                 ),
 
             ),
@@ -258,13 +244,6 @@ class Exopite_Seo_Core_Admin {
             );
 
             $fields[0]['fields'][] = array(
-                'id'      => 'activate_gzip',
-                'type'    => 'switcher',
-                'title'   => esc_html__( 'Activate GZip', 'exopite-seo-core' ),
-                'default' => 'no',
-            );
-
-            $fields[0]['fields'][] = array(
                 'id'      => 'remove_json_from_header',
                 'type'    => 'switcher',
                 'title'   => esc_html__( 'Remove JSON links from header', 'exopite-seo-core' ),
@@ -276,23 +255,25 @@ class Exopite_Seo_Core_Admin {
                 'type'    => 'switcher',
                 'title'   => esc_html__( 'Limit revisions', 'exopite-seo-core' ),
                 'default' => 'no',
+                'info'    => esc_html__( 'Whenever you update a post in WordPress, it creates a revision, which never will be deleted.', 'exopite-seo-core' ) . '<br>' . esc_html__( 'Eventually causes performance issues.', 'exopite-seo-core' ),
             );
 
             $fields[0]['fields'][] = array(
                 'id'      => 'revision_to_keep',
                 'type'    => 'range',
                 'title'   => esc_html__( 'Revision to keep', 'exopite-seo-core' ),
-                'default' => '20',
+                'default' => '10',
                 'min'     => '0',
                 'max'     => '100',
                 'dependency' => array( 'limit_revisions', '==', 'true' ),
-                'info'    =>  ' ' . 'For unlimited, set to 100.',
+                'info'    =>  ' ' . esc_html__( 'For unlimited, set to 100.', 'exopite-seo-core' ),
             );
 
             $fields[0]['fields'][] = array(
                 'id'      => 'noidex_archives_search',
                 'type'    => 'switcher',
-                'title'   => esc_html__( 'Add noidex on blog, archives, search and 404', 'exopite-seo-core' ),
+                'title'   => esc_html__( 'Add "noindex"', 'exopite-seo-core' ),
+                'info'    => esc_html__( 'to blog, archives, search and 404 pages', 'exopite-seo-core' ),
                 'default' => 'no',
             );
 
@@ -328,7 +309,7 @@ class Exopite_Seo_Core_Admin {
 
                 'type'    => 'notice',
                 'class'   => 'warning',
-                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your images.', 'exopite-seo-core' ), '<a href="' . get_site_url() . 'wp-admin/plugin-install.php?tab=plugin-information&plugin=ewww-image-optimizer" target="_blank">EWWW Image Optimizer</a>' ),
+                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your images.', 'exopite-seo-core' ), '<a href="' . get_site_url() . 'wp-admin/plugin-install.php?tab=plugin-information&plugin=ewww-image-optimizer" target="_blank" rel="noreferrer noopener">EWWW Image Optimizer</a>' ),
 
             );
 
@@ -340,13 +321,25 @@ class Exopite_Seo_Core_Admin {
 
                 'type'    => 'notice',
                 'class'   => 'warning',
-                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your site SEO. This plugin is created to extend your site SEO after Yoast SEO is installed and activated.', 'exopite-seo-core' ), '<a href="' . get_site_url() . 'wp-admin/plugin-install.php?tab=plugin-information&plugin=wordpress-seo" target="_blank">Yoast SEO</a>' ),
+                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your site SEO. This plugin is created to extend your site SEO after Yoast SEO is installed and activated.', 'exopite-seo-core' ), '<a href="' . get_site_url() . 'wp-admin/plugin-install.php?tab=plugin-information&plugin=wordpress-seo" target="_blank" rel="noreferrer noopener">Yoast SEO</a>' ),
 
             );
 
         }
 
-        $fields[1] = array(
+        if ( ! is_plugin_active( 'images-to-webp/images-to-webp.php' ) ) {
+
+            $fields[0]['fields'][] = array(
+
+                'type'    => 'notice',
+                'class'   => 'warning',
+                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your images. This plugin is created to use WebP, Googles new images format, whenever is possible.', 'exopite-seo-core' ), '<a href="' . get_site_url() . 'wp-admin/plugin-install.php?tab=plugin-information&plugin=images-to-webp" target="_blank" rel="noreferrer noopener">Images to WebP</a>' ),
+
+            );
+
+        }
+
+        $fields[] = array(
             'name'   => 'head_section',
             'title'  => esc_html__( 'Head', 'exopite-seo-core' ),
             'icon'   => 'fa fa-h-square',
@@ -368,7 +361,7 @@ class Exopite_Seo_Core_Admin {
                     'attributes'    => array(
                         'style'        => 'height: 300px; max-width: 700px;',
                     ),
-                    'description' => '<span class="info-links"><a href="https://technicalseo.com/seo-tools/schema-markup-generator/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Schema Markup Generator</a><br><a href="http://www.geo-tag.de/generator/de.html" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Geo-Tag Generator</a></span>',
+                    'description' => '<span class="info-links"><a href="https://technicalseo.com/seo-tools/schema-markup-generator/" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Schema Markup Generator</a><br><a href="http://www.geo-tag.de/generator/de.html" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Geo-Tag Generator</a></span>',
                 ),
 
                 array(
@@ -387,13 +380,12 @@ class Exopite_Seo_Core_Admin {
                     'attributes'    => array(
                         'style'        => 'height: 600px; max-width: 700px;',
                     ),
-                    // 'description' => '<span class="info-links"><a href="https://technicalseo.com/seo-tools/schema-markup-generator/" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Schema Markup Generator</a><br><a href="http://www.geo-tag.de/generator/de.html" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i> Geo-Tag Generator</a></span>',
                 ),
 
             ),
         );
 
-        $fields[2] = array(
+        $fields[] = array(
             'name'   => 'footer_section',
             'title'  => esc_html__( 'Footer', 'exopite-seo-core' ),
             'icon'   => 'fa fa-code',
@@ -415,6 +407,15 @@ class Exopite_Seo_Core_Admin {
                     'attributes'    => array(
                         'style'        => 'height: 600px; max-width: 700px;',
                     ),
+                    'description' => '<span class="info-links">
+                    <a href="https://analytics.google.com/analytics/web/" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Open Google Analytics</a><br>
+                    <a href="https://www.google.com/webmasters/tools/home?pli=1" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Open Google Search Console</a><br>
+                    <a href="https://tagmanager.google.com/" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Open Google Tag Manager</a><br>
+                    <a href="https://checkgoogleanalytics.psi.uni-bamberg.de/" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Check Anonymize IP</a><br>
+                    <a href="https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Google ip-anonymization</a><br>
+                    <a href="https://gtmetrix.com/" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> GTmetrix</a><br>
+                    <a href="https://developers.google.com/speed/pagespeed/insights/?hl=EN&url=' . urlencode( get_site_url() ) .  '" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> PageSpeed Insights</a><br>
+                    </span>',
 
                 ),
 
@@ -429,7 +430,35 @@ class Exopite_Seo_Core_Admin {
             ),
         );
 
-        $fields[3] = array(
+        $fields[] = array(
+            'name'   => 'robots_txt_section',
+            'title'  => esc_html__( 'Robots.txt', 'exopite-seo-core' ),
+            'icon'   => 'fa fa-file-text-o',
+            'fields' => array(
+
+                array(
+                    'id'      => 'activate_robots_txt',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Append text to robots.txt', 'exopite-seo-core' ),
+                    'default' => 'no',
+                    'info'    => '<span class="info-links ga-links"><a href="https://support.google.com/webmasters/answer/6062596?hl=en" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Google: about robots.txt</a><br><a href="/robots.txt" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> See robots.txt</a></span>',
+                ),
+
+                array(
+                    'id'      => 'append_to_robots_txt',
+                    'type'    => 'textarea',
+                    'title'   => esc_html__( 'Text to append to the robots.txt file', 'exopite-seo-core' ),
+                    'dependency' => array( 'activate_robots_txt', '==', 'true' ),
+                    'default' => "Disallow: /?s=\nDisallow: /search/",
+                    // 'description' => '',
+                    // 'info'    => ' <em>' . esc_html__( 'Leave empty to ignore', 'exopite-seo-core' ) . '</em>',
+
+                ),
+
+            ),
+        );
+
+        $fields[] = array(
             'name'       => 'cookie',
             'title'      => esc_html__( 'Cookie', 'exopite-seo-core' ),
             'icon'       => 'fa fa-birthday-cake',
@@ -656,7 +685,7 @@ class Exopite_Seo_Core_Admin {
 
         );
 
-        $fields[4] = array(
+        $fields[] = array(
             'name'   => 'backup_section',
             'title'  => esc_html__( 'Backup', 'exopite-seo-core' ),
             'icon'   => 'fa fa-floppy-o',
