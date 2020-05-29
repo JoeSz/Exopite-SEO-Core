@@ -5,7 +5,7 @@ Provide some extra but important SEO functions along Yoast SEO. Yoast SEO not re
 You may or may not use an other SEO plugin too.
 
 - Author: Joe Szalai
-- Version: 20200514
+- Version: 20200529
 - Plugin URL: https://github.com/JoeSz/Exopite-SEO-Core
 - Demo URL: https://joe.szalai.org/exopite/exopite-seo-core/
 - Author URL: https://joe.szalai.org
@@ -21,7 +21,6 @@ the plugin can be used alone too.
 
 All functions are optional.
 
-* Activate GZip,
 * Remove JSON links from header,
 * Deactivate attachment pages and redirect to attachment file,
 * Limit revisions,
@@ -29,11 +28,13 @@ All functions are optional.
 * Automatically set the WordPress image title, alt-text & description based on file name,
 * Deactivate comments and pingbacks in the whole site,
 * Deactivate feed,
-* Activate Google Analytics (via Tag-Manager), you need a Tag-Manager ID for this first,
-* Add anything to header (e.g. Schema.org JSON or GEO Tags),
-* Add anything to footer (e.g. JavaScript, etc...),
+* Add anything to header (e.g. Schema.org JSON, Google Analytics or GEO Tags),
+* Add anything to footer (e.g. JavaScript, Google Analytics, etc...),
 * Add inline style to header (it is hard to add css for some themes),
 * Add personalizable cookie notice.
+
+* Removed: Activate GZip, use .htaccess
+* Removed: Activate Google Analytics (via Tag-Manager), you need a Tag-Manager ID for this first, use header and/or footer editor
 
 INSTALLATION
 ------------
@@ -63,6 +64,11 @@ Browsers
 
 CHANGELOG
 ---------
+
+= 20200529 =
+* Reorganize code
+* ADDED: nofollow, noopener, noreferrer to external links
+* REMOVED: Google Analytics and gzip
 
 = 20200514 =
 * UPDATE: Separate Cookie CSS and JS and load them only if activated

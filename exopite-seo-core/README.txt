@@ -6,7 +6,7 @@ Tags: seo, search, engine, optimization, search-engine-optimization, wordpress, 
 Requires at least: 4.7
 Tested up to: 5.2.2
 Stable tag: 5.2.2
-Version: 20200514
+Version: 20200529
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -22,7 +22,6 @@ the plugin can be used alone too.
 
 All functions are optional.
 
-* Activate GZip,
 * Remove JSON links from header,
 * Deactivate attachment pages and redirect to attachment file,
 * Limit revisions,
@@ -30,11 +29,13 @@ All functions are optional.
 * Automatically set the WordPress image title, alt-text & description based on file name,
 * Deactivate comments and pingbacks in the whole site,
 * Deactivate feed,
-* Activate Google Analytics (via Tag-Manager), you need a Tag-Manager ID for this first,
-* Add anything to header (e.g. Schema.org JSON or GEO Tags),
-* Add anything to footer (e.g. JavaScript, etc...),
+* Add anything to header (e.g. Schema.org JSON, Google Analytics or GEO Tags),
+* Add anything to footer (e.g. JavaScript, Google Analytics, etc...),
 * Add inline style to header (it is hard to add css for some themes),
 * Add personalizable cookie notice.
+
+* Removed: Activate GZip, use .htaccess
+* Removed: Activate Google Analytics (via Tag-Manager), you need a Tag-Manager ID for this first, use header and/or footer editor
 
 == Installation ==
 
@@ -56,6 +57,11 @@ Browsers
 * Tested on Firefox, Chrome, Edge, IE 11
 
 == Changelog ==
+
+= 20200529 =
+* Reorganize code
+* ADDED: nofollow, noopener, noreferrer to external links
+* REMOVED: Google Analytics and gzip
 
 = 20200514 =
 * UPDATE: Separate Cookie CSS and JS and load them only if activated
