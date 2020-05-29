@@ -124,6 +124,14 @@ class Exopite_Seo_Core {
 
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/exopite-simple-options/exopite-simple-options-framework-class.php';
 
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-exopite-seo-core-cookie-notice.php';
+
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-exopite-seo-core-breadcrumbs.php';
+
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-exopite-seo-core-sanitize.php';
+
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-exopite-seo-core-links.php';
+
 		$this->loader = new Exopite_Seo_Core_Loader();
 
 	}
@@ -165,6 +173,46 @@ class Exopite_Seo_Core {
 	}
 
 	/**
+     * Checks if the current request is a WP REST API request.
+     *
+     * Case #1: After WP_REST_Request initialisation
+     * Case #2: Support "plain" permalink settings
+     * Case #3: URL Path begins with wp-json/ (your REST prefix)
+     *          Also supports WP installations in subfolders
+     *
+     * @returns boolean
+     * @author matzeeable
+	 * @link https://wordpress.stackexchange.com/questions/221202/does-something-like-is-rest-exist/317041#317041
+	 * @link https://gist.github.com/matzeeable/dfd82239f48c2fedef25141e48c8dc30
+     */
+    function is_rest() {
+        $prefix = rest_get_url_prefix( );
+        if ( defined( 'REST_REQUEST' ) && REST_REQUEST // (#1)
+            || isset( $_GET['rest_route'] ) // (#2)
+            	&& strpos( trim( $_GET['rest_route'], '\\/' ), $prefix , 0 ) === 0) {
+				return true;
+			}
+
+        // (#3)
+        $rest_url = wp_parse_url( site_url( $prefix ) );
+        $current_url = wp_parse_url( add_query_arg( array( ) ) );
+        return strpos( $current_url['path'], $rest_url['path'], 0 ) === 0;
+    }
+
+    function is_api_request() {
+
+        if ( ! ( ( defined( 'JSON_REQUEST' ) && JSON_REQUEST ) ||
+             ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) ||
+             ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ||
+             $this->is_rest()
+        ) ) {
+            return false;
+        }
+
+        return true;
+    }
+
+	/**
 	 * Register all of the hooks related to the public-facing functionality
 	 * of the plugin.
 	 *
@@ -176,11 +224,12 @@ class Exopite_Seo_Core {
         $options = get_exopite_sof_option( $this->plugin_name );
 
 		$plugin_public = new Exopite_Seo_Core_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_cookie_notice = new Exopite_Seo_Core_Cookie_Notice( $this->get_plugin_name(), $this->get_version() );
+		$plugin_breadcrumb = new Exopite_Seo_Core_Breadcrumbs( $this->get_plugin_name(), $this->get_version() );
+		$plugin_sanitize = new Exopite_Seo_Core_Sanitize( $this->get_plugin_name(), $this->get_version() );
+		$plugin_links = new Exopite_Seo_Core_Links( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles', 999 );
-        $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts', 999 );
-
-        $activate_gzip = ( isset( $options['activate_gzip'] ) ) ? $options['activate_gzip'] : 'no';
+        $cookie_note = ( isset( $options['cookie_note'] ) ) ? $options['cookie_note'] : 'no';
         $remove_json_from_header = ( isset( $options['remove_json_from_header'] ) ) ? $options['remove_json_from_header'] : 'no';
         $deactivate_attachment_pages = ( isset( $options['deactivate_attachment_pages'] ) ) ? $options['deactivate_attachment_pages'] : 'no';
         $noidex_archives_search = ( isset( $options['noidex_archives_search'] ) ) ? $options['noidex_archives_search'] : 'no';
@@ -188,14 +237,31 @@ class Exopite_Seo_Core {
         $limit_revisions = ( isset( $options['limit_revisions'] ) ) ? $options['limit_revisions'] : 'no';
         $deactivate_comments = ( isset( $options['deactivate_comments'] ) ) ? $options['deactivate_comments'] : 'no';
         $deactivate_feed = ( isset( $options['deactivate_feed'] ) ) ? $options['deactivate_feed'] : 'no';
-        $cookie_note = ( isset( $options['cookie_note'] ) ) ? $options['cookie_note'] : 'no';
         $ace_editor_head = ( isset( $options['ace_editor_head'] ) ) ? $options['ace_editor_head'] : '';
         $ace_editor_footer = ( isset( $options['ace_editor_footer'] ) && ! empty( $options['ace_editor_footer'] ) ) ? true : false;
         $ace_editor_footer_print_hook = ( isset( $options['ace_editor_footer_print_hook'] ) ) ? $options['ace_editor_footer_print_hook'] : 'no';
-        $activate_google_analytics = ( isset( $options['activate_google_analytics'] ) ) ? $options['activate_google_analytics'] : 'no';
         $sanitize_file_name = ( isset( $options['sanitize_file_name'] ) ) ? $options['sanitize_file_name'] : 'no';
         $canonical_url = ( isset( $options['canonical_url'] ) ) ? $options['canonical_url'] : 'no';
 		$activate_robots_txt = ( isset( $options['activate_robots_txt'] ) ) ? $options['activate_robots_txt'] : 'no';
+        $links_nofollow = ( isset( $options['links_nofollow'] ) ) ? $options['links_nofollow'] : 'no';
+        $links_noopener_noreferer = ( isset( $options['links_noopener_noreferer'] ) ) ? $options['links_noopener_noreferer'] : 'no';
+
+        if ( $options['links_nofollow'] == 'yes' || $options['links_noopener_noreferer'] == 'yes' ) {
+
+            if ( ! $this->is_api_request() ) {
+
+                if ( apply_filters( 'exopite_ob_status', 'off' ) != 'on' ) {
+
+                    $this->loader->add_filter( 'wp_loaded', $plugin_links, 'buffer_start', 12 );
+                    $this->loader->add_filter( 'shutdown', $plugin_links, 'buffer_end', 12 );
+
+                }
+
+                $this->loader->add_filter( 'exopite_ob_content', $plugin_links, 'process_html', 10 );
+
+            }
+
+        }
 
         if ( $ace_editor_footer ) {
 
@@ -208,16 +274,6 @@ class Exopite_Seo_Core {
             }
 
             $this->loader->add_action( $hook, $plugin_public, 'add_to_footer', 999 );
-
-        }
-
-        if ( $activate_gzip == 'yes' ) {
-
-            $this->loader->add_action('init', $plugin_public, 'gzip_compression' );
-
-            // Gzip - keep it from conflicting with older versions, if someone activates it on a pre-WP 2.5 site
-            // add_filter('option_gzipcompression', create_function('$a','return false;'));
-            add_filter( 'option_gzipcompression', '__return_false' );
 
         }
 
@@ -288,25 +344,6 @@ class Exopite_Seo_Core {
 
         }
 
-        if ( $activate_google_analytics == 'yes' ) {
-
-            if ( isset( $options['google_analytics_id'] ) && ! empty( $options['google_analytics_id'] ) ) {
-
-                $this->loader->add_action( 'wp_head', $plugin_public, 'google_analytics_head', 0 );
-                // $this->loader->add_action( 'wp_footer', $plugin_public, 'google_analytics_footer', 0 );
-                // -- OR --
-                // $this->loader->add_filter( 'body_class', $plugin_public, 'body_class', 10000 );
-
-            }
-
-            if ( isset( $options['google_analytics_id_gtag'] ) && ! empty( $options['google_analytics_id_gtag'] ) ) {
-
-                $this->loader->add_action( 'wp_head', $plugin_public, 'google_analytics_head_gtag', 0 );
-
-            }
-
-        }
-
         if ( $sanitize_file_name == 'yes' ) {
 
 			/**
@@ -315,7 +352,7 @@ class Exopite_Seo_Core {
 			 * WordPress build in sanitize_file_name will not take care umlauts.
 			 * This generate sometime some issues with urls and filenames.
 			 */
-			$this->loader->add_filter( 'sanitize_file_name', $plugin_public, 'sanitize_file_name', 10, 2 );
+			$this->loader->add_filter( 'sanitize_file_name', $plugin_sanitize, 'sanitize_file_name', 10, 2 );
 
 		}
 
@@ -327,17 +364,6 @@ class Exopite_Seo_Core {
              * @link https://brutalbusiness.com/automatically-set-the-wordpress-image-title-alt-text-other-meta/
              */
             $this->loader->add_action( 'add_attachment', $plugin_public, 'auto_image_alt' );
-
-        }
-
-        if ( $cookie_note == 'yes' ) {
-
-            /*
-             * Automatically Set the WordPress Image Title, Alt-Text & Other Meta
-             *
-             * @link https://brutalbusiness.com/automatically-set-the-wordpress-image-title-alt-text-other-meta/
-             */
-            $this->loader->add_action( 'wp_footer', $plugin_public, 'cookie_note', 1 );
 
         }
 
@@ -389,9 +415,18 @@ class Exopite_Seo_Core {
 
         }
 
-        if ( ! defined( 'EXOPITE_VERSION' ) ) $this->loader->add_shortcode( 'exopite-breadcrumbs', $plugin_public, 'breadcrumbs' );
+        if ( ! defined( 'EXOPITE_VERSION' ) ) $this->loader->add_shortcode( 'exopite-breadcrumbs', $plugin_breadcrumb, 'breadcrumbs' );
 
         $this->loader->add_shortcode( "exopite-ga-optout", $plugin_public, "ga_optout", $priority = 10, $accepted_args = 2 );
+
+
+        if ( $cookie_note == 'yes' ) {
+
+            $this->loader->add_action( 'wp_enqueue_scripts', $plugin_cookie_notice, 'enqueue_styles', 999 );
+            $this->loader->add_action( 'wp_enqueue_scripts', $plugin_cookie_notice, 'enqueue_scripts', 999 );
+            $this->loader->add_action( 'wp_footer', $plugin_cookie_notice, 'cookie_note', 1 );
+
+        }
 
 	}
 
