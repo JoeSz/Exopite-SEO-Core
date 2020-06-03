@@ -212,22 +212,22 @@ class Exopite_Seo_Core_Admin {
                     'default' => 'no',
                 ),
 
-                array(
-                    'id'      => 'links_nofollow',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Add "nofollow" to external links', 'exopite-seo-core' ),
-                    'default' => 'no',
-                    'info'    => esc_html__( "Use this to signify to the search englines, that you don't vouch for a page you link to.", "exopite-seo-core" ),
-                ),
+                // array(
+                //     'id'      => 'links_nofollow',
+                //     'type'    => 'switcher',
+                //     'title'   => esc_html__( 'Add "nofollow" to external links', 'exopite-seo-core' ),
+                //     'default' => 'no',
+                //     'info'    => esc_html__( "Use this to signify to the search englines, that you don't vouch for a page you link to.", "exopite-seo-core" ),
+                // ),
 
-                array(
-                    'id'      => 'links_noopener_noreferer',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Add "noopener", "noreferrer" to external links"', 'exopite-seo-core' ),
-                    'default' => 'no',
-                    'info'   => esc_html__( 'Apply only to links with target="_blank" attribute.', 'exopite-seo-core' ) . '<br>' . esc_html__( 'If you not doing this, can couse performance and security issues for the user.', 'exopite-seo-core' ),
-                    'description' => '<span class="info-links"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Mozilla attr-target</a><br><a href="https://mathiasbynens.github.io/rel-noopener/" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> About rel=noopener</a></span>',
-                ),
+                // array(
+                //     'id'      => 'links_noopener_noreferer',
+                //     'type'    => 'switcher',
+                //     'title'   => esc_html__( 'Add "noopener", "noreferrer" to external links"', 'exopite-seo-core' ),
+                //     'default' => 'no',
+                //     'info'   => esc_html__( 'Apply only to links with target="_blank" attribute.', 'exopite-seo-core' ) . '<br>' . esc_html__( 'If you not doing this, can couse performance and security issues for the user.', 'exopite-seo-core' ),
+                //     'description' => '<span class="info-links"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Mozilla attr-target</a><br><a href="https://mathiasbynens.github.io/rel-noopener/" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> About rel=noopener</a></span>',
+                // ),
 
             ),
 
