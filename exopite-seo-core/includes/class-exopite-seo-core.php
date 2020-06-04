@@ -250,6 +250,19 @@ class Exopite_Seo_Core {
 
             if ( ! $this->is_api_request() ) {
 
+				/**
+				 * PHP Simple HTML DOM Parser
+				 * @link https://sourceforge.net/projects/simplehtmldom/files/
+				 *
+				 * Docs:
+				 * - https://stackoverflow.com/questions/14264525/php-simple-html-dom-parser-select-only-divs-with-multiple-classes
+				 * - https://code.tutsplus.com/tutorials/html-parsing-and-screen-scraping-with-the-simple-html-dom-library--net-11856
+				 * - https://stackoverflow.com/questions/4812691/preserve-line-breaks-simple-html-dom-parser
+				 */
+				if( ! class_exists( 'simple_html_dom' ) ) {
+					require_once plugin_dir_path( dirname( __FILE__ ) ) . 'vendor/simple_html_dom.1.9.1.php';
+				}
+
                 if ( apply_filters( 'exopite_ob_status', 'off' ) != 'on' ) {
 
                     $this->loader->add_filter( 'wp_loaded', $plugin_links, 'buffer_start', 12 );
