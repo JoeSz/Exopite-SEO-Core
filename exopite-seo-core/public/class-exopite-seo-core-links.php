@@ -277,7 +277,7 @@ class Exopite_Seo_Core_Links {
 
         $test = $time_elapsed_secs;
 
-        return $content . 'TEST<pre>' . var_export( $test, true ) . '</pre>';
+        return $content;
     }
 
     /**
