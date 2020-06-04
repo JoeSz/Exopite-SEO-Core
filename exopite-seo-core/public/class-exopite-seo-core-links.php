@@ -87,6 +87,14 @@ class Exopite_Seo_Core_Links {
 
     public function is_external_url( $url ) {
 
+        if ( substr( $url, 0, 2 ) === "//" ) {
+            return true;
+        }
+
+        if ( substr( $url, 0, 1 ) === "/" ) {
+            return false;
+        }
+
         // Abort if parameter URL is empty
         if( empty($url) ) {
             return true;
@@ -108,8 +116,102 @@ class Exopite_Seo_Core_Links {
     }
 
 
-    public function add_links_rel( $content ) {
+    public function add_links_attributes( $content ) {
 
+
+        $start = microtime(true);
+
+        $html = new simple_html_dom();
+
+        // Load HTML from a string/variable
+        $html->load( $content, $lowercase = true, $stripRN = false, $defaultBRText = DEFAULT_BR_TEXT );
+
+
+        // Find all links
+        foreach( $html->find('a') as $element ) {
+
+            $href = $element->href;
+
+            $innertext = $element->innertext;
+            $innertext = str_replace( array( '<br>', '</p>', '</h1>', '</h2>', '</h3>', '</li>', '</div>', '</span>' ), ' ', $innertext );
+            $innertext = preg_replace( '!\s+!', ' ', $innertext );
+            $innertext = strip_tags( $innertext );
+
+            $title = $element->title;
+
+            if ( $this->is_external_url( $href ) ) {
+
+                $rels = array();
+
+                $links_nofollow = ( isset( $this->options['links_nofollow'] ) ) ? $this->options['links_nofollow'] : 'no';
+                $links_noopener_noreferer = ( isset( $this->options['links_noopener_noreferer'] ) ) ? $this->options['links_noopener_noreferer'] : 'no';
+
+                if( $links_nofollow == 'yes' ) {
+
+                    $rel = $element->rel;
+
+                    if ( ! empty( $rel ) ) $rels = explode( ' ', $rel );
+
+                    if ( ! in_array( 'nofollow', $rels ) ) {
+                        $rels[] = 'nofollow';
+                    }
+
+
+                }
+
+                if( $links_noopener_noreferer == 'yes' ) {
+
+                    $target = $element->target;
+
+                    if ( $target == '_blank' ) {
+
+                        if ( ! in_array( 'noopener', $rels ) ) {
+                            $rels[] = 'noopener';
+                        }
+                        if ( ! in_array( 'noreferrer', $rels ) ) {
+                            $rels[] = 'noreferrer';
+                        }
+
+                    }
+
+                }
+
+                $element->rel = implode( ' ', $rels );
+
+            }
+
+            $links_set_title = ( isset( $this->options['links_set_title'] ) ) ? $this->options['links_set_title'] : 'no';
+
+            if( $links_set_title == 'yes' ) {
+
+                if ( ( empty( $title ) || ! $title ) && ! empty( $innertext ) ) {
+
+                    $element->title = $innertext;
+
+                }
+
+            }
+
+
+
+        }
+
+        $content = $html->save();
+
+        $html->clear();
+        unset( $html );
+
+        // 0.019870996475219727
+        // 0.019154071807861328
+        $time_elapsed_secs = microtime(true) - $start;
+
+        /**
+         * DOMDocument ist faster,
+         * but very oft break things.
+         * E.g.: Borlabs-Cookie templates inside <script type="text/template"></script>
+         */
+        /*
+        $start = microtime(true);
         $doc = new DOMDocument();
         @$doc->loadHTML( mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' ) );
 
@@ -164,8 +266,18 @@ class Exopite_Seo_Core_Links {
 
         $content = $doc->saveHTML();
 
-        return $content;
+        // 0.12426495552062988
+        // 0.008669853210449219
+        // 0.008555889129638672
+        $time_elapsed_secs = microtime(true) - $start;
+        */
 
+
+        // return $content;
+
+        $test = $time_elapsed_secs;
+
+        return $content . 'TEST<pre>' . var_export( $test, true ) . '</pre>';
     }
 
     /**
@@ -179,7 +291,7 @@ class Exopite_Seo_Core_Links {
             return $content;
         }
 
-        return $this->add_links_rel( $content );
+        return $this->add_links_attributes( $content );
         // return $this->add_links_rel( $content ) .  number_format( (microtime(true) - $startTime ), 4 ) . " Seconds\n";
 
 
