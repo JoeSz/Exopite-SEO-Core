@@ -221,6 +221,10 @@ class Exopite_Seo_Core {
 	 */
 	private function define_public_hooks() {
 
+		if ( is_admin() ) {
+			return;
+		}
+
         $options = get_exopite_sof_option( $this->plugin_name );
 
 		$plugin_public = new Exopite_Seo_Core_Public( $this->get_plugin_name(), $this->get_version() );
