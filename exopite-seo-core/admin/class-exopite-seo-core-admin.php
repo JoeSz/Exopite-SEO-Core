@@ -248,7 +248,7 @@ class Exopite_Seo_Core_Admin {
                 'type'    => 'switcher',
                 'title'   => esc_html__( 'Automatically add image infos', 'exopite-seo-core' ),
                 'default' => 'no',
-                'info'    => esc_html__( 'Automatically Set the WordPress Image Title, Alt-Text & Other Meta for new images' ),
+                'info'    => esc_html__( 'Automatically Set the WordPress Image Alt-Text' ),
             );
 
             $fields[0]['fields'][] = array(
