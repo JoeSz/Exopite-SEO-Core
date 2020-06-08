@@ -97,7 +97,7 @@ class Exopite_Seo_Core_Links {
 
         // Abort if parameter URL is empty
         if( empty($url) ) {
-            return true;
+            return false;
         }
 
         // Parse home URL and parameter URL
