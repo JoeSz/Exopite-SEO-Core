@@ -287,7 +287,7 @@ class Exopite_Seo_Core_Links {
 
         // $startTime = microtime(true);
 
-        if (is_admin() || $this->is_login_page()) {
+        if ( is_admin() || $this->is_login_page() || ! get_the_id() ) {
             return $content;
         }
 
