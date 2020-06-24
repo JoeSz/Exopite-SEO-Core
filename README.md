@@ -65,6 +65,9 @@ Browsers
 CHANGELOG
 ---------
 
+= 20200624 =
+* Fix: add nofollow for internal links
+
 = 20200529 =
 * Reorganize code
 * ADDED: nofollow, noopener, noreferrer to external links
