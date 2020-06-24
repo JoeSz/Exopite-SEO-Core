@@ -87,24 +87,15 @@ class Exopite_Seo_Core_Links {
 
     public function is_external_url( $url ) {
 
-        if ( substr( $url, 0, 2 ) === "//" ) {
-            return true;
-        }
-
-        if ( substr( $url, 0, 1 ) === "/" ) {
-            return false;
-        }
-
         // Abort if parameter URL is empty
         if( empty($url) ) {
-            return false;
+            return true;
         }
 
         // Parse home URL and parameter URL
         $link_url = parse_url( $url );
         // $home_url = parse_url( $_SERVER['HTTP_HOST'] );
         $home_url = parse_url( home_url() );  // Works for WordPress
-
 
         // Decide on target
         if( empty( $link_url['host'] ) ||  $link_url['host'] == $home_url['host'] ) {
@@ -118,8 +109,7 @@ class Exopite_Seo_Core_Links {
 
     public function add_links_attributes( $content ) {
 
-
-        $start = microtime(true);
+        // $test = array( 'test' );
 
         $html = new simple_html_dom();
 
@@ -131,31 +121,28 @@ class Exopite_Seo_Core_Links {
         foreach( $html->find('a') as $element ) {
 
             $href = $element->href;
-
-            $innertext = $element->innertext;
-            $innertext = str_replace( array( '<br>', '</p>', '</h1>', '</h2>', '</h3>', '</li>', '</div>', '</span>' ), ' ', $innertext );
-            $innertext = preg_replace( '!\s+!', ' ', $innertext );
-            $innertext = strip_tags( $innertext );
-
+            $innertext = strip_tags( $element->innertext );
             $title = $element->title;
 
-            if ( $this->is_external_url( $href ) ) {
+            $debug = '';
 
+            $rel = $element->rel;
+            if ( ! empty( $rel ) ) {
+                $rels = explode( ' ', $rel );
+            } else {
                 $rels = array();
+            }
+
+            if ( $href && $this->is_external_url( $href ) ) {
 
                 $links_nofollow = ( isset( $this->options['links_nofollow'] ) ) ? $this->options['links_nofollow'] : 'no';
                 $links_noopener_noreferer = ( isset( $this->options['links_noopener_noreferer'] ) ) ? $this->options['links_noopener_noreferer'] : 'no';
 
                 if( $links_nofollow == 'yes' ) {
 
-                    $rel = $element->rel;
-
-                    if ( ! empty( $rel ) ) $rels = explode( ' ', $rel );
-
                     if ( ! in_array( 'nofollow', $rels ) ) {
                         $rels[] = 'nofollow';
                     }
-
 
                 }
 
@@ -176,12 +163,9 @@ class Exopite_Seo_Core_Links {
 
                 }
 
-                $element->rel = implode( ' ', $rels );
-
             }
 
-            $links_set_title = ( isset( $this->options['links_set_title'] ) ) ? $this->options['links_set_title'] : 'no';
-
+            $links_set_title = 'yes';
             if( $links_set_title == 'yes' ) {
 
                 if ( ( empty( $title ) || ! $title ) && ! empty( $innertext ) ) {
@@ -192,6 +176,20 @@ class Exopite_Seo_Core_Links {
 
             }
 
+            if ( ! empty( $rels ) ) {
+                $element->rel = implode( ' ', $rels );
+            }
+
+            // $test[] = array(
+            //     'href' => $href,
+            //     'target' => $target,
+            //     'rel' => $rel,
+            //     'title' => $title,
+            //     'title' => $element->title,
+            //     'htmlspec inner' => htmlspecialchars( $element->innertext ),
+            //     'striptags inner' => $innertext,
+            //     'debug' => $debug,
+            // );
 
 
         }
@@ -201,17 +199,7 @@ class Exopite_Seo_Core_Links {
         $html->clear();
         unset( $html );
 
-        // 0.019870996475219727
-        // 0.019154071807861328
-        $time_elapsed_secs = microtime(true) - $start;
-
-        /**
-         * DOMDocument ist faster,
-         * but very oft break things.
-         * E.g.: Borlabs-Cookie templates inside <script type="text/template"></script>
-         */
         /*
-        $start = microtime(true);
         $doc = new DOMDocument();
         @$doc->loadHTML( mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' ) );
 
@@ -266,18 +254,12 @@ class Exopite_Seo_Core_Links {
 
         $content = $doc->saveHTML();
 
-        // 0.12426495552062988
-        // 0.008669853210449219
-        // 0.008555889129638672
-        $time_elapsed_secs = microtime(true) - $start;
+        return $content;
         */
 
-
-        // return $content;
-
-        $test = $time_elapsed_secs;
-
         return $content;
+
+        // return $content . 'TEST<pre>X' . var_export( $test, true ) . '</pre>';
     }
 
     /**
@@ -287,7 +269,7 @@ class Exopite_Seo_Core_Links {
 
         // $startTime = microtime(true);
 
-        if ( is_admin() || $this->is_login_page() || ! get_the_id() ) {
+        if (is_admin() || $this->is_login_page()) {
             return $content;
         }
 
