@@ -235,7 +235,8 @@ class Exopite_Seo_Core {
 
         $cookie_note = ( isset( $options['cookie_note'] ) ) ? $options['cookie_note'] : 'no';
         $remove_json_from_header = ( isset( $options['remove_json_from_header'] ) ) ? $options['remove_json_from_header'] : 'no';
-        $deactivate_attachment_pages = ( isset( $options['deactivate_attachment_pages'] ) ) ? $options['deactivate_attachment_pages'] : 'no';
+		$deactivate_attachment_pages = ( isset( $options['deactivate_attachment_pages'] ) ) ? $options['deactivate_attachment_pages'] : 'no';
+		$deactivate_archives = ( isset( $options['deactivate_archives'] ) ) ? $options['deactivate_archives'] : 'no';
         $noidex_archives_search = ( isset( $options['noidex_archives_search'] ) ) ? $options['noidex_archives_search'] : 'no';
         $auto_image_alt = ( isset( $options['auto_image_alt'] ) ) ? $options['auto_image_alt'] : 'no';
         $limit_revisions = ( isset( $options['limit_revisions'] ) ) ? $options['limit_revisions'] : 'no';
@@ -323,6 +324,14 @@ class Exopite_Seo_Core {
             $this->loader->add_action( 'template_redirect', $plugin_public, 'redirect_attachment_pages_to_file' );
 
         }
+
+		/**
+		 * Remove category, tag, date and author archives from WordPress
+		 * @link https://mekshq.com/remove-archives-wordpress-improve-seo/
+		 */
+		if ( $deactivate_archives == 'yes' ) {
+			$this->loader->add_filter( 'template_redirect', $plugin_public, 'template_redirect_deactivate_archives', 10, 2 );
+		}
 
         /**
          * Add Canonical URL for singles
