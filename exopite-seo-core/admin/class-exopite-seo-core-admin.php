@@ -153,7 +153,7 @@ class Exopite_Seo_Core_Admin {
             'parent'            => $parent,                                         // Required, sub page to your options page
             'submenu'           => true,                                            // Required for submenu
             'settings-link'     => $settings_link,
-            'title'             => esc_html__( 'SEO Core', 'exopite-seo-core' ),    //The name of this page
+            'title'             => esc_html__( 'SEO Core', 'exopite-seo-core' ) . ' v' . $this->version,    //The name of this page
             'capability'        => 'manage_options',                                // The capability needed to view the page
             'plugin_basename'   =>  plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_name . '.php' ),
             'tabbed'            => true,
@@ -181,6 +181,14 @@ class Exopite_Seo_Core_Admin {
                     'title'   => esc_html__( 'Deactivate attachment pages', 'exopite-seo-core' ),
                     'default' => 'no',
                     'info'   => esc_html__( 'If you change this, please', 'exopite-seo-core' ),' <a href="/wp-admin/options-permalink.php" target="_blank" rel="noreferrer noopener">' . esc_html__( 'save permalinks', 'exopite-seo-core' ) . '</a>',
+                ),
+
+                array(
+                    'id'      => 'deactivate_archives',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Deactivate archives', 'exopite-seo-core' ),
+                    'default' => 'no',
+                    'info'   => esc_html__( 'Remove category, tag, date and author archives from WordPress' ),
                 ),
 
                 array(
@@ -317,7 +325,7 @@ class Exopite_Seo_Core_Admin {
 
                 'type'    => 'notice',
                 'class'   => 'warning',
-                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your images.', 'exopite-seo-core' ), '<a href="' . get_site_url() . 'wp-admin/plugin-install.php?tab=plugin-information&plugin=ewww-image-optimizer" target="_blank" rel="noreferrer noopener">EWWW Image Optimizer</a>' ),
+                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your images.', 'exopite-seo-core' ), '<a href="' . get_site_url() . '/wp-admin/plugin-install.php?tab=plugin-information&plugin=ewww-image-optimizer" target="_blank" rel="noreferrer noopener">EWWW Image Optimizer</a>' ),
 
             );
 
@@ -329,7 +337,7 @@ class Exopite_Seo_Core_Admin {
 
                 'type'    => 'notice',
                 'class'   => 'warning',
-                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your site SEO. This plugin is created to extend your site SEO after Yoast SEO is installed and activated.', 'exopite-seo-core' ), '<a href="' . get_site_url() . 'wp-admin/plugin-install.php?tab=plugin-information&plugin=wordpress-seo" target="_blank" rel="noreferrer noopener">Yoast SEO</a>' ),
+                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your site SEO. This plugin is created to extend your site SEO after Yoast SEO is installed and activated.', 'exopite-seo-core' ), '<a href="' . get_site_url() . '/wp-admin/plugin-install.php?tab=plugin-information&plugin=wordpress-seo" target="_blank" rel="noreferrer noopener">Yoast SEO</a>' ),
 
             );
 
@@ -341,7 +349,7 @@ class Exopite_Seo_Core_Admin {
 
                 'type'    => 'notice',
                 'class'   => 'warning',
-                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your images. This plugin is created to use WebP, Googles new images format, whenever is possible.', 'exopite-seo-core' ), '<a href="' . get_site_url() . 'wp-admin/plugin-install.php?tab=plugin-information&plugin=images-to-webp" target="_blank" rel="noreferrer noopener">Images to WebP</a>' ),
+                'content' => sprintf( esc_html__( 'We are recommend to use %s to optimize your images. This plugin is created to use WebP, Googles new images format, whenever is possible.', 'exopite-seo-core' ), '<a href="' . get_site_url() . '/wp-admin/plugin-install.php?tab=plugin-information&plugin=images-to-webp" target="_blank" rel="noreferrer noopener">Images to WebP</a>' ),
 
             );
 
