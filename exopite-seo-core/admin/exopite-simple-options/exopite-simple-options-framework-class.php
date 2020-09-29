@@ -888,7 +888,8 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework' ) ) :
 					$this->config['title'],
 					$this->config['capability'],
 					$this->unique, // slug
-					array( $this, 'display_page' )
+                    array( $this, 'display_page' ),
+                    $this->config['position']
 				);
 
 			}
@@ -1572,7 +1573,7 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework' ) ) :
 			$current_language_title = '';
 			if ( $this->is_multilang() ) {
 				$current_language_title = apply_filters( 'exopite_sof_title_language_notice', $this->lang_current );
-				$current_language_title = ' [ ' . $current_language_title . ' ]';
+				$current_language_title = ' [' . $current_language_title . ']';
 			}
 
 			echo '<header class="exopite-sof-header exopite-sof-header-js">';
