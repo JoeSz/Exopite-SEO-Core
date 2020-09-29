@@ -481,6 +481,8 @@ class Exopite_Seo_Core_Admin {
             ),
         );
 
+        $robots_txt_yoast_site_map = ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) ? '<br><a href="' . esc_attr( home_url() ) . '/sitemap_index.xml" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Yoast SEO Sitemap</a> (<code onClick="window.getSelection().selectAllChildren(this);">' . esc_attr( home_url() ) . '/sitemap_index.xml</code>)' : '';
+
         $fields[5] = array(
             'name'   => 'robots_txt_section',
             'title'  => esc_html__( 'Robots.txt', 'exopite-seo-core' ),
@@ -492,7 +494,7 @@ class Exopite_Seo_Core_Admin {
                     'type'    => 'switcher',
                     'title'   => esc_html__( 'Append text to robots.txt', 'exopite-seo-core' ),
                     'default' => 'no',
-                    'info'    => '<span class="info-links ga-links"><a href="https://support.google.com/webmasters/answer/6062596?hl=en" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Google: about robots.txt</a><br><a href="/robots.txt" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> See robots.txt</a></span>',
+                    'info'    => '<span class="info-links ga-links"><a href="https://support.google.com/webmasters/answer/6062596?hl=en" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Google: about robots.txt</a>' . $robots_txt_yoast_site_map . '<br><a href="/robots.txt" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> robots.txt</a></span>',
                 ),
 
                 array(
