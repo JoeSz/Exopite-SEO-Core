@@ -6,7 +6,7 @@ Tags: seo, search, engine, optimization, search-engine-optimization, wordpress, 
 Requires at least: 4.7
 Tested up to: 5.2.2
 Stable tag: 5.2.2
-Version: 20200529
+Version: 20200929
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -58,8 +58,12 @@ Browsers
 
 == Changelog ==
 
+= 20200929 =
+* ADDED: option to remove WordPress archives
+* FIX: some typos
+
 = 20200624 =
-* Fix: add nofollow for internal links
+* FIX: add nofollow for internal links
 
 = 20200529 =
 * Reorganize code
