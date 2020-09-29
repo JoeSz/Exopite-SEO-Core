@@ -176,36 +176,6 @@ class Exopite_Seo_Core_Admin {
                 ),
 
                 array(
-                    'id'      => 'deactivate_attachment_pages',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Deactivate attachment pages', 'exopite-seo-core' ),
-                    'default' => 'no',
-                    'info'   => esc_html__( 'If you change this, please', 'exopite-seo-core' ),' <a href="/wp-admin/options-permalink.php" target="_blank" rel="noreferrer noopener">' . esc_html__( 'save permalinks', 'exopite-seo-core' ) . '</a>',
-                ),
-
-                array(
-                    'id'      => 'deactivate_archives',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Deactivate archives', 'exopite-seo-core' ),
-                    'default' => 'no',
-                    'info'   => esc_html__( 'Remove category, tag, date and author archives from WordPress' ),
-                ),
-
-                array(
-                    'id'      => 'deactivate_feed',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Deactivate feed', 'exopite-seo-core' ),
-                    'default' => 'no',
-                ),
-
-                array(
-                    'id'      => 'cookie_note',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Add cookie permission', 'exopite-seo-core' ),
-                    'default' => 'no',
-                ),
-
-                array(
                     'id'      => 'sanitize_file_name',
                     'type'    => 'switcher',
                     'title'   => esc_html__( 'Sanitize file name', 'exopite-seo-core' ),
@@ -213,41 +183,35 @@ class Exopite_Seo_Core_Admin {
                     'info'   => esc_html__( 'Empty spaces and special characters can cause problems and they are not SEO freundly.', 'exopite-seo-core' ),
                 ),
 
+            ),
+
+        );
+
+        if ( ! is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
+
+            $fields[0]['fields'][] = array(
                 array(
                     'id'      => 'canonical_url',
                     'type'    => 'switcher',
                     'title'   => esc_html__( 'Add Canonical URL to head', 'exopite-seo-core' ),
                     'default' => 'no',
                 ),
+            );
 
+        }
+
+        if ( ! is_plugin_active( 'borlabs-cookie/borlabs-cookie.php' ) ) {
+
+            $fields[0]['fields'][] = array(
                 array(
-                    'id'      => 'links_set_title',
+                    'id'      => 'cookie_note',
                     'type'    => 'switcher',
-                    'title'   => esc_html__( 'Add title attribute for links if not exists', 'exopite-seo-core' ),
+                    'title'   => esc_html__( 'Add cookie permission', 'exopite-seo-core' ),
                     'default' => 'no',
-                    'info'    => esc_html__( "The title attribute will be the content of the link.", "exopite-seo-core" ),
                 ),
+            );
 
-                array(
-                    'id'      => 'links_nofollow',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Add "nofollow" to external links', 'exopite-seo-core' ),
-                    'default' => 'no',
-                    'info'    => esc_html__( "Use this to signify to the search englines, that you don't vouch for a page you link to.", "exopite-seo-core" ),
-                ),
-
-                array(
-                    'id'      => 'links_noopener_noreferer',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Add "noopener", "noreferrer" to external links"', 'exopite-seo-core' ),
-                    'default' => 'no',
-                    'info'   => esc_html__( 'Apply only to links with target="_blank" attribute.', 'exopite-seo-core' ) . '<br>' . esc_html__( 'If you not doing this, can couse performance and security issues for the user.', 'exopite-seo-core' ),
-                    'description' => '<span class="info-links"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Mozilla attr-target</a><br><a href="https://mathiasbynens.github.io/rel-noopener/" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> About rel=noopener</a></span>',
-                ),
-
-            ),
-
-        );
+        }
 
         if ( ! defined( 'EXOPITE_VERSION' ) ) {
 
@@ -283,14 +247,6 @@ class Exopite_Seo_Core_Admin {
                 'max'     => '100',
                 'dependency' => array( 'limit_revisions', '==', 'true' ),
                 'info'    =>  ' ' . esc_html__( 'For unlimited, set to 100.', 'exopite-seo-core' ),
-            );
-
-            $fields[0]['fields'][] = array(
-                'id'      => 'noidex_archives_search',
-                'type'    => 'switcher',
-                'title'   => esc_html__( 'Add "noindex"', 'exopite-seo-core' ),
-                'info'    => esc_html__( 'to blog, archives, search and 404 pages', 'exopite-seo-core' ),
-                'default' => 'no',
             );
 
             $fields[0]['fields'][] = array(
@@ -355,7 +311,86 @@ class Exopite_Seo_Core_Admin {
 
         }
 
-        $fields[] = array(
+        $fields[1] = array(
+            'name'   => 'archives',
+            'title'  => esc_html__( 'Archives', 'exopite-seo-core' ),
+            'icon'   => 'fa fa-archive',
+            'fields' => array(
+
+                array(
+                    'id'      => 'deactivate_attachment_pages',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Deactivate attachment pages', 'exopite-seo-core' ),
+                    'default' => 'no',
+                    'info'   => esc_html__( 'If you change this, please', 'exopite-seo-core' ),' <a href="/wp-admin/options-permalink.php" target="_blank" rel="noreferrer noopener">' . esc_html__( 'save permalinks', 'exopite-seo-core' ) . '</a>',
+                ),
+
+                array(
+                    'id'      => 'deactivate_archives',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Deactivate archives', 'exopite-seo-core' ),
+                    'default' => 'no',
+                    'info'   => esc_html__( 'Remove category, tag, date and author archives from WordPress' ),
+                ),
+
+                array(
+                    'id'      => 'deactivate_feed',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Deactivate feed', 'exopite-seo-core' ),
+                    'default' => 'no',
+                ),
+
+            ),
+        );
+
+        if ( ! defined( 'EXOPITE_VERSION' ) ) {
+
+            $fields[1]['fields'][] = array(
+
+                'id'      => 'noidex_archives_search',
+                'type'    => 'switcher',
+                'title'   => esc_html__( 'Add "noindex"', 'exopite-seo-core' ),
+                'info'    => esc_html__( 'to blog, archives, search and 404 pages', 'exopite-seo-core' ),
+                'default' => 'no',
+            );
+
+        }
+
+        $fields[2] = array(
+            'name'   => 'links',
+            'title'  => esc_html__( 'Links', 'exopite-seo-core' ),
+            'icon'   => 'fa fa-link',
+            'fields' => array(
+
+                array(
+                    'id'      => 'links_set_title',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Add title attribute for links if not exists', 'exopite-seo-core' ),
+                    'default' => 'no',
+                    'info'    => esc_html__( "The title attribute will be the content of the link.", "exopite-seo-core" ),
+                ),
+
+                array(
+                    'id'      => 'links_nofollow',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Add "nofollow" to external links', 'exopite-seo-core' ),
+                    'default' => 'no',
+                    'info'    => esc_html__( "Use this to signify to the search englines, that you don't vouch for a page you link to.", "exopite-seo-core" ),
+                ),
+
+                array(
+                    'id'      => 'links_noopener_noreferer',
+                    'type'    => 'switcher',
+                    'title'   => esc_html__( 'Add "noopener", "noreferrer" to external links"', 'exopite-seo-core' ),
+                    'default' => 'no',
+                    'info'   => esc_html__( 'Apply only to links with target="_blank" attribute.', 'exopite-seo-core' ) . '<br>' . esc_html__( 'If you not doing this, can couse performance and security issues for the user.', 'exopite-seo-core' ),
+                    'description' => '<span class="info-links"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> Mozilla attr-target</a><br><a href="https://mathiasbynens.github.io/rel-noopener/" target="_blank" rel="noreferrer noopener"><i class="fa fa-arrow-right" aria-hidden="true"></i> About rel=noopener</a></span>',
+                ),
+
+            ),
+        );
+
+        $fields[3] = array(
             'name'   => 'head_section',
             'title'  => esc_html__( 'Head', 'exopite-seo-core' ),
             'icon'   => 'fa fa-h-square',
@@ -401,7 +436,7 @@ class Exopite_Seo_Core_Admin {
             ),
         );
 
-        $fields[] = array(
+        $fields[4] = array(
             'name'   => 'footer_section',
             'title'  => esc_html__( 'Footer', 'exopite-seo-core' ),
             'icon'   => 'fa fa-code',
@@ -446,7 +481,7 @@ class Exopite_Seo_Core_Admin {
             ),
         );
 
-        $fields[] = array(
+        $fields[5] = array(
             'name'   => 'robots_txt_section',
             'title'  => esc_html__( 'Robots.txt', 'exopite-seo-core' ),
             'icon'   => 'fa fa-file-text-o',
@@ -466,6 +501,11 @@ class Exopite_Seo_Core_Admin {
                     'title'   => esc_html__( 'Text to append to the robots.txt file', 'exopite-seo-core' ),
                     'dependency' => array( 'activate_robots_txt', '==', 'true' ),
                     'default' => "Disallow: /?s=\nDisallow: /search/",
+                    'attributes'    => array(
+                        'rows'  =>  '4',
+                        'cols'  =>  '50',
+                        'class' => 'robots-txt-textarea',
+                    ),
                     // 'description' => '',
                     // 'info'    => ' <em>' . esc_html__( 'Leave empty to ignore', 'exopite-seo-core' ) . '</em>',
 
@@ -474,7 +514,7 @@ class Exopite_Seo_Core_Admin {
             ),
         );
 
-        $fields[] = array(
+        $fields[6] = array(
             'name'       => 'cookie',
             'title'      => esc_html__( 'Cookie', 'exopite-seo-core' ),
             'icon'       => 'fa fa-birthday-cake',
@@ -701,7 +741,7 @@ class Exopite_Seo_Core_Admin {
 
         );
 
-        $fields[] = array(
+        $fields[7] = array(
             'name'   => 'backup_section',
             'title'  => esc_html__( 'Backup', 'exopite-seo-core' ),
             'icon'   => 'fa fa-floppy-o',

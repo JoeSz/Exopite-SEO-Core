@@ -11,3 +11,6 @@
     margin-top: 0;
     margin-bottom: 0;
 }
+textarea.robots-txt-textarea {
+    height: 800px;
+}
