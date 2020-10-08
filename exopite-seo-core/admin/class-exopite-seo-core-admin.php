@@ -190,12 +190,10 @@ class Exopite_Seo_Core_Admin {
         if ( ! is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
 
             $fields[0]['fields'][] = array(
-                array(
-                    'id'      => 'canonical_url',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Add Canonical URL to head', 'exopite-seo-core' ),
-                    'default' => 'no',
-                ),
+                'id'      => 'canonical_url',
+                'type'    => 'switcher',
+                'title'   => esc_html__( 'Add Canonical URL to head', 'exopite-seo-core' ),
+                'default' => 'no',
             );
 
         }
@@ -203,12 +201,10 @@ class Exopite_Seo_Core_Admin {
         if ( ! is_plugin_active( 'borlabs-cookie/borlabs-cookie.php' ) ) {
 
             $fields[0]['fields'][] = array(
-                array(
-                    'id'      => 'cookie_note',
-                    'type'    => 'switcher',
-                    'title'   => esc_html__( 'Add cookie permission', 'exopite-seo-core' ),
-                    'default' => 'no',
-                ),
+                'id'      => 'cookie_note',
+                'type'    => 'switcher',
+                'title'   => esc_html__( 'Add cookie permission', 'exopite-seo-core' ),
+                'default' => 'no',
             );
 
         }
