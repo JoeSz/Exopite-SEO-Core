@@ -153,7 +153,8 @@ class Exopite_Seo_Core_Admin {
             'parent'            => $parent,                                         // Required, sub page to your options page
             'submenu'           => true,                                            // Required for submenu
             'settings-link'     => $settings_link,
-            'title'             => esc_html__( 'SEO Core', 'exopite-seo-core' ) . ' v' . $this->version,    //The name of this page
+            'title'             => esc_html__( 'SEO Core', 'exopite-seo-core' ),    //The name of this page
+            'option_title'      => esc_html__( 'SEO Core', 'exopite-seo-core' ) . ' v' . $this->version,    //The name of this page
             'capability'        => 'manage_options',                                // The capability needed to view the page
             'plugin_basename'   =>  plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_name . '.php' ),
             'tabbed'            => true,
