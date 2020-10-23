@@ -312,8 +312,22 @@ class Exopite_Seo_Core_Public {
 
     public function ace_editor_head() {
 
-        echo $this->options['ace_editor_head'];
+        echo $this->apply_wordpress_filters( $this->options['ace_editor_head'] );
 
+    }
+
+    public function add_to_footer() {
+
+        echo $this->apply_wordpress_filters( $this->options['ace_editor_footer'] );
+
+    }
+
+    public function apply_wordpress_filters( $text ) {
+
+        $text = convert_smilies( $text );
+        $text = do_shortcode( $text );
+
+        return $text;
 
     }
 
@@ -443,12 +457,6 @@ class Exopite_Seo_Core_Public {
         );
 
         return '<a href="javascript:gaOptout();">' . $args['link'] . '</a>';
-
-    }
-
-    public function add_to_footer() {
-
-        echo $this->options['ace_editor_footer'];
 
     }
 

@@ -281,20 +281,6 @@ class Exopite_Seo_Core {
 
         }
 
-        if ( $ace_editor_footer ) {
-
-            $hook = 'wp_footer';
-
-            if ( $ace_editor_footer_print_hook == 'yes' ) {
-
-                $hook = 'wp_print_footer_scripts';
-
-            }
-
-            $this->loader->add_action( $hook, $plugin_public, 'add_to_footer', 999 );
-
-        }
-
         /**
          * Remove JSON API description
          * @link https://wordpress.stackexchange.com/questions/211467/remove-json-api-links-in-header-html/212472#212472
@@ -367,6 +353,20 @@ class Exopite_Seo_Core {
         if ( ! empty( $ace_editor_head ) ) {
 
             $this->loader->add_action( 'wp_head', $plugin_public, 'ace_editor_head' );
+
+        }
+
+        if ( $ace_editor_footer ) {
+
+            $hook = 'wp_footer';
+
+            if ( $ace_editor_footer_print_hook == 'yes' ) {
+
+                $hook = 'wp_print_footer_scripts';
+
+            }
+
+            $this->loader->add_action( $hook, $plugin_public, 'add_to_footer', 999 );
 
         }
 
