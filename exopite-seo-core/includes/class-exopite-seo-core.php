@@ -251,7 +251,7 @@ class Exopite_Seo_Core {
         $links_nofollow = ( isset( $options['links_nofollow'] ) ) ? $options['links_nofollow'] : 'no';
         $links_noopener_noreferer = ( isset( $options['links_noopener_noreferer'] ) ) ? $options['links_noopener_noreferer'] : 'no';
 
-        if ( $options['links_nofollow'] == 'yes' || $options['links_noopener_noreferer'] == 'yes' ) {
+        if ( $links_nofollow == 'yes' || $links_noopener_noreferer == 'yes' ) {
 
             if ( ! $this->is_api_request() ) {
 
