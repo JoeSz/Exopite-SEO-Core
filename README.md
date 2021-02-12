@@ -5,7 +5,7 @@ Provide some extra but important SEO functions along Yoast SEO. Yoast SEO not re
 You may or may not use an other SEO plugin too.
 
 - Author: Joe Szalai
-- Version: 20200929
+- Version: 20210212
 - Plugin URL: https://github.com/JoeSz/Exopite-SEO-Core
 - Demo URL: https://joe.szalai.org/exopite/exopite-seo-core/
 - Author URL: https://joe.szalai.org
@@ -64,6 +64,12 @@ Browsers
 
 CHANGELOG
 ---------
+
+= 20210212 =
+* UPDATE: Separate archives to deactivate (Category, Tag, Others: Date and Author)
+* UPDATE: Deactivated archives redirect to blog page if exists, if not then root
+* ADDED: remove deactivated archives from WordPress sitemap.xml
+* ADDED: WP Sitemaps Config suggestion
 
 = 20200929 =
 * ADDED: option to remove WordPress archives
