@@ -196,10 +196,6 @@ class Exopite_Seo_Core {
         // (#3)
         $rest_url = wp_parse_url( site_url( $prefix ) );
         $current_url = wp_parse_url( add_query_arg( array( ) ) );
-
-		// added to avoid PHP Notice:  Undefined index: path
-		if ( ! isset( $current_url['path'] ) || ! isset( $rest_url['path'] ) ) return false;
-
         return strpos( $current_url['path'], $rest_url['path'], 0 ) === 0;
     }
 
@@ -240,6 +236,8 @@ class Exopite_Seo_Core {
         $cookie_note = ( isset( $options['cookie_note'] ) ) ? $options['cookie_note'] : 'no';
         $remove_json_from_header = ( isset( $options['remove_json_from_header'] ) ) ? $options['remove_json_from_header'] : 'no';
 		$deactivate_attachment_pages = ( isset( $options['deactivate_attachment_pages'] ) ) ? $options['deactivate_attachment_pages'] : 'no';
+		$deactivate_category_archives = ( isset( $options['deactivate_category_archives'] ) ) ? $options['deactivate_category_archives'] : 'no';
+		$deactivate_tags_archives = ( isset( $options['deactivate_tags_archives'] ) ) ? $options['deactivate_tags_archives'] : 'no';
 		$deactivate_archives = ( isset( $options['deactivate_archives'] ) ) ? $options['deactivate_archives'] : 'no';
         $noidex_archives_search = ( isset( $options['noidex_archives_search'] ) ) ? $options['noidex_archives_search'] : 'no';
         $auto_image_alt = ( isset( $options['auto_image_alt'] ) ) ? $options['auto_image_alt'] : 'no';
@@ -255,7 +253,7 @@ class Exopite_Seo_Core {
         $links_nofollow = ( isset( $options['links_nofollow'] ) ) ? $options['links_nofollow'] : 'no';
         $links_noopener_noreferer = ( isset( $options['links_noopener_noreferer'] ) ) ? $options['links_noopener_noreferer'] : 'no';
 
-        if ( $links_nofollow == 'yes' || $links_noopener_noreferer == 'yes' ) {
+        if ( $options['links_nofollow'] == 'yes' || $options['links_noopener_noreferer'] == 'yes' ) {
 
             if ( ! $this->is_api_request() ) {
 
@@ -318,9 +316,19 @@ class Exopite_Seo_Core {
 		/**
 		 * Remove category, tag, date and author archives from WordPress
 		 * @link https://mekshq.com/remove-archives-wordpress-improve-seo/
+		 * @link https://wordpress.org/support/topic/remove-the-archive-pages-from-the-sitemap/
 		 */
+		if ( $deactivate_category_archives == 'yes' ) {
+			$this->loader->add_filter( 'template_redirect', $plugin_public, 'template_redirect_deactivate_category_archives', 10, 2 );
+			$this->loader->add_filter( 'wp_sitemaps_taxonomies', $plugin_public, 'wp_sitemaps_taxonomies_deactivate_category_archives', 10, 2 );
+		}
+		if ( $deactivate_tags_archives == 'yes' ) {
+			$this->loader->add_filter( 'template_redirect', $plugin_public, 'template_redirect_deactivate_tags_archives', 10, 2 );
+			$this->loader->add_filter( 'wp_sitemaps_taxonomies', $plugin_public, 'wp_sitemaps_taxonomies_deactivate_tags_archives', 10, 2 );
+		}
 		if ( $deactivate_archives == 'yes' ) {
 			$this->loader->add_filter( 'template_redirect', $plugin_public, 'template_redirect_deactivate_archives', 10, 2 );
+			$this->loader->add_filter( 'wp_sitemaps_add_provider', $plugin_public, 'wp_sitemaps_add_provider_deactivate_archives', 10, 2 );
 		}
 
         /**

@@ -460,18 +460,72 @@ class Exopite_Seo_Core_Public {
 
     }
 
-    public function template_redirect_deactivate_archives() {
+    public function redirect( $set_404 = false ) {
 
-        //If we are on category or tag or date or author archive
-        if( is_category() || is_tag() || is_date() || is_author() ) {
+        if ( $set_404 ) {
 
-            // global $wp_query;
-            // $wp_query->set_404(); //set to 404 not found page
+            global $wp_query;
+            $wp_query->set_404(); //set to 404 not found page
+            status_header( 404 );
+            nocache_headers();
+            include( get_query_template( '404' ) );
+            die();
 
-            wp_redirect( home_url() );
+        } else {
+
+            $redirect_to = get_permalink( get_option( 'page_for_posts' ) );
+            if ( ! $redirect_to ) {
+                $redirect_to = home_url();
+            }
+
+            wp_redirect( $redirect_to );
             exit();
 
         }
+
+    }
+
+    public function template_redirect_deactivate_category_archives() {
+
+        if( is_category() ) $this->redirect();
+    }
+
+    public function template_redirect_deactivate_tags_archives() {
+
+        if( is_tag() ) $this->redirect();
+
+    }
+
+    public function template_redirect_deactivate_archives() {
+
+        if( is_date() || is_author() ) {
+
+            $this->redirect();
+
+        }
+    }
+
+    // Remove author archive from sitemap.xml
+    public function wp_sitemaps_add_provider_deactivate_archives( $provider, $name ) {
+
+        if ( 'users' === $name ) {
+            return false;
+        }
+
+        return $provider;
+
+    }
+
+    // Remove category archive from sitemap.xml
+    public function wp_sitemaps_taxonomies_deactivate_category_archives( $taxonomies ) {
+        unset( $taxonomies['category'] );
+        return $taxonomies;
+    }
+
+    // Remove tag archive from sitemap.xml
+    public function wp_sitemaps_taxonomies_deactivate_tags_archives( $taxonomies ) {
+        unset( $taxonomies['post_tag'] );
+        return $taxonomies;
     }
 
 }
