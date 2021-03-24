@@ -58,6 +58,10 @@ Browsers
 
 == Changelog ==
 
+= 20210324 =
+* FIX: do not display canonical link if Yoast SEO installed
+* FIX: settings link if Yoast SEO installed
+
 = 20200929 =
 * ADDED: option to remove WordPress archives
 * FIX: some typos
