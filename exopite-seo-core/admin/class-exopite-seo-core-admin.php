@@ -143,7 +143,7 @@ class Exopite_Seo_Core_Admin {
 
         if ( ! function_exists( 'is_plugin_active' ) ) require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 
-        $parent = ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) ? 'wpseo_dashboard' : 'plugins.php';
+        $parent = ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) ? 'admin.php' : 'plugins.php';
         $settings_link = ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) ? 'admin.php?page=exopite-seo-core' : 'plugins.php?page=exopite-seo-core';
 
         $config = array(
