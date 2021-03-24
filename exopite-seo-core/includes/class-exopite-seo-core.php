@@ -334,7 +334,7 @@ class Exopite_Seo_Core {
         /**
          * Add Canonical URL for singles
          */
-        if ( $canonical_url == 'yes' ) {
+        if ( $canonical_url == 'yes' && ! is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
 
 			if( function_exists( 'rel_canonical' ) ) {
 				remove_action( 'wp_head', 'rel_canonical' );
