@@ -5,7 +5,7 @@ Provide some extra but important SEO functions along Yoast SEO. Yoast SEO not re
 You may or may not use an other SEO plugin too.
 
 - Author: Joe Szalai
-- Version: 20210212
+- Version: 20210407
 - Plugin URL: https://github.com/JoeSz/Exopite-SEO-Core
 - Demo URL: https://joe.szalai.org/exopite/exopite-seo-core/
 - Author URL: https://joe.szalai.org
@@ -64,6 +64,13 @@ Browsers
 
 CHANGELOG
 ---------
+
+= 20210407 =
+* FIX: typo
+
+= 20210324 =
+* FIX: do not display canonical link if Yoast SEO installed
+* FIX: settings link if Yoast SEO installed
 
 = 20210212 =
 * UPDATE: Separate archives to deactivate (Category, Tag, Others: Date and Author)
