@@ -278,7 +278,7 @@ class Exopite_Seo_Core_Links {
             return $content;
         }
 
-        add_filter( 'exopite_seo_core_rant', __return_true );
+        add_filter( 'exopite_seo_core_rant', '__return_true' );
 
         return $this->add_links_attributes( $content );
         // return $this->add_links_rel( $content ) .  number_format( (microtime(true) - $startTime ), 4 ) . " Seconds\n";
