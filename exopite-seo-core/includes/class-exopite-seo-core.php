@@ -231,7 +231,7 @@ class Exopite_Seo_Core {
 		$plugin_cookie_notice = new Exopite_Seo_Core_Cookie_Notice( $this->get_plugin_name(), $this->get_version() );
 		$plugin_breadcrumb = new Exopite_Seo_Core_Breadcrumbs( $this->get_plugin_name(), $this->get_version() );
 		$plugin_sanitize = new Exopite_Seo_Core_Sanitize( $this->get_plugin_name(), $this->get_version() );
-		$plugin_links = new Exopite_Seo_Core_Links( $this->get_plugin_name(), $this->get_version() );
+		$plugin_links = new Exopite_Seo_Core_Links( $this->get_plugin_name(), $this->get_version(), $this );
 
         $cookie_note = ( isset( $options['cookie_note'] ) ) ? $options['cookie_note'] : 'no';
         $remove_json_from_header = ( isset( $options['remove_json_from_header'] ) ) ? $options['remove_json_from_header'] : 'no';

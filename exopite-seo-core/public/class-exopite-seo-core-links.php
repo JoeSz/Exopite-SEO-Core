@@ -42,6 +42,8 @@ class Exopite_Seo_Core_Links {
 
     private $options;
 
+    public $include;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -49,8 +51,9 @@ class Exopite_Seo_Core_Links {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct( $plugin_name, $version, $include ) {
 
+        $this->include = $include;
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
         $this->options = get_exopite_sof_option( $this->plugin_name );
@@ -266,6 +269,10 @@ class Exopite_Seo_Core_Links {
      * 0.01s (localhost, real server will be faster
      */
     public function process_html( $content ) {
+
+        if ( $this->include->is_api_request() ) {
+            return $content;
+        }
 
         // $startTime = microtime(true);
 
